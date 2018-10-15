@@ -89,6 +89,11 @@ class Mst_staff extends CI_Controller{
         }
     }
 
+    public function cetak()
+    {
+        $this->load->view('modul_admin/mst_staff/cetak_mst_staff_modul_admin_view');
+    }
+
     public function tambah()
     {
         if($this->session->id_user=="")

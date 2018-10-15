@@ -36,6 +36,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff/tambah"style="margin-bottom:10px;"class="btn btn-danger" type="button"><i class="fa fa-plus"></i> Tambah data staff</a>
+            <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff/cetak" style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button" id="btn_cetak"><i class="fas fa-print"></i> Cetak</a>
             <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff/export"style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button"><i class="fas fa-upload"></i> Export</a>
             <a style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button" id="btn_toggle_import"><i class="fas fa-download"></i> Import</a>
             <br>

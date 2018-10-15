@@ -24,6 +24,20 @@ class Instansi_model extends CI_Model{
         $this->db->update('instansi',$data);
     }
 
+    public function edit_instansi_tanpa_foto($instansi,$alamat,$kepala, $nik)
+    {
+        
+        $data=array
+        (
+            'nama_instansi'=>$instansi,
+            'alamat_instansi'=>$alamat,
+            'kepala_instansi'=>$kepala,
+            'nik_instansi'=>$nik,
+        );
+        $this->db->where('id','1');
+        $this->db->update('instansi',$data);
+    }
+
     
 }
 

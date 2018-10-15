@@ -42,6 +42,18 @@ class Instansi extends CI_Controller{
             $data=$this->instansi_model->edit_instansi($instansi,$alamat,$kepala, $nik, $nama_file);
             echo json_encode($data);
         
+        }
+        else
+        {
+            $instansi= $this->input->post('instansi');
+            $alamat= $this->input->post('alamat');
+            $kepala= $this->input->post('kepala');
+            $nik= $this->input->post('nik');
+               
+            
+            echo '<script>alert("'.$nama_file.'");</script>';
+            $data=$this->instansi_model->edit_instansi_tanpa_foto($instansi,$alamat,$kepala, $nik);
+            echo json_encode($data);
         }   
     }
 
