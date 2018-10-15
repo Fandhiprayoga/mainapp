@@ -52,28 +52,16 @@
                     <tbody>
                         
                         <?php 
+                        
                             if(count($data_menu))
                             {
                                 foreach($data_menu as $list)
                                 {
+                                    $modul=$this->db->query('select max(nama_modul) as nama_modul from modul where id="'.$list['id_modul'].'"')->result_array();
                                     echo '<tr>';
                                     echo '<td class="id">'.$list['id'].'</td>';
-                                    echo '<td>';
-                                    echo '<select class="form-control" id="modul" disabled style="width:100%;">';
-                                    
-                                        if(count($data_modul))
-                                        {
-                                            foreach($data_modul as $l)
-                                            {
-                                                if($list['id_modul']==$l['id'])
-                                                {
-                                                    echo '<option value="'.$l['id'].'">'.$l['nama_modul'].'</option>';
-                                                }
-                                                
-                                            }
-                                        }
-                            
-                                    echo '</select>';
+                                    echo '<td id="modul" id_modul="'.$list['id_modul'].'" >';
+                                    echo    $modul[0]['nama_modul'];
                                     echo '</td>';
                                     
                                     echo '<td class="nama">'.$list['nama_menu'].'</td>';
@@ -194,7 +182,7 @@ $('body').on('click','#btn_edit',function(){
         
         var row = $(this).closest("tr");    // Find the row
         var id = row.find(".id").text(); // Find the text
-        var id_modul = row.find("#modul").val(); // Find the text
+        var id_modul = row.find("#modul").attr('id_modul'); // Find the text
         var nama_menu = row.find('.nama').text();
         var icon  = row.find('.icon').text();
         var order = row.find('.order').text();

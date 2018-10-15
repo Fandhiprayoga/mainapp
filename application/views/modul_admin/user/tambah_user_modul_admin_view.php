@@ -13,7 +13,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="<?php echo base_url();?>index.php/modul_admin/user/">List user</a></li>
+        <li><a href="<?php echo base_url();?>index.php/modul_admin/user">List user</a></li>
         <li><a href="#">Tambah user</a></li>
         
       </ol>
@@ -38,10 +38,24 @@
             <form>
     <div class="form-group">
         <p class="help-block">Id user (username)</p><input type="text"  class="form-control" id="id" style="text-transform: lowercase;"/></div>
+   
     <div class="form-group">
-        <p class="help-block">Nama user</p><input type="text" class="form-control" id="nama" /></div>
-    <div class="form-group">
-        <p class="help-block">Bagian user</p><input type="text" class="form-control" id="bagian" /></div>
+        <p class="help-block">Pilih staff</p>
+        <select class="form-control js-example-basic-single" id="staff" style="width:100%;">
+        <option> </option>
+        <?php 
+            $data_gs=$this->db->query('select * from mst_staff')->result_array();
+            if(count($data_gs))
+            {
+                foreach($data_gs as $l)
+                {
+                    echo '<option value="'.$l['id_staff'].'">'.$l['nama_staff'].' | ('.$l['jabatan_staff'].')</option>';
+                }
+            }
+        ?>
+        </select>
+    </div>
+
     <div class="form-group">
         <p class="help-block">Group user</p>
         <select class="form-control js-example-basic-single" id="group" style="width:100%;">
@@ -119,13 +133,12 @@ setDefaultActive();
 //Save product
 $('#btn_simpan').on('click',function(){
             var id_user = $('#id').val().split(' ').join('');
-            var nama_user = $('#nama').val();
-            var bagian_user  = $('#bagian').val();
+            var id_staff = $('#staff').val();
             var group_user  = $('#group').val();
             var pass_user  = $('#pass').val();
             var status_user  = $('#status').val();
             //console.log(id_user);
-            if(id_user ==""||nama_user==""||bagian_user ==""||group_user ==""||pass_user ==""||status_user=="")
+            if(id_user ==""||id_staff==""||group_user ==""||pass_user ==""||status_user=="")
             {
                 $.alert({theme: 'material',
                         type: 'red',
@@ -175,7 +188,7 @@ $('#btn_simpan').on('click',function(){
                         type : "POST",
                         url  : "<?php echo base_url();?>index.php/modul_admin/user/aksi_tambah_user",
                         dataType : "JSON",
-                        data : {id_user:id_user,nama_user:nama_user,bagian_user:bagian_user,group_user:group_user,pass_user:pass_user,status_user:status_user},
+                        data : {id_user:id_user,id_staff:id_staff,group_user:group_user,pass_user:pass_user,status_user:status_user},
                         success: function(data){
                             $.alert('Simpan berhasil');
                             window.location.href='<?php echo base_url();?>index.php/modul_admin/user';

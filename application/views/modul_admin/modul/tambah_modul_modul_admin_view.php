@@ -11,7 +11,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="<?php echo base_url();?>index.php/modul_admin/modul/">List Modul</a></li>
+        <li><a href="<?php echo base_url();?>index.php/modul_admin/modul">List Modul</a></li>
         <li><a href="#">Tambah Modul</a></li>
         
       </ol>

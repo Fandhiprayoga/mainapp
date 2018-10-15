@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <th>ID SUBMENU</th>
-                            <th>MENU</th>
+                            <th>MENU | (MODUL)</th>
                             <th>NAMA SUBMENU</th>
                             <th>LINK SUBMENU</th>
                             <th>ORDER</th>
@@ -52,34 +52,16 @@
                     <tbody>
                         
                         <?php 
-                            $data_modul=$this->db->query('select * from modul')->result_array();
                             if(count($data_submenu))
                             {
                                 foreach($data_submenu as $list)
                                 {
+                                    $data_modul=$this->db->query('select nama_modul from modul where id="'.$list['id_modul'].'"')->result_array();
+                                    $data_menu=$this->db->query('select nama_menu from menu where id="'.$list['id_menu'].'"')->result_array();
                                     echo '<tr>';
                                     echo '<td class="id">'.$list['id'].'</td>';
-                                    echo '<td>';
-                                    echo '<select class="form-control" id="menu" disabled style="width:100%;">';
-                                    
-                                        if(count($data_menu))
-                                        {
-                                            foreach($data_menu as $l)
-                                            {
-                                                foreach($data_modul as $a)
-                                                {   
-                                                    if($a['id']==$l['id_modul'])
-                                                    {
-                                                        if($list['id_menu']==$l['id'])
-                                                        {
-                                                            echo '<option value="'.$l['id'].'">'.$l['nama_menu'].' | ('.$a['nama_modul'].')</option>';
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                            
-                                    echo '</select>';
+                                    echo '<td id="menu" id_menu="'.$list['id_menu'].'">';
+                                    echo  $data_menu[0]['nama_menu'].' | ('.$data_modul[0]['nama_modul'].')';
                                     echo '</td>';
                                     
                                     echo '<td class="nama">'.$list['nama_submenu'].'</td>';
@@ -125,9 +107,10 @@
         <select class="form-control js-example-basic-single" id="menu_edit" style="width:100%;">
         <?php 
             $data_modul=$this->db->query('select * from modul')->result_array();
-            if(count($data_menu))
+            $d_menu=$this->db->query('select * from menu order by order_menu asc')->result_array();
+            if(count($d_menu))
             {
-                foreach($data_menu as $l)
+                foreach($d_menu as $l)
                 {
                     foreach($data_modul as $a)
                     {
@@ -209,7 +192,7 @@ $('body').on('click','#btn_edit',function(){
         
         var row = $(this).closest("tr");    // Find the row
         var id = row.find(".id").text(); // Find the text
-        var id_menu = row.find("#menu").val(); // Find the text
+        var id_menu = row.find("#menu").attr('id_menu'); // Find the text
         var nama_submenu = row.find('.nama').text();
         var link_submenu  = row.find('.link').text();
         var order = row.find('.order').text();

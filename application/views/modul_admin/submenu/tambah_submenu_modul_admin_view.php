@@ -13,7 +13,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="<?php echo base_url();?>index.php/modul_admin/submenu/">List submenu</a></li>
+        <li><a href="<?php echo base_url();?>index.php/modul_admin/submenu">List submenu</a></li>
         <li><a href="#">Tambah submenu</a></li>
         
       </ol>
@@ -37,13 +37,14 @@
             <div class="box-body">
             <form>
             <div class="form-group">
-        <p class="help-block">Menu</p>
+        <p class="help-block">Menu | (Modul)</p>
         <select class="form-control js-example-basic-single" id="menu" style="width:100%;">
         <?php 
-            $data_modul=$this->db->query('select * from modul')->result_array();
-            if(count($data_menu))
+            $data_modul=$this->db->query('select * from modul order by id asc')->result_array();
+            $d_menu=$this->db->query('select * from menu order by order_menu asc')->result_array();
+            if(count($d_menu))
             {
-                foreach($data_menu as $l)
+                foreach($d_menu as $l)
                 {
                     foreach($data_modul as $a)
                     {

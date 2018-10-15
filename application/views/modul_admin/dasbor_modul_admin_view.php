@@ -83,7 +83,19 @@ desired effect
             <!-- Menu Toggle Button -->
             <a class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?php echo base_url();?>/assets/dist/img/avatar.png" class="user-image" alt="User Image">
+              <?php
+                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
+                
+                if($a[0]['foto_staff']=="")
+                {
+                    echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="user-image" alt="User Image">';
+                }
+                else
+                {
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="user-image" alt="User Image">';
+                }
+              ?>
+              
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</span>
             </a>
@@ -107,7 +119,19 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url();?>/assets/dist/img/avatar.png" class="img-circle" alt="User Image">
+        <?php
+                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
+                
+                if($a[0]['foto_staff']=="")
+                {
+                    echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
+                }
+                else
+                {
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="img-circle" alt="User Image" style="">';
+                }
+          ?>
+         
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>

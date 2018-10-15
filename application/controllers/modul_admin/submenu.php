@@ -16,7 +16,7 @@ class submenu extends CI_Controller{
         }
         else
         {
-            $data['data_menu']=$this->submenu_model->tampil_menu_list();
+            // $data['data_menu']=$this->submenu_model->tampil_menu_list();
             $data['data_submenu']=$this->submenu_model->tampil_submenu_list();
             $data['page']='modul_admin/submenu/submenu_modul_admin_view';
             $this->load->view('modul_admin/dasbor_modul_admin_view', $data);
@@ -31,7 +31,7 @@ class submenu extends CI_Controller{
         }
         else
         {
-            $data['data_menu']=$this->submenu_model->tampil_menu_list();
+            // $data['data_menu']=$this->submenu_model->tampil_menu_list();
             $data['data_submenu']=$this->submenu_model->tampil_submenu_list();
             $data['page']='modul_admin/submenu/tambah_submenu_modul_admin_view';
             $this->load->view('modul_admin/dasbor_modul_admin_view', $data);

@@ -59,7 +59,7 @@
                                 foreach($data_user as $list)
                                 {
                                     echo '<tr>';
-                                    echo '<td class="id">'.$list['id_user'].'</td>';
+                                    echo '<td class="id" id_staff="'.$list['id_staff'].'">'.$list['id_user'].'</td>';
                                     echo '<td class="nama">'.$list['nama_user'].'</td>';
                                     echo '<td class="bagian">'.$list['bagian_user'].'</td>';
                                     echo '<td class="status">'.$list['status_user'].'</td>';
@@ -122,10 +122,24 @@
               <form>
     <div class="form-group">
         <p class="help-block">Id user</p><input type="text" readonly class="form-control" id="id_edit" /></div>
+    
     <div class="form-group">
-        <p class="help-block">Nama user</p><input type="text" class="form-control" id="nama_edit" /></div>
-    <div class="form-group">
-        <p class="help-block">Bagian user</p><input type="text" class="form-control" id="bagian_edit" /></div>
+        <p class="help-block">Pilih staff</p>
+        <select class="form-control js-example-basic-single" id="staff_edit" style="width:100%;">
+        <?php 
+            $data_gs=$this->db->query('select * from mst_staff')->result_array();
+            if(count($data_gs))
+            {
+                foreach($data_gs as $l)
+                {
+                    echo '<option value="'.$l['id_staff'].'">'.$l['nama_staff'].' | ('.$l['jabatan_staff'].')</option>';
+                }
+            }
+        ?>
+        </select>
+    
+    </div>
+
     <div class="form-group">
         <p class="help-block">Group user</p>
         <select class="form-control js-example-basic-single" id="group_edit" style="width:100%;">
@@ -219,16 +233,16 @@ $('body').on('click','#btn_edit',function(){
         
         var row = $(this).closest("tr");    // Find the row
         var id = row.find(".id").text(); // Find the text
-        var nama_user = row.find('.nama').text();
-        var bagian_user  = row.find('.bagian').text();
+        var id_staff = row.find('.id').attr('id_staff');;
+      
         var group_user  = row.find('#group').val();
         var pass_user  = row.find('#pass').val();
         var status_user  = row.find('.status').text();
         
         
         $('#id_edit').val(id);
-        $('#nama_edit').val(nama_user);
-        $('#bagian_edit').val(bagian_user);
+        $('#staff_edit').val(id_staff).trigger('change.select2');
+        
         $('#group_edit').val(group_user).trigger('change.select2');
         $('#status_edit').val(status_user);
         $('#pass_edit').val(pass_user);
@@ -302,15 +316,15 @@ $('body').on('click','#btn_hapus',function(){
 
 $('#btn_simpan_edit').on('click',function(){
             var id_user = $('#id_edit').val().split(' ').join('');
-            var nama_user = $('#nama_edit').val();
-            var bagian_user  = $('#bagian_edit').val();
+            var id_staff = $('#staff_edit').val();
+           
             var group_user  = $('#group_edit').val();
             var status_user  = $('#status_edit').val();
             var pass_user  = $('#pass_edit').val();
             
             
 
-            if(id_user==""||nama_user==""||bagian_user ==""||group_user==""||status_user ==""||pass_user =="")
+            if(id_user==""||id_staff==""||group_user==""||status_user ==""||pass_user =="")
             {
                 $.alert({theme: 'material',
                         type: 'red',
@@ -331,7 +345,7 @@ $('#btn_simpan_edit').on('click',function(){
                 type : "POST",
                 url  : "<?php echo base_url();?>index.php/modul_admin/user/aksi_edit_user",
                 dataType : "JSON",
-                data : {id_user:id_user,nama_user:nama_user,bagian_user:bagian_user,group_user:group_user,status_user:status_user,pass_user:pass_user},
+                data : {id_user:id_user,id_staff:id_staff,group_user:group_user,status_user:status_user,pass_user:pass_user},
                 success: function(data){
                     $.alert('Edit berhasil...');
                     $('#modal-default').modal('hide');

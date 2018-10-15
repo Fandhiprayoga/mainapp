@@ -17,13 +17,14 @@ class Auth extends CI_Controller{
     {
         $username=$this->input->post('username');
         $password=$this->input->post('password');
-        $d_login=$this->db->query('select * from user where id_user="'.$username.'" and pass_user="'.$password.'"')->result();
+        $d_login=$this->db->query('select u.*, (select nama_staff from mst_staff where id_staff=u.id_staff) as nama_user, (select jabatan_staff from mst_staff where id_staff=u.id_staff) as bagian_user from user u where u.id_user="'.$username.'" and u.pass_user="'.$password.'"')->result();
         if(count($d_login)>0)
         {
             if($d_login[0]->status_user=="Aktif")
             {
                 $datases=array(
                         'id_user'    => $d_login[0]->id_user,
+                        'id_staff'    => $d_login[0]->id_staff,
                         'nama_user'  => $d_login[0]->nama_user,
                         'group_user' => $d_login[0]->group_user,
                 );

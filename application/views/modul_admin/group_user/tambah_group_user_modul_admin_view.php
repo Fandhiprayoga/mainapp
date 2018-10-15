@@ -13,7 +13,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="<?php echo base_url();?>index.php/modul_admin/group_user/">List group_user</a></li>
+        <li><a href="<?php echo base_url();?>index.php/modul_admin/group_user">List group_user</a></li>
         <li><a href="#">Tambah group_user</a></li>
         
       </ol>

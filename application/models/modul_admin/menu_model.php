@@ -6,7 +6,7 @@ class Menu_model extends CI_Model{
 
     public function tampil_menu_list()
     {
-        $query = $this->db->query("select * from menu order by order_menu asc");
+        $query = $this->db->query("select * from menu  ORDER BY id_modul, order_menu ASC");
         return $query->result_array();
     }
 
