@@ -4,42 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Staff/Karyawan</title>
-    <link rel="stylesheet" href="<?php echo base_url();?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        .grid{
+            padding:30px;
+        }
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th {
+            border: 1px solid black;
+            text-align: center;
+            
+        }
+        td {
+            border: 1px solid black;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<br>
-    <div>
-        <div class="container">
-            <div class="row">
-            <?php
-                $a=$this->db->query('select * from instansi')->result_array();
-                if($a[0]['logo_instansi']=="")
-                {
-                    echo '<div class="col-md-6 col-sm-6 col-xs-6" style="width:237px;text-align:center;" ><img src="'.base_url().'assets/upload/index_logo.png" style="width:120px;margin:auto;" /></div>';
-                }
-                else
-                {
-                    echo '<div class="col-md-6 col-sm-6 col-xs-6" style="width:237px;text-align:center;"><img src="'.base_url().'assets/upload/'.$a[0]['logo_instansi'].'" style="width:120px;" /></div>';
-                }
-                
-                    echo '<div class="col-md-6 col-sm-6 col-xs-6" style="">
-                                <h3>'.$a[0]['nama_instansi'].'</h3>
-                            </div>';
-                    echo '<div class="col-md-6 col-sm-6 col-xs-6">
-                            <h5>'.$a[0]['alamat_instansi'].'<br /></h5>
-                        </div>';
-            ?>
+    <br>
+    <div class="grid">
+        <span>
+            <div class="logo" style="display: inline;">
+                <?php
+                    $a=$this->db->query('select * from instansi')->result_array();
+                    if($a[0]['logo_instansi']!="")
+                    {
+                        echo '<img src="'.$_SERVER['DOCUMENT_ROOT'].'/mainapp/assets/upload/'.$a[0]['logo_instansi'].'" alt="logo_instansi" height="115" width="115">';
+                    }
+                    else
+                    {
+                        echo '<img src="'.$_SERVER['DOCUMENT_ROOT'].'/mainapp/assets/upload/index_logo.jpg" alt="logo_instansi" height="115" width="115">';
+                    }
+                ?>
             </div>
-        </div>
-    </div>
-    
-    <hr />
-    <div class="container" id="ini_tabel">
-        <div class="table-responsive">
-        <p align="center" style="font-weight:bold;">DAFTAR STAFF / KARYAWAN</p>
-        <br>
-            <table class="table table-bordered" id="itu_tabel">
+            <div class="instansi" style="padding-top:-20px;margin-right:100px;margin-left:20px;float:right;display: inline-block; ">
+                    <?php
+                        $b=$this->db->query('select * from instansi')->result_array();
+                        if(count($b))
+                        {
+                            echo '<h3>'.$b[0]['nama_instansi'].'</h3>';
+                            echo '<h5>'.$b[0]['alamat_instansi'].'</h5>';
+                        }
+                    ?>
+            </div>
+        </span>
+        <div class="tabel_plate">
+            <hr>
+            <br>
+            <p align="center" style="font-weight:bold;">DAFTAR STAFF / KARYAWAN</p>
+            <br>
+            <table>
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -72,22 +90,13 @@
                             }
                         }
                     ?>
-                   
                 </tbody>
             </table>
         </div>
-<hr />
-        <p>Dicetak oleh <?php echo $this->session->id_user;?> pada <?php echo date("Y/m/d");?></p>
+        <div class="footer">
+            <br>
+            <p>Dicetak oleh <?php echo $this->session->id_user;?> pada <?php echo date("Y/m/d");?></p>
+        </div>
     </div>
 </body>
 </html>
-<!-- jQuery 3 -->
-<script src="<?php echo base_url();?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url();?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function () {
-    window.print();
-});
-</script>

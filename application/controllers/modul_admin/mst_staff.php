@@ -91,7 +91,16 @@ class Mst_staff extends CI_Controller{
 
     public function cetak()
     {
-        $this->load->view('modul_admin/mst_staff/cetak_mst_staff_modul_admin_view');
+        
+        
+    
+        $this->load->library('pdf');
+    
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "data_staff.pdf";
+        $this->pdf->load_view('modul_admin/mst_staff/cetak_mst_staff_modul_admin_view');
+
+        //$this->load->view('modul_admin/mst_staff/cetak_mst_staff_modul_admin_view');
     }
 
     public function tambah()
