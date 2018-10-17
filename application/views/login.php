@@ -16,7 +16,14 @@
     <div class="login-clean" style="height:100%;width:100%;padding-top:84px;padding-bottom:50px;background-color:#ffe5e1;">
         <form method="post" action="<?php echo base_url();?>index.php/auth/login">
             <h2 class="sr-only">Login Form</h2>
-            <div class="illustration"><i class="icon ion-ios-navigate" style="color:#dd4b39;"></i></div><p class="text-center">MAIN APP<br>Jl. lorem ipsum dorlot sit amet</p>
+            <?php
+                $a=$this->db->query('select * from instansi')->result_array();
+                if(count($a))
+                {
+                    echo '<div class="illustration"><img style="margin-top:-30px;" width="115px" height="115px;" src="'.base_url().'assets/upload/'.$a[0]['logo_instansi'].'"></div><p style="margin-top:-30px;" class="text-center"><b>'.$a[0]['nama_instansi'].'</b><br><br>'.$a[0]['alamat_instansi'].'</p>';
+                }
+            ?>
+            
             <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username" required></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#dd4b39;">Log In</button></div><a href="#" class="forgot">mainapp&nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;2018</a></form>
