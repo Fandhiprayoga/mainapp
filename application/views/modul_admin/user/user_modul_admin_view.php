@@ -59,7 +59,7 @@
                                 foreach($data_user as $list)
                                 {
                                     echo '<tr>';
-                                    echo '<td class="id" id_staff="'.$list['id_staff'].'">'.$list['id_user'].'</td>';
+                                    echo '<td class="id" id_organisasi="'.$list['id_organisasi'].'">'.$list['id_user'].'</td>';
                                     echo '<td class="nama">'.$list['nama_user'].'</td>';
                                     echo '<td class="bagian">'.$list['bagian_user'].'</td>';
                                     echo '<td class="status">'.$list['status_user'].'</td>';
@@ -76,20 +76,42 @@
                                     echo '</select>';
                                     echo '</td>';
                                     
+                                    if($list['id_organisasi']=="OR999999999")
+                                    {
+                                        echo '<td>';
+                                        echo    '<div class="input-group input-group-sm">';
+                                        echo            '<input class="form-control" id="pass" type="password" value="'.$list['pass_user'].'" readonly>';
+                                        echo                '<span class="input-group-btn">';
+                                        echo                    '<a type="button" disabled id="btn_lihat" class="btn btn-danger btn-flat"><i class="far fa-eye"></i></a>';
+                                        echo               '</span>';
+                                        echo        '</div>';
+                                        echo '</td>';
+                                    }
+                                    else
+                                    {
+                                        echo '<td>';
+                                        echo    '<div class="input-group input-group-sm">';
+                                        echo            '<input class="form-control" id="pass" type="password" value="'.$list['pass_user'].'" readonly>';
+                                        echo                '<span class="input-group-btn">';
+                                        echo                    '<a type="button" id="btn_lihat" class="btn btn-danger btn-flat"><i class="far fa-eye"></i></a>';
+                                        echo               '</span>';
+                                        echo        '</div>';
+                                        echo '</td>';
+                                    }
+                                   
 
-                                    echo '<td>';
-                                    echo    '<div class="input-group input-group-sm">';
-                                    echo            '<input class="form-control" id="pass" type="password" value="'.$list['pass_user'].'" readonly>';
-                                    echo                '<span class="input-group-btn">';
-                                    echo                    '<a type="button" id="btn_lihat" class="btn btn-danger btn-flat"><i class="far fa-eye"></i></a>';
-                                    echo               '</span>';
-                                    echo        '</div>';
-                                    echo '</td>';
-
-                                    
+                                   
                                     echo '<td style="width:170px;">';
                                     echo    '<div class="btn-toolbar" style="width:100%;">';
-                                    echo        '<div role="group" class="btn-group"><button id="btn_edit" data-toggle="modal" data-target="#modal-default" class="btn btn-default" type="button"><i class="fa fa-edit"></i> Edit</button><button id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                            if($list['id_organisasi']=="OR999999999")
+                                            {
+                                                echo        '<div role="group" class="btn-group"><button disabled id="btn_edit" data-toggle="modal" data-target="#modal-default" class="btn btn-default" type="button"><i class="fa fa-edit"></i> Edit</button><button disabled id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                            }
+                                            else 
+                                            {
+                                                echo        '<div role="group" class="btn-group"><button id="btn_edit" data-toggle="modal" data-target="#modal-default" class="btn btn-default" type="button"><i class="fa fa-edit"></i> Edit</button><button id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                            }
+                                  
                                     echo    '</div>';
                                     echo '</td>';
                                     echo '</tr>';
@@ -124,15 +146,15 @@
         <p class="help-block">Id user</p><input type="text" readonly class="form-control" id="id_edit" /></div>
     
     <div class="form-group">
-        <p class="help-block">Pilih staff</p>
-        <select class="form-control js-example-basic-single" id="staff_edit" style="width:100%;">
+        <p class="help-block">Pilih organisasi</p>
+        <select class="form-control js-example-basic-single" id="organisasi_edit" style="width:100%;">
         <?php 
-            $data_gs=$this->db->query('select * from mst_staff')->result_array();
+            $data_gs=$this->db->query('select * from mst_organisasi')->result_array();
             if(count($data_gs))
             {
                 foreach($data_gs as $l)
                 {
-                    echo '<option value="'.$l['id_staff'].'">'.$l['nama_staff'].' | ('.$l['jabatan_staff'].')</option>';
+                    echo '<option value="'.$l['id_organisasi'].'">'.$l['nama_organisasi'].' | ('.$l['jabatan_organisasi'].')</option>';
                 }
             }
         ?>
@@ -233,7 +255,7 @@ $('body').on('click','#btn_edit',function(){
         
         var row = $(this).closest("tr");    // Find the row
         var id = row.find(".id").text(); // Find the text
-        var id_staff = row.find('.id').attr('id_staff');;
+        var id_organisasi = row.find('.id').attr('id_organisasi');;
       
         var group_user  = row.find('#group').val();
         var pass_user  = row.find('#pass').val();
@@ -241,7 +263,7 @@ $('body').on('click','#btn_edit',function(){
         
         
         $('#id_edit').val(id);
-        $('#staff_edit').val(id_staff).trigger('change.select2');
+        $('#organisasi_edit').val(id_organisasi).trigger('change.select2');
         
         $('#group_edit').val(group_user).trigger('change.select2');
         $('#status_edit').val(status_user);
@@ -316,7 +338,7 @@ $('body').on('click','#btn_hapus',function(){
 
 $('#btn_simpan_edit').on('click',function(){
             var id_user = $('#id_edit').val().split(' ').join('');
-            var id_staff = $('#staff_edit').val();
+            var id_organisasi = $('#organisasi_edit').val();
            
             var group_user  = $('#group_edit').val();
             var status_user  = $('#status_edit').val();
@@ -324,7 +346,7 @@ $('#btn_simpan_edit').on('click',function(){
             
             
 
-            if(id_user==""||id_staff==""||group_user==""||status_user ==""||pass_user =="")
+            if(id_user==""||id_organisasi==""||group_user==""||status_user ==""||pass_user =="")
             {
                 $.alert({theme: 'material',
                         type: 'red',
@@ -345,7 +367,7 @@ $('#btn_simpan_edit').on('click',function(){
                 type : "POST",
                 url  : "<?php echo base_url();?>index.php/modul_admin/user/aksi_edit_user",
                 dataType : "JSON",
-                data : {id_user:id_user,id_staff:id_staff,group_user:group_user,status_user:status_user,pass_user:pass_user},
+                data : {id_user:id_user,id_organisasi:id_organisasi,group_user:group_user,status_user:status_user,pass_user:pass_user},
                 success: function(data){
                     $.alert('Edit berhasil...');
                     $('#modal-default').modal('hide');

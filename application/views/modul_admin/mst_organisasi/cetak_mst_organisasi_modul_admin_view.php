@@ -55,7 +55,7 @@
         <div class="tabel_plate">
             <hr>
             <br>
-            <p align="center" style="font-weight:bold;">DAFTAR USTADZ & STAFF</p>
+            <p align="center" style="font-weight:bold;">DAFTAR KEPENGURUSAN</p>
             <br>
             <table>
                 <thead>
@@ -65,28 +65,26 @@
                         <th>NAMA  LENGKAP</th>
                         <th>JENIS KELAMIN</th>
                         <th>TTL</th>
-                        <th>JABATAN STAFF</th>
+                        <th>JABATAN</th>
                         <th>ALAMAT</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        $b=$this->db->query('select * from mst_staff order by jabatan_staff asc')->result_array();
-                        
+                        $b=$this->db->query('select * from mst_organisasi  where id_organisasi!="OR999999999"')->result_array();
                         if(count($b))
                         {
                             $i=1;
                             foreach($b as $bl)
                             {
-                                $c=$this->db->query('select * from mst_organisasi where id_organisasi="'.$bl['id_organisasi'].'"')->result_array();
                                 echo '<tr>
                                             <td>'.$i.'</td>
-                                            <td>'.$bl['id_staff'].'</td>
-                                            <td>'.$c[0]['nama_organisasi'].'</td>
-                                            <td>'.$c[0]['jk_organisasi'].'</td>
-                                            <td>'.$c[0]['t_organisasi'].', '.$c[0]['tl_organisasi'].'</td>
-                                            <td>'.$bl['jabatan_staff'].'</td>
-                                            <td>'.$c[0]['alamat_organisasi'].'</td>
+                                            <td>'.$bl['id_organisasi'].'</td>
+                                            <td>'.$bl['nama_organisasi'].'</td>
+                                            <td>'.$bl['jk_organisasi'].'</td>
+                                            <td>'.$bl['t_organisasi'].', '.$bl['tl_organisasi'].'</td>
+                                            <td>'.$bl['jabatan_organisasi'].'</td>
+                                            <td>'.$bl['alamat_organisasi'].'</td>
                                         </tr>';
                                 $i++;
                             }

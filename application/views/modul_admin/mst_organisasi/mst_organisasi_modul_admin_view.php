@@ -5,24 +5,16 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="<?php echo base_url();?>/assets/bower_components/select2/dist/css/select2.min.css">
 <link href="<?php echo base_url();?>/assets/css/jquery-confirm.min.css" rel="stylesheet">
-<style>
-    th {
-       vertical-align:middle !important;
-       align:center !important; 
-    }
-    td {
-        vertical-align:middle !important;
-    }
-</style>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
       <h1>
-        Manajemen data ustadz & staff
-        <small>Halaman kelola ustadz & staff</small>
+        Master data organisasi
+        <small>Halaman kelola data organisasi</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="#">list data ustadz & staff</a></li>
+        <li><a href="#">list data organisasi</a></li>
         
       </ol>
     </section>
@@ -33,7 +25,7 @@
     <div class="container-fluid">
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">List ustadz & staff</h3>
+              <h3 class="box-title">List data organisasi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -43,57 +35,65 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff/tambah"style="margin-bottom:10px;"class="btn btn-danger" type="button"><i class="fa fa-plus"></i> Tambah data staff</a>
-            <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff/cetak" style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button" id="btn_cetak"><i class="fas fa-print"></i> Cetak</a>
-        
+            <a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi/tambah"style="margin-bottom:10px;"class="btn btn-danger" type="button"><i class="fa fa-plus"></i> Tambah data organisasi</a>
+            <a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi/cetak" style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button" id="btn_cetak"><i class="fas fa-print"></i> Cetak</a>
+            <a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi/export"style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button"><i class="fas fa-upload"></i> Export</a>
+            <a style="margin-bottom:10px;"class="btn btn-danger pull-right" type="button" id="btn_toggle_import"><i class="fas fa-download"></i> Import</a>
             <br>
-          
+            <div id="import_row">
+                <form id="submit_import" method="post" action="mst_organisasi/import" enctype="multipart/form-data"><input style="width:100%;height:50px;" class="form-control-file" name="attachment_data" type="file" accept=".csv" /> <button class="btn btn-default" type="submit" style="width:100%;">Mulai proses import</button></form>
+            </div>
+            <br>
             
                 <div class="table-responsive">
-                <table class="table" id="tbl_mst_staff" class="table table-bordered table-hover">
+                <table class="table" id="tbl_mst_organisasi" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>ID staff</th>
-                            <th>ID anggota organisasi</th>
-                            <th>FOTO anggota</th>
-                            <th>NAMA LENGKAP</th>
+                            <th>ID organisasi</th>
+                            <th>FOTO organisasi</th>
+                            <th>NAMA LENGKAP organisasi</th>
                             <th>JENIS KELAMIN</th>
                             <th>TTL</th>
-                            <th>JABATAN STAFF</th>
+                            <th>JABATAN</th>
                             <th>ALAMAT</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <?php
-                            
-                            if(count($data_mst_staff))
+                        <?php 
+                            if(count($data_mst_organisasi))
                             {
-                                
-                                foreach($data_mst_staff as $list)
+                                foreach($data_mst_organisasi as $list)
                                 {
-                                    $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$list['id_organisasi'].'"')->result_array(); 
                                     echo '<tr>';
-                                    echo '<td class="id_staff">'.$list['id_staff'].'</td>';
                                     echo '<td class="id_organisasi">'.$list['id_organisasi'].'</td>';
-                                    if($a[0]['foto_organisasi']=="")
+                                    if($list['foto_organisasi']=="")
                                     {
-                                        echo '<td class="foto" file_foto="'.$a[0]['foto_organisasi'].'"><img style="width:100px;height:100px;" src="'.base_url().'/assets/upload/index.png"></td>';
+                                        echo '<td class="foto" file_foto="'.$list['foto_organisasi'].'"><img style="width:100px;height:100px;" src="'.base_url().'/assets/upload/index.png"></td>';
                                     }
                                     else
                                     {
-                                        echo '<td class="foto" file_foto="'.$a[0]['foto_organisasi'].'"><img style="width:100px;height:100px;" src="'.base_url().'/assets/upload/'.$a[0]['foto_organisasi'].'"></td>';
+                                        echo '<td class="foto" file_foto="'.$list['foto_organisasi'].'"><img style="width:100px;height:100px;" src="'.base_url().'/assets/upload/'.$list['foto_organisasi'].'"></td>';
                                     }
                                     
-                                    echo '<td class="nama_staff">'.$a[0]['nama_organisasi'].'</td>';
-                                    echo '<td class="jk_staff">'.$a[0]['jk_organisasi'].'</td>';
-                                    echo '<td class="ttl">'.$a[0]['t_organisasi'].', '.$a[0]['tl_organisasi'].'</td>';
-                                    echo '<td class="jabatan_staff">'.$list['jabatan_staff'].'</td>';
-                                    echo '<td class="alamat_staff">'.$a[0]['alamat_organisasi'].'</td>';
+                                    echo '<td class="nama_organisasi">'.$list['nama_organisasi'].'</td>';
+                                    echo '<td class="jk_organisasi">'.$list['jk_organisasi'].'</td>';
+                                    echo '<td class="ttl" tempat="'.$list['t_organisasi'].'" tanggal="'.$list['tl_organisasi'].'">'.$list['t_organisasi'].', '.$list['tl_organisasi'].'</td>';
+                                    echo '<td class="jabatan_organisasi">'.$list['jabatan_organisasi'].'</td>';
+                                    echo '<td class="alamat_organisasi">'.$list['alamat_organisasi'].'</td>';
                                     echo '<td style="width:170px;">';
                                     echo    '<div class="btn-toolbar" style="width:100%;">';
-                                    echo        '<div role="group" class="btn-group"><button id="btn_edit" data-toggle="modal" data-target="#modal-default" class="btn btn-default" type="button"><i class="fa fa-edit"></i> Edit</button><button id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                    echo        '<div role="group" class="btn-group"><button id="btn_edit" data-toggle="modal" data-target="#modal-default" class="btn btn-default" type="button"><i class="fa fa-edit"></i> Edit</button>';
+                                        if($list['id_organisasi']==$this->session->id_organisasi)
+                                        {
+                                            echo         '<button disabled id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                        }
+                                        else
+                                        {
+                                            echo         '<button id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Hapus</button></div>';
+                                        }
+                                   
                                     echo    '</div>';
                                     echo '</td>';
                                     echo '</tr>';
@@ -120,41 +120,39 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Edit staff</h4>
+                <h4 class="modal-title">Edit organisasi</h4>
               </div>
         <div class="modal-body">
     <form id="submit_edit">
     <div class="form-group">
-        <p class="help-block">ID staff</p><input name="id" type="text" readonly class="form-control" id="id_edit" /></div>
-    
+        <p class="help-block">ID organisasi</p><input name="id" type="text" readonly class="form-control" id="id_edit" /></div>
     <div class="form-group">
-        <p class="help-block">PILIH ANGGOTA</p>
-        <select name="id_organisasi" id="organisasi_edit" class="form-control js-example-basic-single" >
-            <?php
-                $a=$this->db->query('select * from mst_organisasi')->result_array();
-                if(count($a))
-                {
-                    foreach($a as $b)
-                    {
-                        echo '<option value="'.$b['id_organisasi'].'">'.$b['nama_organisasi'].' ('.$b['jabatan_organisasi'].')</option>';
-                    }
-                }
-            ?>
-        </select> 
+        <p class="help-block">FOTO organisasi</p>
+        <input type="file" class="form-control" name="file" id="foto_edit" accept="image/*"/>
     </div>
-
-   <div class="form-group">
-        <p class="help-block">JABATAN STAFF</p>
-        <select name="jabatan" id="jabatan_edit" class="form-control" >
-            <option value="SUPER ADMINISTRATOR">SUPER ADMINISTRATOR</option>
-            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-            <option value="USTADZ">USTADZ</option>
-            <option value="SYAFII">SYAFII</option>
-            <option value="NASI">NASI</option>
-            <option value="MIA">MIA</option>
-            <option value="FARMASI">FARMASI</option>
-            <option value="MAHIL">MAHIL</option>
-        </select> 
+    <div class="form-group">
+        <p class="help-block">NAMA LENGKAP organisasi</p><input name="nama" type="text" class="form-control" id="nama_edit" /></div>
+    <div class="form-group">
+        <p class="help-block">JENIS KELAMIN</p>
+        
+        <select name="jk" id="jk_edit" class="form-control" >
+            <option value="LAKI-LAKI">LAKI-LAKI</option>
+            <option value="PEREMPUAN">PEREMPUAN</option>
+        </select>
+        
+    </div>
+    <div class="form-group">
+        <p class="help-block">TEMPAT TANGGAL LAHIR</p>
+        <input type="text" class="form-control" id="t_edit" name="t"  />
+        <input type="date" class="form-control" id="tl_edit" name="tl">
+    </div>
+    <div class="form-group">
+        <p class="help-block">JABATAN</p>
+        <input type="text" class="form-control" id="jabatan_edit" name="jabatan" />
+    </div>
+    <div class="form-group">
+        <p class="help-block">ALAMAT</p>
+        <textarea name="alamat" id="alamat_edit" class="form-control"></textarea>
     </div>
               </div>
               <div class="modal-footer">
@@ -188,8 +186,8 @@
 <script>
 $(document).ready(function() {
     //$('#icon_edit').iconpicker({ hideOnSelect: true,selected: true, });
-    $('.js-example-basic-single').select2();
-    $('#tbl_mst_staff').DataTable({
+    //$('.js-example-basic-single').select2();
+    $('#tbl_mst_organisasi').DataTable({
     'paging'      : true,
     'lengthChange': true,
     'searching'   : true,
@@ -200,7 +198,10 @@ $(document).ready(function() {
     $('#import_row').hide();
 });
 
-
+$('#btn_toggle_import').click(function (e) { 
+    e.preventDefault();
+    $('#import_row').toggle(2000);
+});
 var setDefaultActive = function() {
             var url = String(window.location);
             var url = url.replace('#', '');
@@ -217,21 +218,31 @@ setDefaultActive();
 $('body').on('click','#btn_edit',function(){
         
         var row             = $(this).closest("tr");    // Find the row
-        var id_staff        = row.find(".id_staff").text(); // Find the text
-        var id_organisasi      = row.find(".id_organisasi").text(); // Find the text
-        var jabatan_staff      = row.find(".jabatan_staff").text(); // Find the text
+        var id_organisasi        = row.find(".id_organisasi").text(); // Find the text
+        var nama_organisasi      = row.find('.nama_organisasi').text();
+        var jk_organisasi        = row.find('.jk_organisasi').text();
+        var jabatan_organisasi   = row.find('.jabatan_organisasi').text();
+        var alamat_organisasi   = row.find('.alamat_organisasi').text();
+        var t_organisasi         = row.find('.ttl').attr('tempat');
+        var tl_organisasi        = row.find('.ttl').attr('tanggal');
+        var foto            = row.find('.foto').attr('file_foto');
         
-        // alert(id_staff+' '+nama_staff+' '+jk_staff+' '+jabatan_staff+' '+t_staff +' '+tl_staff );
-        $('#id_edit').val(id_staff);
-        $('#organisasi_edit').val(id_organisasi);
-        $('#jabatan_edit').val(jabatan_staff);
+        
+        // alert(id_organisasi+' '+nama_organisasi+' '+jk_organisasi+' '+jabatan_organisasi+' '+t_organisasi +' '+tl_organisasi );
+        $('#id_edit').val(id_organisasi);
+        $('#nama_edit').val(nama_organisasi);
+        $('#jk_edit').val(jk_organisasi);
+        $('#t_edit').val(t_organisasi);
+        $('#tl_edit').attr('value',tl_organisasi);
+        $('#jabatan_edit').val(jabatan_organisasi);
+        $('#alamat_edit').val(alamat_organisasi);
        
 });
 
 
 $('body').on('click','#btn_hapus',function(){
         var row = $(this).closest("tr");    // Find the row
-        var id_mst_staff = row.find(".id_staff").text(); // Find the text
+        var id_mst_organisasi = row.find(".id_organisasi").text(); // Find the text
         $.confirm({
             theme: 'material',
             type: 'red',
@@ -242,9 +253,9 @@ $('body').on('click','#btn_hapus',function(){
                     
                     $.ajax({
                         type : "POST",
-                        url  : "<?php echo base_url();?>index.php/modul_admin/mst_staff/aksi_hapus_mst_staff",
+                        url  : "<?php echo base_url();?>index.php/modul_admin/mst_organisasi/aksi_hapus_mst_organisasi",
                         dataType : "JSON",
-                        data : {id_mst_staff:id_mst_staff},
+                        data : {id_mst_organisasi:id_mst_organisasi},
                         success: function(data){
                             $.alert('Data terhapus !');
                             console.log(data);
@@ -273,7 +284,7 @@ $('body').on('click','#btn_hapus',function(){
 $('#submit_edit').submit(function(e){
     e.preventDefault(); 
     $.ajax({
-                     url:'<?php echo base_url();?>index.php/modul_admin/mst_staff/aksi_edit_mst_staff',
+                     url:'<?php echo base_url();?>index.php/modul_admin/mst_organisasi/aksi_edit_mst_organisasi',
                      type:"post",
                      data:new FormData(this),
                      processData:false,
@@ -299,7 +310,7 @@ $('#submit_edit').submit(function(e){
 // $('#submit_import').submit(function(e){
 //     e.preventDefault(); 
 //     $.ajax({
-//                      url:'<?php echo base_url();?>index.php/modul_admin/mst_staff/import',
+//                      url:'<?php echo base_url();?>index.php/modul_admin/mst_organisasi/import',
 //                      type:"post",
 //                      data:new FormData(this),
 //                      processData:false,

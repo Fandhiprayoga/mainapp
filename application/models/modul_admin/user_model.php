@@ -6,7 +6,7 @@ class User_model extends CI_Model{
 
     public function tampil_user_list()
     {
-        $query = $this->db->query("select u.*, (select nama_staff from mst_staff where id_staff=u.id_staff) as nama_user, (select jabatan_staff from mst_staff where id_staff=u.id_staff) as bagian_user from user u");
+        $query = $this->db->query("select u.*, (select nama_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as nama_user, (select jabatan_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as bagian_user from user u");
         return $query->result_array();
     }
 
@@ -22,7 +22,7 @@ class User_model extends CI_Model{
         $data=array
         (
             'id_user'=>$this->input->post('id_user'),
-            'id_staff'=>$this->input->post('id_staff'),
+            'id_organisasi'=>$this->input->post('id_organisasi'),
             'group_user'=>$this->input->post('group_user'),
             'pass_user'=>$this->input->post('pass_user'),
             'status_user'=>$this->input->post('status_user'),
@@ -36,7 +36,7 @@ class User_model extends CI_Model{
         $id_user=$this->input->post('id_user');
         $data=array
         (
-            'id_staff'=>$this->input->post('id_staff'),
+            'id_organisasi'=>$this->input->post('id_organisasi'),
             'group_user'=>$this->input->post('group_user'),
             'pass_user'=>$this->input->post('pass_user'),
             'status_user'=>$this->input->post('status_user'),

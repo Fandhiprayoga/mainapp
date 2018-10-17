@@ -10,55 +10,27 @@ class Mst_staff_model extends CI_Model{
         return $query->result_array();
     }
 
-    public function tambah_mst_staff($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat)
+    public function tambah_mst_staff($id,$id_organisasi,$jabatan)
     {
         $data=array
         (
             'id_staff'=>$id,
-            'nama_staff'=>$nama,
-            'jk_staff'=>$jk,
-            't_staff'=>$t,
-            'tl_staff'=>$tl,
+            'id_organisasi'=>$id_organisasi,
             'jabatan_staff'=>$jabatan,
-            'alamat_staff'=>$alamat,
-            'foto_staff'=>$nama_file,
+           
         );
         $this->db->insert('mst_staff',$data);
     }
 
 
-    public function edit_mst_staff($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat)
+    public function edit_mst_staff($id,$id_organisasi,$jabatan)
     {
         $id_mst_staff=$id;
         $data=array
         (
     
-            'nama_staff'=>$nama,
-            'jk_staff'=>$jk,
-            't_staff'=>$t,
-            'tl_staff'=>$tl,
+            'id_organisasi'=>$id_organisasi,
             'jabatan_staff'=>$jabatan,
-            'alamat_staff'=>$alamat,
-            'foto_staff'=>$nama_file,
-        );
-        $this->db->where('id_staff',$id_mst_staff);
-        $this->db->update('mst_staff',$data);
-    }
-
-    
-
-    public function edit_mst_staff_tanpa_foto($id,$nama,$jk,$t,$tl,$jabatan, $alamat)
-    {
-        $id_mst_staff=$id;
-        $data=array
-        (
-    
-            'nama_staff'=>$nama,
-            'jk_staff'=>$jk,
-            't_staff'=>$t,
-            'tl_staff'=>$tl,
-            'jabatan_staff'=>$jabatan,
-            'alamat_staff'=>$alamat,
         );
         $this->db->where('id_staff',$id_mst_staff);
         $this->db->update('mst_staff',$data);

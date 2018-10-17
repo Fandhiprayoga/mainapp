@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mst_staff extends CI_Controller{
+class mst_staff extends CI_Controller{
 
     function __construct() {
         parent::__construct();
@@ -119,113 +119,38 @@ class Mst_staff extends CI_Controller{
 
     public function aksi_tambah_mst_staff()
     {
-
-        $config['upload_path']    = "./assets/upload"; //path folder file upload
-        $config['allowed_types']  = 'gif|jpg|png'; //type file yang boleh di upload
-        $config['encrypt_name']   = TRUE; //enkripsi file name upload
-         
-       
-        $this->load->library('upload',$config); //call library upload 
-        if($this->upload->do_upload("file")){ //upload file
-            $data = array('upload_data' => $this->upload->data()); //ambil file name yang diupload
-            
-            $id         = $this->input->post('id');
-            $nama       = $this->input->post('nama');
-            $jk         = $this->input->post('jk');
-            $t          = strtoupper($this->input->post('t'));
-            $tl         = $this->input->post('tl');
-            $jabatan    = strtoupper($this->input->post('jabatan'));
-            $alamat     = $this->input->post('alamat');
+            $id               = $this->input->post('id');
+            $id_organisasi    = $this->input->post('id_organisasi');
+            $jabatan          = $this->input->post('jabatan');
+            $id2              = substr($jabatan,0,2);
+            $id               = $id2.$id;
            
-            $jabatan2   = substr($jabatan,0,1);
-            $id2         = $jabatan2.''.$id;
-            $id=$id2;
-            $nama_file  = $data['upload_data']['file_name']; //set file name ke variable image
-            $data       = $this->mst_staff_model->tambah_mst_staff($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
+           
+            $data             = $this->mst_staff_model->tambah_mst_staff($id,$id_organisasi,$jabatan);
             echo json_encode($data);
     }
-    else
-    {
-            $id         = $this->input->post('id');
-            $nama       = $this->input->post('nama');
-            $jk         = $this->input->post('jk');
-            $t          = $this->input->post('t');
-            $tl         = $this->input->post('tl');
-            $jabatan    = $this->input->post('jabatan');
-            $alamat     = $this->input->post('alamat');
-        
-            $jabatan2   = substr($jabatan,0,1);
-            $id2         = $jabatan2.''.$id;
-            $id=$id2;
-            $nama_file  = $data['upload_data']['file_name']; //set file name ke variable image
-            $data       = $this->mst_staff_model->tambah_mst_staff($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
-            echo json_encode($data);
-    }
-}
 
     public function aksi_edit_mst_staff()
     {
-        $config['upload_path']    = "./assets/upload"; //path folder file upload
-        $config['allowed_types']  = 'gif|jpg|png'; //type file yang boleh di upload
-        $config['encrypt_name']   = TRUE; //enkripsi file name upload
-         
-       
-        $this->load->library('upload',$config); //call library upload 
-        if($this->upload->do_upload("file")){ //upload file
-            $data = array('upload_data' => $this->upload->data()); //ambil file name yang diupload
+        
             
-            $id         = $this->input->post('id');
-            $nama       = $this->input->post('nama');
-            $jk         = $this->input->post('jk');
-            $t          = $this->input->post('t');
-            $tl         = $this->input->post('tl');
-            $jabatan    = $this->input->post('jabatan');
-            $alamat     = $this->input->post('alamat');
+            $id               = $this->input->post('id');
+            $id_organisasi    = $this->input->post('id_organisasi');
+            $jabatan          = $this->input->post('jabatan');
+        
            
-            // hapus data foto eksis
-            $z            = $this->db->query('select foto_staff from mst_staff where id_staff="'.$id.'"')->result_array();
-            unlink('assets/upload/'.$z[0]['foto_staff']);
-
-            $nama_file    = $data['upload_data']['file_name']; //set file name ke variable image
-            $data         = $this->mst_staff_model->edit_mst_staff($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
+           
+            $data             = $this->mst_staff_model->edit_mst_staff($id,$id_organisasi,$jabatan);
             echo json_encode($data);
-        // $data=$this->mst_staff_model->edit_mst_staff();
-		// echo json_encode($data);
+     
     }
-    else
-    {
-            $id         = $this->input->post('id');
-            $nama       = $this->input->post('nama');
-            $jk         = $this->input->post('jk');
-            $t          = $this->input->post('t');
-            $tl         = $this->input->post('tl');
-            $jabatan    = $this->input->post('jabatan');
-            $alamat    = $this->input->post('alamat');
-
-        $data=$this->mst_staff_model->edit_mst_staff_tanpa_foto($id,$nama,$jk,$t,$tl,$jabatan,$alamat);
-        echo json_encode($data);
-    }
-}
 
     public function aksi_hapus_mst_staff()
     {
         $id_staff=$this->input->post('id_mst_staff');
-        // hapus data foto eksis
-        $x= $this->db->query('select foto_staff from mst_staff where id_staff="'.$id_staff.'"')->result_array();
-        
 
         $data=$this->mst_staff_model->hapus_mst_staff($id_staff);
-        if($data>0)
-        {
-            if($x[0]['foto_staff']!=null)
-            {
-                $filename = $x[0]['foto_staff'];
-                $ifile ='./assets/upload/'. $filename; // this is the actual path to the file you want to delete.
-                //$file=base_url().'assets/upload/'.$x[0]['foto_staff'].'';
-                unlink($ifile); // use server document root
-               
-            }
-        }
+        
 		echo json_encode($data);
     }
 } 

@@ -75,15 +75,15 @@ desired effect
             <a class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <?php
-                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
+                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
                 
-                if($a[0]['foto_staff']=="")
+                if($a[0]['foto_organisasi']=="")
                 {
                     echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="user-image" alt="User Image">';
                 }
                 else
                 {
-                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="user-image" alt="User Image">';
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="user-image" alt="User Image">';
                 }
               ?>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->

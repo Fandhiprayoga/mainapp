@@ -84,20 +84,16 @@ desired effect
             <a class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
+                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
                 
-                if(count($a))
+                if($a[0]['foto_staff']=="")
                 {
-                  if($a[0]['foto_organisasi']=="")
-                  {
-                      echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="user-image" alt="User Image">';
-                  }
-                  else
-                  {
-                    echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="user-image" alt="User Image">';
-                  }
+                    echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="user-image" alt="User Image">';
                 }
-                
+                else
+                {
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="user-image" alt="User Image">';
+                }
               ?>
               
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
@@ -124,20 +120,16 @@ desired effect
       <div class="user-panel">
         <div class="pull-left image">
         <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
+                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
                 
-                if(count($a))
+                if($a[0]['foto_staff']=="")
                 {
-                  if($a[0]['foto_organisasi']=="")
-                  {
-                      echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
-                  }
-                  else
-                  {
-                    echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="img-circle" alt="User Image" style="">';
-                  }
+                    echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
                 }
-                
+                else
+                {
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="img-circle" alt="User Image" style="">';
+                }
           ?>
          
         </div>
@@ -151,14 +143,14 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
       <li><a href="<?php echo base_url();?>index.php/modul_list"><i class="fas fa-arrow-alt-circle-left"></i> <span> Kembali ke Menu Modul</span></a></li>
-      <li class=""><a href="<?php echo base_url();?>index.php/modul_admin/beranda"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+      <li class=""><a href="<?php echo base_url();?>index.php/modul_pendaftaran/beranda"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li class="header">LIST MENU</li>
         <!-- Optionally, you can add icons to the links -->
         
         <?php
             $dummy_gu=$this->session->group_user;
             $data_group_priv=$this->db->query('SELECT gp.*, (SELECT nama_submenu FROM submenu WHERE id=gp.id_submenu) AS nama_submenu, (SELECT link_submenu FROM submenu WHERE id=gp.id_submenu) AS link_submenu, (SELECT id_menu FROM submenu WHERE id=gp.id_submenu) AS id_menu, (SELECT order_submenu FROM submenu WHERE id=gp.id_submenu) AS order_submenu FROM group_priv gp WHERE id_group_user="'.$dummy_gu.'" AND is_priv="1" ORDER BY order_submenu ASC')->result_array();
-            $data_menu=$this->db->query("select * from menu where id_modul='5' order by order_menu asc" )->result_array();
+            $data_menu=$this->db->query("select * from menu where id_modul='6' order by order_menu asc" )->result_array();
             // $data_submenu=$this->db->query("select * from submenu " )->result_array();
             if(count($data_menu))
             {

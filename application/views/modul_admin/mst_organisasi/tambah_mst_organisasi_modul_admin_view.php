@@ -8,13 +8,13 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
       <h1>
-      Manajemen data ustadz & staff
-        <small>Halaman kelola ustadz & staff</small>
+      Master data organisasi
+        <small>Halaman kelola organisasi</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi">list data ustadz & staff</a></li>
-        <li><a href="#">Tambah data ustadz & staff</a></li>
+        <li><a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi">List data organisasi</a></li>
+        <li><a href="#">Tambah data organisasi</a></li>
         
       </ol>
     </section>
@@ -25,7 +25,7 @@
     <div class="container-fluid">
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah data ustadz & staff</h3>
+              <h3 class="box-title">Tambah data anggota organisasi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -37,42 +37,41 @@
             <div class="box-body">
         <form id="submit_tambah">
             <div class="form-group" >
-            <?php $a=$this->db->query('select * from mst_staff where substring(id_staff,3,8)="'.date('Y').''.date('m').''.date('d').'"')->num_rows();
+            <?php $a=$this->db->query('select * from mst_organisasi where substring(id_organisasi,2,8)="'.date('Y').''.date('m').''.date('d').'"')->num_rows();
                     $b=$a+1;
             ?>
-        <p class="help-block">ID STAFF</p><input name="id" type="text" readonly class="form-control" id="id_edit" value="<?php echo date('Y').''.date('m').''.date('d').''.$b;?>" /></div>
+        <p class="help-block">ID ANGGOTA</p><input name="id" type="text" readonly class="form-control" id="id_edit" value="<?php echo date('Y').''.date('m').''.date('d').''.$b;?>" /></div>
    
-        <div class="form-group">
-        <p class="help-block">PILIH ANGGOTA</p>
-        <select name="id_organisasi" id="organisasi_edit" class="form-control js-example-basic-single" >
-            <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi not in (select id_organisasi from mst_staff)')->result_array();
-                if(count($a))
-                {
-                    foreach($a as $b)
-                    {
-                        echo '<option value="'.$b['id_organisasi'].'">'.$b['nama_organisasi'].' ('.$b['jabatan_organisasi'].')</option>';
-                    }
-                }
-            ?>
-        </select> 
+    <div class="form-group">
+        <p class="help-block">NAMA LENGKAP ANGGOTA</p><input name="nama" type="text" class="form-control" id="nama_edit" /></div>
+    <div class="form-group">
+        <p class="help-block">JENIS KELAMIN</p>
+        
+        <select name="jk" id="jk_edit" class="form-control" >
+            <option value="LAKI-LAKI">LAKI-LAKI</option>
+            <option value="PEREMPUAN">PEREMPUAN</option>
+        </select>
+        
     </div>
-
-   <div class="form-group">
-        <p class="help-block">JABATAN STAFF</p>
-        <select name="jabatan" id="jabatan_edit" class="form-control" >
-            <option value="SUPER ADMINISTRATOR">SUPER ADMINISTRATOR</option>
-            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-            <option value="USTADZ">USTADZ</option>
-            <option value="SYAFII">SYAFII</option>
-            <option value="NASI">NASI</option>
-            <option value="MIA">MIA</option>
-            <option value="FARMASI">FARMASI</option>
-            <option value="MAHIL">MAHIL</option>
-        </select> 
+    <div class="form-group">
+        <p class="help-block">TEMPAT TANGGAL LAHIR</p>
+        <input type="text" class="form-control" id="t_edit" name="t"  style="text-transform:uppercase"/>
+        <input type="date" class="form-control" id="tl_edit" name="tl">
+    </div>
+    <div class="form-group">
+        <p class="help-block">JABATAN</p>
+        <input type="text" class="form-control" id="jabatan_edit" name="jabatan" style="text-transform:uppercase" />
+    </div>
+    <div class="form-group">
+        <p class="help-block">FOTO organisasi</p>
+        <input type="file" class="form-control" name="file" id="foto_edit" accept="image/*"/>
+    </div>
+    <div class="form-group">
+        <p class="help-block">ALAMAT</p>
+        <textarea name="alamat" id="alamat_edit" class="form-control"></textarea>
     </div>
         <button class="btn btn-danger btn-block " type="submit" id="btn_simpan">SIMPAN</button>
-        <a href="<?php echo base_url();?>index.php/modul_admin/mst_staff" class="btn btn-primary btn-block " type="button" id="btn_kembali" >KEMBALI</a>
+        <a href="<?php echo base_url();?>index.php/modul_admin/mst_organisasi" class="btn btn-primary btn-block " type="button" id="btn_kembali" >KEMBALI</a>
         </form>
             </div>
             <!-- /.box-body -->
@@ -159,7 +158,7 @@ setDefaultActive();
 $('#submit_tambah').submit(function(e){
     e.preventDefault(); 
     $.ajax({
-                     url:'<?php echo base_url();?>index.php/modul_admin/mst_staff/aksi_tambah_mst_staff',
+                     url:'<?php echo base_url();?>index.php/modul_admin/mst_organisasi/aksi_tambah_mst_organisasi',
                      type:"post",
                      data:new FormData(this),
                      processData:false,
@@ -169,7 +168,7 @@ $('#submit_tambah').submit(function(e){
                       success: function(data){
                           $.alert('Tersimpan');
                           console.log(data);
-                          window.location.href='<?php echo base_url();?>index.php/modul_admin/mst_staff';
+                          window.location.href='<?php echo base_url();?>index.php/modul_admin/mst_organisasi';
                         },
                         error: function(xhr, textStatus, error) {
                             console.log(xhr.responseText);
