@@ -121,28 +121,25 @@ desired effect
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
+      <div class="user-panel" style="height:80px;">
         <div class="pull-left image">
         <?php
                 $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
                 
-                if(count($a))
+                if($a[0]['foto_organisasi']=="")
                 {
-                  if($a[0]['foto_organisasi']=="")
-                  {
-                      echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
-                  }
-                  else
-                  {
-                    echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="img-circle" alt="User Image" style="">';
-                  }
+                    echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
                 }
-                
+                else
+                {
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="img-circle" alt="User Image" style="">';
+                }
           ?>
          
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>
+          <p><?php echo $this->session->id_user;?>&nbsp;</p>
+          <p>(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>

@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MAINAPP | MODUL ADMIN</title>
+  <title>MAINAPP | MODUL PENDAFTARAN</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo base_url();?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -84,15 +84,15 @@ desired effect
             <a class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <?php
-                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
+                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
                 
-                if($a[0]['foto_staff']=="")
+                if($a[0]['foto_organisasi']=="")
                 {
                     echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="user-image" alt="User Image">';
                 }
                 else
                 {
-                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="user-image" alt="User Image">';
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="user-image" alt="User Image">';
                 }
               ?>
               
@@ -117,24 +117,25 @@ desired effect
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
+      <div class="user-panel" style="height:80px;">
         <div class="pull-left image">
         <?php
-                $a=$this->db->query('select * from mst_staff where id_staff="'.$this->session->id_staff.'"')->result_array();
+                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
                 
-                if($a[0]['foto_staff']=="")
+                if($a[0]['foto_organisasi']=="")
                 {
                     echo '<img src="'.base_url().'assets/dist/img/avatar.png" class="img-circle" alt="User Image" >';
                 }
                 else
                 {
-                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_staff'].'" class="img-circle" alt="User Image" style="">';
+                  echo '<img src="'.base_url().'assets/upload/'.$a[0]['foto_organisasi'].'" class="img-circle" alt="User Image" style="">';
                 }
           ?>
          
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>
+          <p><?php echo $this->session->id_user;?>&nbsp;</p>
+          <p>(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
