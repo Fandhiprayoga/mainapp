@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2018 at 11:52 PM
+-- Generation Time: Oct 22, 2018 at 11:53 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -55,7 +55,6 @@ INSERT INTO `group_priv` (`id`, `id_group_user`, `id_submenu`, `is_priv`) VALUES
 (15, 1, 12, 1),
 (16, 1, 14, 1),
 (17, 1, 9, 1),
-(19, 1, 11, 1),
 (20, 1, 15, 1),
 (21, 1, 16, 1);
 
@@ -246,6 +245,36 @@ INSERT INTO `mst_staff` (`id_staff`, `id_organisasi`, `jabatan_staff`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pendaftaran`
+--
+
+CREATE TABLE `pendaftaran` (
+  `id_pendaftaran` varchar(50) NOT NULL COMMENT 'id_daftar',
+  `n_pendaftaran` varchar(100) DEFAULT NULL COMMENT 'nama lengkap',
+  `nl_pendaftaran` varchar(100) DEFAULT NULL COMMENT 'nama panggilan',
+  `t_pendaftaran` varchar(100) DEFAULT NULL COMMENT 'tempat lahir',
+  `tl_pendaftaran` date DEFAULT NULL COMMENT 'tanggal lahir',
+  `instansi_pendaftaran` varchar(100) DEFAULT NULL COMMENT 'instansi/ fak / jur',
+  `alamat_pendaftaran` text COMMENT 'alamat',
+  `telp_pendaftaran` varchar(50) DEFAULT NULL COMMENT 'no telp',
+  `email_pendaftaran` varchar(100) DEFAULT NULL COMMENT 'emal / fb',
+  `org_pendaftaran` text COMMENT 'pengalaman organisasi',
+  `prestasi_pendaftaran` text COMMENT 'prestasi',
+  `alasan_pendaftaran` text COMMENT 'alasan masuk',
+  `dump_pendaftaran` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pendaftaran`
+--
+
+INSERT INTO `pendaftaran` (`id_pendaftaran`, `n_pendaftaran`, `nl_pendaftaran`, `t_pendaftaran`, `tl_pendaftaran`, `instansi_pendaftaran`, `alamat_pendaftaran`, `telp_pendaftaran`, `email_pendaftaran`, `org_pendaftaran`, `prestasi_pendaftaran`, `alasan_pendaftaran`, `dump_pendaftaran`) VALUES
+('SA201810221', 'Jhon Doo', 'Jhon', 'Banyumas', '1994-10-13', 'MAN 2 BANYUMAS', '<p>CILONGOK RT 09/01</p>\n', '08123456734', 'test@gmail.com', '<p>pramuka</p>\n\n<p>PMR</p>\n\n<p>OSIS</p>\n\n<p>aaaaaa</p>\n', '<p>-</p>\n', '<p>karena ingin mengembangkan ilmu tentang agama,</p>\n\n<p>dan ingin membanggakan kedua orang tua.</p>\n', '2018-10-22 09:38:45'),
+('SA201810222', 'Fandhi Dhuga Prayoga', 'Fandhi', 'Banyumas', '1994-01-07', 'SMAN Ajibarang', '<p>Karangtengah RT 09 / RW 01, Cilongok, Banyumas.</p>\n', '082227100068', 'fduga2@gmail.com', '<p>OSIS SMAN Ajibarang,</p>\n\n<p>MPK SMAN Ajibarang,</p>\n\n<p>PRAMUKA SMAN Ajibarang.</p>\n', '<p>-</p>\n', '<p>karenga ingin menambah ilmu tentang agama.</p>\n', '2018-10-22 09:43:22');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `submenu`
 --
 
@@ -269,8 +298,7 @@ INSERT INTO `submenu` (`id`, `id_menu`, `nama_submenu`, `link_submenu`, `order_s
 (5, 2, 'Group User', 'index.php/modul_admin/group_user', 2),
 (6, 2, 'Group Privilage', 'index.php/modul_admin/group_priv', 4),
 (7, 11, 'Mng Ustadz & Staff', 'index.php/modul_admin/mst_staff', 1),
-(9, 5, 'bbbbbbbbbbbbb', '#', 1),
-(11, 5, 'cccccccccccc', '#', 1),
+(9, 5, 'Pendaftaran Baru', 'index.php/modul_pendaftaran/pendaftaran', 1),
 (12, 6, 'Setting Instansi', 'index.php/modul_admin/instansi', 1),
 (14, 3, 'Master Data Organisasi', 'index.php/modul_admin/mst_organisasi', 1),
 (15, 10, 'Laporan Pendaftaran', '#', 1),
@@ -347,6 +375,12 @@ ALTER TABLE `mst_organisasi`
 ALTER TABLE `mst_staff`
   ADD PRIMARY KEY (`id_staff`),
   ADD KEY `organisasi_staff` (`id_organisasi`);
+
+--
+-- Indexes for table `pendaftaran`
+--
+ALTER TABLE `pendaftaran`
+  ADD PRIMARY KEY (`id_pendaftaran`);
 
 --
 -- Indexes for table `submenu`
