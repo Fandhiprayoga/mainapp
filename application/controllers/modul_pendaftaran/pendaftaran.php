@@ -24,13 +24,27 @@ class Pendaftaran extends CI_Controller{
 
     public function cetak()
     {
-         $this->load->library('pdf');
+           $this->load->library('pdf');
         $data['id_pendaftaran']=$this->uri->segment('4');
-         $this->pdf->setPaper('A4', 'potrait');
-         $this->pdf->filename = "data_pendaftar.pdf";
-         $this->pdf->load_view('modul_pendaftaran/pendaftaran/cetak_pendaftaran_modul_pendaftaran_view',$data);
+        $data['data_barcode']= $this->barcode($this->uri->segment('4'));
+           $this->pdf->setPaper('A4', 'potrait');
+           $this->pdf->filename = "data_pendaftar.pdf";
+           $this->pdf->load_view('modul_pendaftaran/pendaftaran/cetak_pendaftaran_modul_pendaftaran_view',$data);
         //$this->load->view('modul_pendaftaran/pendaftaran/cetak_pendaftaran_modul_pendaftaran_view', $data);
     }
+
+    public function barcode($kode)
+    {
+        //$kode=$this->uri->segment('4');
+        $this->load->library('zend');
+        $this->zend->load('Zend/Barcode');
+        $file = Zend_Barcode::draw('code128', 'image', array('text' => $kode), array());
+        //$kode = time().$kode;
+        
+        $store_image = imagejpeg($file,"./assets/upload/barcode/{$kode}.jpg");
+        return $kode.'.jpg';
+    }
+
     public function detail()
     {
         $data['id_pendaftaran']=$this->uri->segment('4');

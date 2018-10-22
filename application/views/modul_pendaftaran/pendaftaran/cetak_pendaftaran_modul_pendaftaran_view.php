@@ -71,7 +71,9 @@
         <div class="tabel_plate">
             <hr>
             <br>
-            <p align="center" style="font-weight:bold;">FORMULIR PENDAFTARAN SANTRI BARU (<?php echo $id_pendaftaran;?>)</p>
+            <p align="center" style="font-weight:bold;display:inline;margin-left:150px;margin-top:-10px;">FORMULIR PENDAFTARAN SANTRI BARU </p>
+            <img style="display: inline;margin-left:500px;margin-top:-40px;" src="./assets/upload/barcode/<?php echo $data_barcode;?>" alt="">
+            <br>
             <br>
             <table>
             <?php $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();?>
