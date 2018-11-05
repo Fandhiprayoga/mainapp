@@ -140,6 +140,70 @@ class Pendaftaran extends CI_Controller{
         $data=$this->pendaftaran_model->hapus_pendaftaran();
 		echo json_encode($data);
     }
+
+
+    public function aksi_upload_foto()
+    {
+        $id_pendaftaran= $this->input->post('id_pendaftaran');
+        
+        $config['upload_path']    = "./assets/upload/santri"; //path folder file upload
+        $config['allowed_types']  = 'jpg|jpeg|png'; //type file yang boleh di upload
+        $config['encrypt_name']   = TRUE; //enkripsi file name upload
+
+        $this->load->library('upload',$config); //call library upload
+        if($this->upload->do_upload("foto"))
+        {
+            $data = array('upload_data' => $this->upload->data()); //ambil file name yang diupload
+            
+            $nama_file  = $data['upload_data']['file_name'];
+            $data_ins=array(
+                'foto_pendaftaran'=>$nama_file,
+            );
+
+            $this->db->where('id_pendaftaran',$id_pendaftaran);
+            $this->db->update('pendaftaran', $data_ins);
+            if($this->db->affected_rows()>0)    
+             {
+                header('Location:'.base_url().'index.php/modul_pendaftaran/pendaftaran');
+             }
+             else 
+             {
+                 echo 'Data gagal tersimpan !';
+             }
+        }
+        else
+        {
+            echo 'Upload file gagal !';
+        }
+
+    }
+
+    public function aksi_hapus_foto()
+    {
+        $id_pendaftaran=$this->uri->segment('4');
+        $foto_pendaftaran=$this->uri->segment('5');
+        $data=array(
+            'foto_pendaftaran'=>'',
+        );
+        $this->db->where('id_pendaftaran',$id_pendaftaran);
+        $this->db->update('pendaftaran',$data);
+        if($this->db->affected_rows()>0)    
+        {
+            if(unlink('./assets/upload/santri/'.$foto_pendaftaran))
+            {
+                header('Location:'.base_url().'index.php/modul_pendaftaran/pendaftaran');
+            }
+            else
+            {
+                echo 'Gagal hapus foto';
+            }
+            
+        }
+        else 
+        {
+            echo 'Data gagal tersimpan !';
+        }
+    }
 } 
 
 ?>

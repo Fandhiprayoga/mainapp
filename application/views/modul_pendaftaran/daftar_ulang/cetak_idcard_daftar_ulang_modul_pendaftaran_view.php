@@ -50,18 +50,28 @@
                            echo     '<div id="header">
                                              <img style="float:left;" height="50px" src="./assets/upload/'.$i[0]['logo_instansi'].'">
                                              <p style="margin-left:70px;margin-top:-5px;margin-bottom:1px;font-size:15px;" id="nama_instansi">'.$i[0]['nama_instansi'].'</p>
-                                             <p style="margin-left:70px;margin-top:0px;font-size:10px;" id="alamat_instansi">'.$i[0]['alamat_instansi'].'</p>
-                                             
-                                             <div style="margin-top:30px;margin-left:20px;" id="id_front">
-                                                      <img style="margin-right:50px;" height="90px" width="70px" src="./assets/upload/index.png">
-                                                      <p style="margin-top:-110px;margin-left:120px;text-transform: capitalize;"><b>'.$n[0]['n_pendaftaran'].'</b></p>
-                                                      <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a->id_pendaftaran.'.jpg">
-                                             </div>
-                                             
-                                    </div>';
+                                             <p style="margin-left:70px;margin-top:0px;font-size:10px;" id="alamat_instansi">'.$i[0]['alamat_instansi'].'</p>';
+                                               if($n[0]['foto_pendaftaran']!="")
+                                               {
+                                                      echo       '<div style="margin-top:30px;margin-left:20px;" id="id_front">
+                                                               <img style="margin-right:50px;" height="90px" width="70px" src="./assets/upload/santri/'.$n[0]['foto_pendaftaran'].'">
+                                                               <p style="margin-top:-110px;margin-left:120px;text-transform: capitalize;"><b>'.$n[0]['n_pendaftaran'].'</b></p>
+                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a->id_pendaftaran.'.jpg">
+                                                      </div>';
+                                               }
+                                               else
+                                               {
+                                                      echo       '<div style="margin-top:30px;margin-left:20px;" id="id_front">
+                                                               <img style="margin-right:50px;" height="90px" width="70px" src="./assets/upload/santri/index.png">
+                                                               <p style="margin-top:-110px;margin-left:120px;text-transform: capitalize;"><b>'.$n[0]['n_pendaftaran'].'</b></p>
+                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a->id_pendaftaran.'.jpg">
+                                                      </div>';
+                                               
+                                             }
+                           echo       '</div>';
                            echo     '<div id="id_back" >
-                                             <p style="margin-bottom:25px;margin-left:-100px;" align="center">BIODATA</p>
-                                             <table style="margin-left:-40px;">
+                                             <p style="margin-bottom:35px;margin-left:-100px;" align="center">BIODATA</p>
+                                             <table style="margin-left:-30px;font-size:10px;">
                                                       <tbody>
                                                                <tr>
                                                                         <td>Nama</td>

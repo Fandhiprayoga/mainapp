@@ -166,11 +166,14 @@
         <br>
         <div class="footer">
             <br>
-            <p style="margin-bottom:90px;margin-left:400px;">Pamulang,&nbsp;
-            <?php echo $a[0]['tgl_pendaftaran'];?>
-            </p>
-            <p style="margin-left:400px;">(
-                <?php echo $a[0]['n_pendaftaran'];?>)</p>
+            <img src="./assets/upload/santri/<?php if($a[0]['foto_pendaftaran']!=""){echo $a[0]['foto_pendaftaran'];}else{echo 'index.png';}?>" alt="" width="100px;">
+            <div style="margin-top:-170px;">
+                <p style="margin-bottom:90px;margin-left:400px;">Pamulang,&nbsp;
+                    <?php echo $a[0]['tgl_pendaftaran'];?>
+                </p>
+                <p style="margin-left:400px;">(
+                    <?php echo $a[0]['n_pendaftaran'];?>)</p>
+            </div>
         </div>
     </div>
     <script src="" async defer></script>

@@ -63,17 +63,23 @@
                                             <td>'.$a['t_pendaftaran'].', '.$a['tl_pendaftaran'].'</td> 
                                             <td>'.$a['alamat_pendaftaran'].'</td> 
                                             <td>'.$a['tgl_pendaftaran'].'</td>
-                                            <td>';
+                                            <td style="align:center;">';
 
                                             if($a['foto_pendaftaran']!="")
                                             {
-                                                echo 'ini isi foto';
+                                                echo '
+                                                <img width="100px"  src="'.base_url().'/assets/upload/santri/'.$a['foto_pendaftaran'].'" class="img-responsive" alt="Image">
+                                                <a href="pendaftaran/aksi_hapus_foto/'.$a['id_pendaftaran'].'/'.$a['foto_pendaftaran'].'" >Hapus</a>
+                                                ';
                                             }
                                             else
                                             {
-                                                echo '<label class="btn btn-default btn-file">
-                                                            Upload ... <form method="post" id="form_foto"><input name="foto" type="file" style="display: none;"></form>
-                                                      </label>';
+                                                echo '<form method="post" id="form_foto" action="pendaftaran/aksi_upload_foto" enctype="multipart/form-data">
+                                                        <input type="hidden" name="id_pendaftaran" value="'.$a['id_pendaftaran'].'">
+                                                        <label class="btn btn-default btn-file">
+                                                            Upload ... <input accept=".jpg, .jpeg" name="foto" id="foto" type="file" style="display: none;">
+                                                        </label>
+                                                      </form>';
                                             }
 
                                     echo    '</td>
@@ -198,7 +204,8 @@ $("body").on("click","#btn_hapus", function () {
 });
 
 
-$("body").on("click","#btn_upload", function () {
-    $.alert('mau upload');
+$("#foto").change(function (e) { 
+    e.preventDefault();
+    $("#form_foto").submit();
 });
 </script>

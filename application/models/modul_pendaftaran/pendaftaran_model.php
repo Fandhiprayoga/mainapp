@@ -6,7 +6,7 @@ class Pendaftaran_model extends CI_Model{
 
     public function tampil_pendaftaran_list()
     {
-        $query = $this->db->query("select * from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri) order by dump_pendaftaran desc");
+        $query = $this->db->query("select * from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri) order by id_pendaftaran desc");
         return $query->result_array();
     }
 
