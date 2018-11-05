@@ -46,7 +46,8 @@
                             <th>NAMA LENGKAP</th>
                             <th>TTL</th>
                             <th>ALAMAT</th>
-                            <th>TIMESTAMP DAFTAR</th>
+                            <th>TANGGAL DAFTAR</th>
+                            <th>FOTO</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -61,7 +62,21 @@
                                             <td>'.$a['n_pendaftaran'].'</td> 
                                             <td>'.$a['t_pendaftaran'].', '.$a['tl_pendaftaran'].'</td> 
                                             <td>'.$a['alamat_pendaftaran'].'</td> 
-                                            <td>'.$a['dump_pendaftaran'].'</td> 
+                                            <td>'.$a['tgl_pendaftaran'].'</td>
+                                            <td>';
+
+                                            if($a['foto_pendaftaran']!="")
+                                            {
+                                                echo 'ini isi foto';
+                                            }
+                                            else
+                                            {
+                                                echo '<label class="btn btn-default btn-file">
+                                                            Upload ... <form method="post" id="form_foto"><input name="foto" type="file" style="display: none;"></form>
+                                                      </label>';
+                                            }
+
+                                    echo    '</td>
                                             <td>
                                                     <div class="btn-toolbar" style="width:100%;">
                                                         <div role="group" class="btn-group">
@@ -76,7 +91,7 @@
                             }
                             else
                             {
-                                echo '<tr><td> Tidak ada data </td></tr>';
+                                echo '<tr><td colspan="5"align="center">TIDAK ADA DATA YANG BISA DITAMPILKAN</td></tr>';
                             }
                         ?>    
                     </tbody>
@@ -92,8 +107,6 @@
     </section>
     <!-- /.content -->
     
-
-
     <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
@@ -159,6 +172,10 @@ $("body").on("click","#btn_hapus", function () {
                                 $.alert('hapus berhasil');
                                 location.reload();
                             }
+                            else if(data=='gagal hapus data')
+                            {
+                                $.alert('gagal hapus data2');
+                            }
                             else
                             {
                                 $.alert('hapus gagal');
@@ -180,4 +197,8 @@ $("body").on("click","#btn_hapus", function () {
    
 });
 
+
+$("body").on("click","#btn_upload", function () {
+    $.alert('mau upload');
+});
 </script>

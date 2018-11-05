@@ -75,6 +75,8 @@ class Pendaftaran extends CI_Controller{
 
     public function aksi_tambah_pendaftaran()
     {
+
+        $this->barcode($this->input->post('id_pendaftaran'));
         $data=$this->pendaftaran_model->tambah_pendaftaran();
         
 		echo json_encode($data);
@@ -89,6 +91,52 @@ class Pendaftaran extends CI_Controller{
 
     public function aksi_hapus_pendaftaran()
     {
+        $id_pendaftaran=$this->input->post('id_pendaftaran');
+        $du=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+        if(count($du))
+        {
+            
+            if($du[0]['ijazah_daftar_ulang']!="")
+            {
+                unlink('./assets/upload/ijazah/'.$du[0]['ijazah_daftar_ulang']);
+            }else
+            {
+                $data='gagal hapus data';
+            }
+             if($du[0]['kk_daftar_ulang']!="")
+            {
+                unlink('./assets/upload/kk/'.$du[0]['kk_daftar_ulang']);
+            }else
+            {
+                $data='gagal hapus data';
+            }
+             if($du[0]['infaq_daftar_ulang']!="")
+            {
+                unlink('./assets/upload/infaq/'.$du[0]['infaq_daftar_ulang']);
+            }else
+            {
+                $data='gagal hapus data';
+            }
+             if($du[0]['yatim_daftar_ulang']!="")
+            {
+                unlink('./assets/upload/yatim/'.$du[0]['yatim_daftar_ulang']);
+            }else
+            {
+                $data='gagal hapus data';
+            }
+             if(file_exists('./assets/upload/barcode/'.$id_pendaftaran.'.jpg'))
+            {
+                unlink('./assets/upload/barcode/'.$id_pendaftaran.'.jpg');
+            }
+            else
+            {
+                $data='gagal hapus data';
+            }
+        }
+        else
+        {
+            //gak ngapa-ngapa
+        }
         $data=$this->pendaftaran_model->hapus_pendaftaran();
 		echo json_encode($data);
     }

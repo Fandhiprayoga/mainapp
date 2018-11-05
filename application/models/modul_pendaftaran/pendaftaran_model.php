@@ -6,7 +6,7 @@ class Pendaftaran_model extends CI_Model{
 
     public function tampil_pendaftaran_list()
     {
-        $query = $this->db->query("select * from pendaftaran order by dump_pendaftaran desc");
+        $query = $this->db->query("select * from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri) order by dump_pendaftaran desc");
         return $query->result_array();
     }
 
@@ -19,6 +19,8 @@ class Pendaftaran_model extends CI_Model{
 
     public function tambah_pendaftaran()
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date('Y/m/d');
         $data=array
         (
             'id_pendaftaran'=>$this->input->post('id_pendaftaran'),
@@ -33,6 +35,7 @@ class Pendaftaran_model extends CI_Model{
             'org_pendaftaran'=>$this->input->post('org_pendaftaran'),
             'prestasi_pendaftaran'=>$this->input->post('prestasi_pendaftaran'),
             'alasan_pendaftaran'=>$this->input->post('alasan_pendaftaran'),
+            'tgl_pendaftaran'=>$date,
         );
         $this->db->insert('pendaftaran',$data);
         if($this->db->affected_rows()>0)    
