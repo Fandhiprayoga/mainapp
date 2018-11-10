@@ -22,25 +22,39 @@ class Bayar_infaq extends CI_Controller{
         }
     }
 
-     public function cetak()
-     {
-         $this->load->library('pdf');
-         $data['id_pendaftaran']=$this->uri->segment('4');
-         $data['id_infaq']=$this->uri->segment('5');
-         $this->pdf->setPaper(array(0,0,419.53,595.28),'landscape');
-         $this->pdf->filename = "data_bayar_infaq_".$data['id_pendaftaran'].".pdf";
-         $this->pdf->load_view('modul_pendaftaran/bayar_infaq/cetak_bayar_infaq_modul_pendaftaran_view',$data);
-     }
+    public function santri_lama()
+    {
+        if($this->session->id_user=="")
+        {
+            redirect(base_url('index.php/auth'), 'refresh');
+        }
+        else
+        {
+            $data['data_bayar_infaq']=$this->bayar_infaq_model->tampil_bayar_infaq_list();
+            $data['page']='modul_pendaftaran/bayar_infaq/santri_lama_bayar_infaq_modul_pendaftaran_view';
+            $this->load->view('modul_pendaftaran/dasbor_modul_pendaftaran_view', $data);
+        }
+    }
 
-     public function cetak2($id_pendaftaran, $id_infaq)
-     {
-         $this->load->library('pdf');
-         $data['id_pendaftaran']=$id_pendaftaran;
-         $data['id_infaq']=$id_infaq;
-         $this->pdf->setPaper(array(0,0,419.53,595.28),'landscape');
-         $this->pdf->filename = "data_bayar_infaq_".$data['id_pendaftaran'].".pdf";
-         $this->pdf->cetak_view('modul_pendaftaran/bayar_infaq/cetak_bayar_infaq_modul_pendaftaran_view',$data,'./assets/upload/infaq/'.$data['id_pendaftaran'].'.pdf');
-     }
+    public function cetak()
+    {
+        $this->load->library('pdf');
+        $data['id_pendaftaran']=$this->uri->segment('4');
+        $data['id_infaq']=$this->uri->segment('5');
+        $this->pdf->setPaper(array(0,0,419.53,595.28),'landscape');
+        $this->pdf->filename = "data_bayar_infaq_".$data['id_pendaftaran'].".pdf";
+        $this->pdf->load_view('modul_pendaftaran/bayar_infaq/cetak_bayar_infaq_modul_pendaftaran_view',$data);
+    }
+
+    public function cetak2($id_pendaftaran, $id_infaq)
+    {
+        $this->load->library('pdf');
+        $data['id_pendaftaran']=$id_pendaftaran;
+        $data['id_infaq']=$id_infaq;
+        $this->pdf->setPaper(array(0,0,419.53,595.28),'landscape');
+        $this->pdf->filename = "data_bayar_infaq_".$data['id_pendaftaran'].".pdf";
+        $this->pdf->cetak_view('modul_pendaftaran/bayar_infaq/cetak_bayar_infaq_modul_pendaftaran_view',$data,'./assets/upload/infaq/'.$data['id_pendaftaran'].'.pdf');
+    }
 
 //     public function barcode($kode)
 //     {
@@ -75,11 +89,17 @@ class Bayar_infaq extends CI_Controller{
 // 		echo json_encode($data);
 //     }
 
+    public function tampil_bayar_infaq()
+    {
+        $a=$this->db->query('select p.*, bi.id_infaq, bi.id_infaq, bi.status_bayar_infaq from mst_santri p left join bayar_infaq bi on p.id_santri=bi.id_pendaftaran and bi.id_infaq="'.$this->input->post('id_infaq').'" order by p.id_santri desc')->result_array();
+        echo json_encode($a);
+    }
+
     public function aksi_tambah_bayar_infaq()
     {
-         $id_pendaftaran    = $this->input->post('id_pendaftaran');
-         $id_infaq          = $this->input->post('id_infaq');
-         $data              = $this->bayar_infaq_model->tambah_bayar_infaq();
+        $id_pendaftaran    = $this->input->post('id_pendaftaran');
+        $id_infaq          = $this->input->post('id_infaq');
+        $data              = $this->bayar_infaq_model->tambah_bayar_infaq();
 
         if($data)
         {
@@ -89,18 +109,17 @@ class Bayar_infaq extends CI_Controller{
                 //edit
                 $data   = array(
                     'infaq_daftar_ulang'=>$id_pendaftaran.".pdf",
-                 );
-         
-                      $this->db->where('id_pendaftaran',$id_pendaftaran);
-                      $this->db->update('daftar_ulang',$data);
-                      if($this->db->affected_rows()>0)    
-                      {
-                          $data= TRUE;
-                          $this->cetak2($id_pendaftaran, $id_infaq);
-                      }
-                      else {
-                          $data= FALSE;
-                      }
+                );
+                    $this->db->where('id_pendaftaran',$id_pendaftaran);
+                    $this->db->update('daftar_ulang',$data);
+                    if($this->db->affected_rows()>0)    
+                    {
+                        $data= TRUE;
+                        $this->cetak2($id_pendaftaran, $id_infaq);
+                    }
+                    else {
+                        $data= FALSE;
+                    }
             }
             else
             {
@@ -110,22 +129,20 @@ class Bayar_infaq extends CI_Controller{
                     'infaq_daftar_ulang'=>$id_pendaftaran.".pdf",
                 );
         
-                     $this->db->insert('daftar_ulang',$data);
-                     if($this->db->affected_rows()>0)    
-                     {
-                         $data= TRUE;
-                         $this->cetak2($id_pendaftaran, $id_infaq);
-                     }
-                     else {
-                         $data= FALSE;
-                     }
+                    $this->db->insert('daftar_ulang',$data);
+                    if($this->db->affected_rows()>0)    
+                    {
+                        $data= TRUE;
+                        $this->cetak2($id_pendaftaran, $id_infaq);
+                    }
+                    else {
+                        $data= FALSE;
+                    }
             }
-            
-          
         }
         else
         {
-          //ga ngapa2
+            //ga ngapa2
         }
         
 		echo json_encode($data);

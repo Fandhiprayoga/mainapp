@@ -37,6 +37,17 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <br>
+                <div>
+
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#">INFAQ CALON SANTRI</a></li>
+                            <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/santri_lama">INFAQ SANTRI</a></li>
+                        </ul>
+                    </div>
+
+                </div>
                 <br>
                 <div class="table-responsive">
                     <table class="table" id="tbl_bayar_infaq" class="table table-bordered table-hover">
@@ -173,7 +184,7 @@
     $(document).ready(function () {
         //$('#icon_edit').iconpicker({ hideOnSelect: true,selected: true, });
         $('.js-example-basic-single').select2();
-        
+
         $('#tbl_bayar_infaq').DataTable({
             'paging': true,
             'lengthChange': true,
@@ -251,58 +262,56 @@
     // });
 
     $('body').on('click', '#btn_bayar', function () {
-        var row               = $(this).closest("tr"); // Find the row
-        var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
-        var id_infaq          = row.find("#infaq").val();
-        var status_infaq      = 1;
+        var row = $(this).closest("tr"); // Find the row
+        var id_pendaftaran = row.find(".id_pendaftaran").attr('id_pendaftaran');
+        var id_infaq = row.find("#infaq").val();
+        var status_infaq = 1;
         $.confirm({
-                theme: 'material',
-                type: 'red',
-                title: 'Confirm!',
-                content: 'Anda yakin ?',
-                buttons: {
-                    confirm: function () {
-                        $.ajax({
-                            type: "post",
-                            url: "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/aksi_tambah_bayar_infaq",
-                            data: {
-                                id_pendaftaran: id_pendaftaran,
-                                id_infaq: id_infaq,
-                                status_bayar_infaq: status_infaq,
-                            },
-                            dataType: "json",
-                            success: function (data) {
-                                if(data)
-                                {
-                                    $.alert('simpan berhasil');
-                                    location.reload();
-                                }
-                                else
-                                {
-                                    $.alert('simpan gagal');
-                                }
-                            },
-                            error: function (xhr, textStatus, error) {
-                                console.log(xhr.responseText);
-                                console.log(xhr.statusText);
-                                console.log(textStatus);
-                                console.log(error);
+            theme: 'material',
+            type: 'red',
+            title: 'Confirm!',
+            content: 'Anda yakin ?',
+            buttons: {
+                confirm: function () {
+                    $.ajax({
+                        type: "post",
+                        url: "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/aksi_tambah_bayar_infaq",
+                        data: {
+                            id_pendaftaran: id_pendaftaran,
+                            id_infaq: id_infaq,
+                            status_bayar_infaq: status_infaq,
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                $.alert('simpan berhasil');
+                                location.reload();
+                            } else {
+                                $.alert('simpan gagal');
                             }
-                        });
-                    },
-                    cancel: function () {
+                        },
+                        error: function (xhr, textStatus, error) {
+                            console.log(xhr.responseText);
+                            console.log(xhr.statusText);
+                            console.log(textStatus);
+                            console.log(error);
+                        }
+                    });
+                },
+                cancel: function () {
 
-                    },
-                }
-            });
+                },
+            }
+        });
     });
 
-    $('body').on('click','#btn_cetak', function () {
+    $('body').on('click', '#btn_cetak', function () {
         // $.alert('ini cetak');
-        var row               = $(this).closest("tr"); // Find the row
-        var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
-        var id_infaq          = row.find("#infaq").val();
+        var row = $(this).closest("tr"); // Find the row
+        var id_pendaftaran = row.find(".id_pendaftaran").attr('id_pendaftaran');
+        var id_infaq = row.find("#infaq").val();
 
-        location.href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak/"+id_pendaftaran+"/"+id_infaq;
+        location.href = "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak/" +
+            id_pendaftaran + "/" + id_infaq;
     });
 </script>

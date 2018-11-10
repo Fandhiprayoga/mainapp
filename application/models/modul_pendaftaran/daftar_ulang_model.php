@@ -15,7 +15,7 @@ class Daftar_ulang_model extends CI_Model{
                                     du.infaq_daftar_ulang
                                     FROM pendaftaran p
                                     LEFT JOIN daftar_ulang du
-                                    ON p.id_pendaftaran = du.id_pendaftaran where du.status_daftar_ulang='0' order by p.id_pendaftaran desc");
+                                    ON p.id_pendaftaran = du.id_pendaftaran where p.id_pendaftaran NOT IN (SELECT id_santri FROM mst_santri) order by p.id_pendaftaran desc");
         return $query->result_array();
     }
 

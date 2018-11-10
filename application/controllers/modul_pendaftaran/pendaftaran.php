@@ -93,6 +93,7 @@ class Pendaftaran extends CI_Controller{
     {
         $id_pendaftaran=$this->input->post('id_pendaftaran');
         $du=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+        $p=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
         if(count($du))
         {
             
@@ -101,28 +102,41 @@ class Pendaftaran extends CI_Controller{
                 unlink('./assets/upload/ijazah/'.$du[0]['ijazah_daftar_ulang']);
             }else
             {
-                $data='gagal hapus data';
+                $data['ijazah']='gagal hapus data';
             }
              if($du[0]['kk_daftar_ulang']!="")
             {
                 unlink('./assets/upload/kk/'.$du[0]['kk_daftar_ulang']);
             }else
             {
-                $data='gagal hapus data';
+                $data['kk']='gagal hapus data';
             }
              if($du[0]['infaq_daftar_ulang']!="")
             {
                 unlink('./assets/upload/infaq/'.$du[0]['infaq_daftar_ulang']);
             }else
             {
-                $data='gagal hapus data';
+                $data['infaq']='gagal hapus data';
             }
              if($du[0]['yatim_daftar_ulang']!="")
             {
                 unlink('./assets/upload/yatim/'.$du[0]['yatim_daftar_ulang']);
-            }else
+            }
+            else
             {
-                $data='gagal hapus data';
+                $data['yatim']='gagal hapus data';
+            }
+
+        }
+        if(count($p))
+        {
+            if(file_exists('./assets/upload/santri/'.$p[0]['foto_pendaftaran']))
+            {
+                unlink('./assets/upload/santri/'.$p[0]['foto_pendaftaran']);
+            }
+            else
+            {
+                $data['santri']='gagal hapus data';
             }
              if(file_exists('./assets/upload/barcode/'.$id_pendaftaran.'.jpg'))
             {
@@ -130,14 +144,10 @@ class Pendaftaran extends CI_Controller{
             }
             else
             {
-                $data='gagal hapus data';
+                $data['barcode']='gagal hapus data';
             }
         }
-        else
-        {
-            //gak ngapa-ngapa
-        }
-        $data=$this->pendaftaran_model->hapus_pendaftaran();
+        $data['db']=$this->pendaftaran_model->hapus_pendaftaran();
 		echo json_encode($data);
     }
 

@@ -225,6 +225,17 @@ class Daftar_ulang extends CI_Controller{
              else {
                  $data= FALSE;
              }
+
+             //intergrasi daftar_ulang ke kelas_asrama
+             $obj_kelas_asrm=array('id_santri'=>$id_pendaftaran,);
+             $kls_asrm=$this->db->insert('kelas_asrama', $obj_kelas_asrm);
+             if($this->db->affected_rows()>0)    
+             {
+                $data=TRUE;
+             }
+             else {
+                 $data= FALSE;
+             }
         }
         else
         {

@@ -173,14 +173,11 @@ $("body").on("click","#btn_hapus", function () {
                         data: {id_pendaftaran:id_pendaftaran},
                         dataType: "JSON",
                         success: function (data) {
-                            if(data==true)
+                            console.log(data);
+                            if(data['db']==true)
                             {
                                 $.alert('hapus berhasil');
                                 location.reload();
-                            }
-                            else if(data=='gagal hapus data')
-                            {
-                                $.alert('gagal hapus data2');
                             }
                             else
                             {

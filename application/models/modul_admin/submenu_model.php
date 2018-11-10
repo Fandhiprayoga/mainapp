@@ -6,7 +6,7 @@ class Submenu_model extends CI_Model{
 
     public function tampil_submenu_list()
     {
-        $query = $this->db->query("SELECT (SELECT id_modul FROM menu WHERE id=sm.id_menu) AS id_modul, sm.* FROM submenu sm ORDER BY id_modul, sm.id_menu, sm.order_submenu ASC");
+        $query = $this->db->query("SELECT (SELECT id_modul FROM menu WHERE id=sm.id_menu) AS id_modul, sm.* FROM submenu sm ORDER BY id_modul, sm.id_menu,  sm.order_submenu ASC");
         return $query->result_array();
     }
 
