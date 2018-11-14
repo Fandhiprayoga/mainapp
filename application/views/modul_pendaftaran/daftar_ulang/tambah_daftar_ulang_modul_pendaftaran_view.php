@@ -181,8 +181,7 @@
                 console.log(data);
                 if (data) {
                     $.alert('Simpan berhasil');
-                    location.href =
-                        "<?php echo base_url()?>index.php/modul_pendaftaran/daftar_ulang";
+                    history.back();
                 } else {
                     $.alert('Simpan Gagal');
                 }

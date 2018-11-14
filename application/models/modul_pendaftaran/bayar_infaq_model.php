@@ -38,6 +38,27 @@ class Bayar_infaq_model extends CI_Model{
         }
     }
 
+    public function tambah_bayar_infaq_santri_lama()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date('Y/m/d');
+        $data=array
+        (
+            'id_pendaftaran'=>$this->input->post('id_pendaftaran'),
+            'id_infaq'=>$this->input->post('id_infaq'),
+            'status_bayar_infaq'=>$this->input->post('status_bayar_infaq'),
+            'tgl_bayar_infaq'=>$date,
+        );
+        $this->db->insert('bayar_infaq',$data);
+        if($this->db->affected_rows()>0)    
+        {
+            return TRUE;
+        }
+        else {
+            return FALSE;
+        }
+    }
+
     public function edit_bayar_infaq()
     {
         $id_bayar_infaq=$this->input->post('id_bayar_infaq');

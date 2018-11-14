@@ -41,10 +41,11 @@
          
          if(count($id_pendaftaran))
          {
+                sort($id_pendaftaran);
                   foreach($id_pendaftaran as $a)
                   {
                            $i=$this->db->query('select * from instansi')->result_array();
-                           $n=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$a->id_pendaftaran.'"')->result_array();
+                           $n=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$a.'"')->result_array();
                            echo '<img width="642.51968504px" height="204.09448819px" src="./assets/upload/idcard.png" alt="" style="margin-bottom:5px;margin-top:5px;" ><br>';   
                            //instansi header front
                            echo     '<div id="header">
@@ -56,7 +57,7 @@
                                                       echo       '<div style="margin-top:30px;margin-left:20px;" id="id_front">
                                                                <img style="margin-right:50px;" height="90px" width="70px" src="./assets/upload/santri/'.$n[0]['foto_pendaftaran'].'">
                                                                <p style="margin-top:-110px;margin-left:120px;text-transform: capitalize;"><b>'.$n[0]['n_pendaftaran'].'</b></p>
-                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a->id_pendaftaran.'.jpg">
+                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a.'.jpg">
                                                       </div>';
                                                }
                                                else
@@ -64,7 +65,7 @@
                                                       echo       '<div style="margin-top:30px;margin-left:20px;" id="id_front">
                                                                <img style="margin-right:50px;" height="90px" width="70px" src="./assets/upload/santri/index.png">
                                                                <p style="margin-top:-110px;margin-left:120px;text-transform: capitalize;"><b>'.$n[0]['n_pendaftaran'].'</b></p>
-                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a->id_pendaftaran.'.jpg">
+                                                               <img style="margin-top:-70px;margin-left:120px;"height="50px" src="./assets/upload/barcode/'.$a.'.jpg">
                                                       </div>';
                                                
                                              }

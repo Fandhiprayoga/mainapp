@@ -99,6 +99,10 @@
                                             {
                                                 echo    '<td class="infaq"><a href="javascript:void(0)" id="btn_upload" type="button" class="btn btn-large  btn-block btn-warning" href="#" >BELUM BAYAR</a></td>';
                                             }
+                                            else if($a['infaq_daftar_ulang']=="santri_lama")
+                                            {
+                                                echo    '<td class="infaq"><a href="javascript:void(0)" id="btn_upload" type="button" class="btn btn-large  btn-block btn-success" href="#" >SANTRI LAMA</a></td>';
+                                            }
                                             else
                                             {
                                                 echo    '<td class="infaq">
@@ -124,7 +128,7 @@
                                                 <a href="'.base_url().'index.php/modul_pendaftaran/pendaftaran/cetak/'.$a['id_pendaftaran'].'" type="button" class="btn btn-large btn-block btn-default"><i class="fas fa-list-alt"></i></a>
                                                 
                                             </td>
-                                            <td class="cetak" align="center"><input type="checkbox" name="cetak" id="cetak"></td>';
+                                            <td class="cetak" align="center"><input type="checkbox" name="cetak" id="cetak2"></td>';
                                     
                                     echo    '</tr>';
                                     $i++;
@@ -146,7 +150,7 @@
                         <p>Cheklis dahulu diatas pada kolom status cetak yang akan dicetakkan idcardnya</p>
                     </div>
                     <form action="cetak" method="post" id="form_id_pendaftaran">
-                    <input type="hidden" name="id_pendaftaran[]" id="id_pendaftaran">
+                    <input type="hidden" name="id_pendaftaran" id="id_pendaftaran">
                     <span><button id="btn_cetak" class="btn btn-danger" stype="submit">CETAK IDCARD</button> <b>&nbsp; <span id="jml_cetak">0</span>
                             data siap cetak idcard</b></span>
                     </form>
@@ -256,10 +260,10 @@
     });
 
     $("body").on("click", "#btn_status", function () {
-        var row = $(this).closest("tr"); // Find the row
-        var id_pendaftaran = row.find(".id_pendaftaran").text();
-        var id_daftar_ulang = row.find(".id_daftar_ulang").text();
-        var btn = row.find('#btn_status').attr('disabled');
+        var row               = $(this).closest("tr"); // Find the row
+        var id_pendaftaran    = row.find(".id_pendaftaran").text();
+        var id_daftar_ulang   = row.find(".id_daftar_ulang").text();
+        var btn               = row.find('#btn_status').attr('disabled');
         // $.alert(id_pendaftaran+' '+id_daftar_ulang);
 
         if (btn == 'disabled') {
@@ -317,7 +321,32 @@
         $("#jml_cetak").text(values.length);
         $('[name="id_pendaftaran[]"]').val(JSON.stringify(values));
         console.log(values);
-        //!lalalalalalallala akhirnya fix X'(
+        //!lalalalalalallala akhirnya fix X'
+    });
+
+    var values = [];
+    $('body').on('change', '#cetak2', function () {
+        var row = $(this).closest("tr");
+        var id_pendaftaran= row.find(".id_pendaftaran").text();
+        if(jQuery.inArray(id_pendaftaran,values)== -1)
+        {
+            //id tidak ada di array
+            values.push(
+                id_pendaftaran
+            );
+        }
+        else
+        {
+            values.splice(jQuery.inArray(id_pendaftaran,values), 1);
+        }
+    
+        //console.log(values);
+        $("#jml_cetak").text(values.length);
+
+        $('[name="id_pendaftaran"]').val(values);
+        //console.log(jQuery.inArray( id_pendaftaran, values ));
+        console.log(values);
+        //!lalalalalalallala akhirnya fix X'
     });
 
     

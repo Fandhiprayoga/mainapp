@@ -9,13 +9,13 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-         <h1>
-                  Pembayaran Infaq
-                  <small>Halaman kelola Pemabayaran infaq calon santri</small>
-         </h1>
-         <ol class="breadcrumb">
-                  <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                  <li><a href="#">list bayar infaq</a></li>
+        <h1>
+                Pembayaran Infaq
+                <small>Halaman kelola Pemabayaran infaq calon santri</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="#">list bayar infaq</a></li>
 
          </ol>
 </section>
@@ -27,11 +27,9 @@
                   <div class="box box-danger">
                            <div class="box-header with-border">
                                     <h3 class="box-title">List bayar infaq</h3>
-
+            
                                     <div class="box-tools pull-right">
-                                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                               class="fa fa-minus"></i>
-                                             </button>
+                                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>  </button>
                                     </div>
                                     <!-- /.box-tools -->
                            </div>
@@ -227,86 +225,54 @@
          //     $('#nominal_edit').val(nominal_bayar_infaq);
          // });
 
-         $('body').on('click', '#btn_bayar', function () {
-                  var row               = $(this).closest("tr"); // Find the row
-                  var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
-                  var id_infaq          = row.find("#infaq").val();
-                  var status_infaq      = 1;
-                  $.confirm({
-                           theme    : 'material',
-                           type     : 'red',
-                           title    : 'Confirm!',
-                           content  : 'Anda yakin ?',
-                           buttons: {
-                                    confirm: function () {
-                                             $.ajax({
-                                                      type: "post",
-                                                      url: "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/aksi_tambah_bayar_infaq",
-                                                      data: {
-                                                               id_pendaftaran: id_pendaftaran,
-                                                               id_infaq: id_infaq,
-                                                               status_bayar_infaq: status_infaq,
-                                                      },
-                                                      dataType: "json",
-                                                      success: function (
-                                                               data
-                                                      ) {
-                                                               if (
-                                                                        data
-                                                               ) {
-                                                                        $
-                                                                                 .alert(
-                                                                                          'simpan berhasil'
-                                                                                 );
-                                                                        location
-                                                                                 .reload();
-                                                               } else {
-                                                                        $
-                                                                                 .alert(
-                                                                                          'simpan gagal'
-                                                                                 );
-                                                               }
-                                                      },
-                                                      error: function (
-                                                               xhr,
-                                                               textStatus,
-                                                               error
-                                                      ) {
-                                                               console
-                                                                        .log(
-                                                                                 xhr
-                                                                                 .responseText
-                                                                        );
-                                                               console
-                                                                        .log(
-                                                                                 xhr
-                                                                                 .statusText
-                                                                        );
-                                                               console
-                                                                        .log(
-                                                                                 textStatus
-                                                                        );
-                                                               console
-                                                                        .log(
-                                                                                 error
-                                                                        );
-                                                      }
-                                             });
-                                    },
-                                    cancel: function () {
-
-                                    },
-                           }
-                  });
-         });
+$('body').on('click', '#btn_bayar', function () {
+    var row               = $(this).closest("tr"); // Find the row
+    var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
+    var id_infaq          = row.find("#infaq").val();
+    var status_infaq      = 1;
+    $.confirm({
+        theme: 'material',
+        type: 'red',
+        title: 'Confirm!',
+        content: 'Anda yakin ?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/aksi_tambah_bayar_infaq_santri_lama",
+                    data: {
+                        id_pendaftaran: id_pendaftaran,
+                        id_infaq: id_infaq,
+                        status_bayar_infaq: status_infaq
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $.alert('simpan berhasil');
+                            location.reload();
+                        } else {
+                            $.alert('simpan gagal');
+                        }
+                    },
+                    error: function (xhr, textStatus, error) {
+                        console.log(xhr.responseText);
+                        console.log(xhr.statusText);
+                        console.log(textStatus);
+                        console.log(error);
+                    }
+                });
+            },
+            cancel: function () {}
+        }
+    });
+});
 
          $('body').on('click', '#btn_cetak', function () {
                   // $.alert('ini cetak');
                   var row               = $(this).closest("tr"); // Find the row
                   var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
                   var id_infaq          = row.find("#infaq").val();
-
-                  location.href         = "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak/" +
+                  location.href         = "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak_santri_lama/" +
                            id_pendaftaran + "/" + id_infaq;
          });
 
@@ -330,13 +296,13 @@
                                 '<td>detail santri</td>';
                                 if(data[i]['status_bayar_infaq']!=1)
                                 {
-                                    html+='<td><button>bayar</button></td>';
+                                    html+='<td><button id="btn_bayar">bayar</button></td>';
                                 }
                                 else
                                 {
-                                    html+='<td><button>cetak bukti bayar</button></td>';
+                                    html+='<td><button id="btn_cetak">cetak bukti bayar</button></td>';
                                 }
-                            html+= '</tr>';
+                        html+='</tr>';
                     }
                     $('#show_data').html(html);
                  },

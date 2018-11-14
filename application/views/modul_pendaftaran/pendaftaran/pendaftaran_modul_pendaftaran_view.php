@@ -36,8 +36,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <a href="<?php echo base_url();?>index.php/modul_pendaftaran/pendaftaran/tambah"style="margin-bottom:10px;"class="btn btn-danger" type="button"><i class="fa fa-plus"></i> Tambah pendaftaran</a>
-                
+            <a href="<?php echo base_url();?>index.php/modul_pendaftaran/pendaftaran/tambah" style="margin-bottom:10px;"class="btn btn-danger" type="button"><i class="fa fa-plus"></i> Tambah pendaftaran</a>
+            <a style="margin-top:-10px;" href="<?php echo base_url();?>index.php/modul_pendaftaran/pendaftaran/tambah_santri_lama" class="btn btn-danger" ><i class="fas fa-plus"></i> Tambah data santri lama</a>  
                 <div class="table-responsive">
                 <table class="table" id="tbl_pendaftaran" class="table table-bordered table-hover">
                     <thead>

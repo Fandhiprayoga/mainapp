@@ -25,8 +25,8 @@ class Daftar_ulang extends CI_Controller{
      public function cetak()
      {
             $this->load->library('pdf');
-            $data=$this->input->post('id_pendaftaran');
-            $data['id_pendaftaran']=json_decode($data[0]);
+            $data['id_pendaftaran']=explode(",", $this->input->post('id_pendaftaran')) ;
+            
             $this->pdf->setPaper('A4', 'potrait');
             $this->pdf->filename = "cetak_idcard.pdf";
             $this->pdf->load_view('modul_pendaftaran/daftar_ulang/cetak_idcard_daftar_ulang_modul_pendaftaran_view',$data);
