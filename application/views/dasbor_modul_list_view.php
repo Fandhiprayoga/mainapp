@@ -7,7 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MAINAPP | MODUL LIST</title>
+  <?PHP $a=$this->db->query('select * from mst_mainapp')->result_array();?>
+  <title><?php echo $a[0]['nama_mainapp'];?> | MODUL LIST</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo base_url();?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -64,7 +65,7 @@ desired effect
     <nav class="navbar navbar-static-top" role="navigation">
     <a href="<?php echo base_url();?>index.php/modul_list/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class=""><b>MAIN</b>APP</span>
+      <span class=""><?php echo $a[0]['nama_mainapp'];?></span>
     </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -111,10 +112,11 @@ desired effect
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Main APP rev 1.0
+    <?PHP $a=$this->db->query('select * from mst_mainapp')->result_array();?>
+    <?php echo $a[0]['nama_mainapp'];?> rev 1.0
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2018 <a href="#">MainAPP</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo $a[0]['tahun_mainapp'];?> <a href="#"><?php echo $a[0]['instansi_mainapp'];?></a>.</strong> All rights reserved.
   </footer>
 
 

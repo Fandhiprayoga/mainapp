@@ -17,48 +17,77 @@
     <p>Selamat datang di modul pendaftaran.</p>
   </div>
 
-  <div class="col-md-3 col-sm-6 col-xs-12">
+<div class="col-md-12 col-sm-6 col-xs-12">
     <div class="info-box">
-      <span class="info-box-icon bg-aqua"><i class="fa fa-folder-open"></i></span>
-
+      <span class="info-box-icon bg-red"><i class="fas fa-recycle"></i></span>
+      <?php $a=$this->db->query('select count(id_pendaftaran) as jml_pendaftaran from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri)')->result_array();?>
       <div class="info-box-content">
-        <?php
-              $m_aktif=count($this->db->query('select * from modul where status_aktif="Aktif"')->result_array());
-              $m_tidak=count($this->db->query('select * from modul where status_aktif="Tidak"')->result_array());
-            ?>
-        <span class="info-box-text">Modul Aktif</span>
+        <span class="info-box-text">Daftar ulang menunggu Proses </span>
         <span class="info-box-number">
-          <?php echo $m_aktif;?></span>
-        <span class="info-box-text">Modul Nonaktif</span>
-        <span class="info-box-number">
-          <?php echo $m_tidak;?></span>
-
+          <?php echo $a[0]['jml_pendaftaran']?> proses</span>
       </div>
       <!-- /.info-box-content -->
     </div>
     <!-- /.info-box -->
   </div>
 
-  <div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="col-md-12 col-sm-6 col-xs-12">
     <div class="info-box">
-      <span class="info-box-icon bg-red"><i class="fa fa-user"></i></span>
-
+      <span class="info-box-icon bg-red"><i class="fas fa-user-plus"></i></span>
+      <?php $b=$this->db->query('select count(id_pendaftaran) as jml_santri_baru from pendaftaran where SUBSTRING(id_pendaftaran,3,4)="'.date('Y').'" ')->result_array();?>
       <div class="info-box-content">
-        <?php
-              $u_aktif=count($this->db->query('select * from user where status_user="Aktif"')->result_array());
-              $u_tidak=count($this->db->query('select * from user where status_user="Tidak"')->result_array());
-            ?>
-        <span class="info-box-text">User Aktif</span>
+        <span class="info-box-text">Jml Pendaftaran santri baru tahun ini (<?php echo date('Y');?>)</span>
         <span class="info-box-number">
-          <?php echo $u_aktif;?></span>
-        <span class="info-box-text">User Nonaktif</span>
-        <span class="info-box-number">
-          <?php echo $u_tidak;?></span>
+        <?php echo $b[0]['jml_santri_baru']?> orang</span>
       </div>
       <!-- /.info-box-content -->
     </div>
     <!-- /.info-box -->
   </div>
+
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-aqua"><i class="fas fa-users"></i></span>
+      <?php $c=$this->db->query('select count(id_santri) as jml_santri from mst_santri')->result_array();?>
+      <div class="info-box-content">
+        <span class="info-box-text">Jml Santri terdaftar</span>
+        <span class="info-box-number">
+        <?php echo $c[0]['jml_santri']?> orang</span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-aqua"><i class="fas fa-chalkboard-teacher"></i></span>
+      <?php $d=$this->db->query('select count(id_kelas) as jml_kelas from mst_kelas')->result_array();?>
+      <div class="info-box-content">
+        <span class="info-box-text">Jml kelas</span>
+        <span class="info-box-number">
+        <?php echo $d[0]['jml_kelas']?> kelas</span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-aqua"><i class="fas fa-home"></i></span>
+      <?php $e=$this->db->query('select count(id_asrama) as jml_asrama from mst_asrama')->result_array();?>
+      <div class="info-box-content">
+        <span class="info-box-text">Jml Asrama</span>
+        <span class="info-box-number">
+        <?php echo $e[0]['jml_asrama']?> asrama</span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+
+
 
 </section>
 <!-- /.content -->
