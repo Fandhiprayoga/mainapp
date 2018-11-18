@@ -43,8 +43,16 @@
                                                       <ul class="nav nav-tabs">
                                                                <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq#">INFAQ CALON SANTRI</a></li>
                                                                <li class="active"><a href="#">INFAQ SANTRI</a></li>
+                                                               <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/laporan#">CETAK LAPORAN</a></li>
                                                       </ul>
                                              </div>
+                                             <br>
+                    
+                     
+                <br>
+                <hr>  
+                
+                
 
                                     </div class="container-fluid">
                                     <br>
@@ -153,15 +161,21 @@
                   //$('#icon_edit').iconpicker({ hideOnSelect: true,selected: true, });
                   $('.js-example-basic-single').select2();
 
-                  $('#tbl_bayar_infaq').DataTable({
-                           'paging': true,
-                           'lengthChange': true,
-                           'searching': true,
-                           'ordering': false,
-                           'info': true,
-                           'autoWidth': true,
-                  });
+                //   $('#tbl_bayar_infaq').DataTable({
+                //            'paging': true,
+                //            'lengthChange': true,
+                //            'searching': true,
+                //            'ordering': false,
+                //            'info': true,
+                //            'autoWidth': true,
+                //   });
+                $("#filter_row").hide();
          });
+
+         $("#btn_filter").click(function (e) { 
+            e.preventDefault();
+            $("#filter_row").toggle(1000);
+        }); 
 
          var setDefaultActive = function () {
                   var url = localStorage.getItem("url");
@@ -227,8 +241,8 @@
 
 $('body').on('click', '#btn_bayar', function () {
     var row               = $(this).closest("tr"); // Find the row
-    var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
-    var id_infaq          = row.find("#infaq").val();
+    var id_pendaftaran    = row.find(".id_santri").text();
+    var id_infaq          = $("#data_infaq").val();
     var status_infaq      = 1;
     $.confirm({
         theme: 'material',
@@ -249,7 +263,7 @@ $('body').on('click', '#btn_bayar', function () {
                     success: function (data) {
                         if (data) {
                             $.alert('simpan berhasil');
-                            location.reload();
+                            reset_table();
                         } else {
                             $.alert('simpan gagal');
                         }
@@ -270,11 +284,64 @@ $('body').on('click', '#btn_bayar', function () {
          $('body').on('click', '#btn_cetak', function () {
                   // $.alert('ini cetak');
                   var row               = $(this).closest("tr"); // Find the row
-                  var id_pendaftaran    = row.find(".id_pendaftaran").attr('id_pendaftaran');
-                  var id_infaq          = row.find("#infaq").val();
-                  location.href         = "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak_santri_lama/" +
+                  var id_pendaftaran    = row.find(".id_santri").text();
+                  var id_infaq          = $("#data_infaq").val();
+                  location.href         = "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/cetak/" +
                            id_pendaftaran + "/" + id_infaq;
          });
+         
+         function reset_table()
+         {
+            var id_infaq          = $("#data_infaq").val();
+            $.ajax({
+                 type       : "post",
+                 url        : "<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/tampil_bayar_infaq",
+                 data       : {id_infaq:id_infaq},
+                 dataType   : "json",
+                 success: function (data) {
+                     //console.log(data);
+                    var html = '';
+		            var i;
+		            for(i=0; i<data.length; i++){
+                        html+='<tr>'+
+                                '<td>'+(i+1)+'</td>'+
+                                '<td class="id_santri">'+data[i]['id_santri']+'</td>'+
+                                '<td class="n_santri">'+data[i]['n_santri']+'</td>'+
+                                '<td><a href="<?php echo base_url();?>/index.php/modul_pendaftaran/pendaftaran/cetak/'+data[i]['id_santri']+'" type="button" class="btn btn-large btn-block btn-default"><i class="fas fa-list-alt"></i></a></td>';
+                                if(data[i]['status_bayar_infaq']!=1)
+                                {
+                                    html+=  '<td class="status_bayar">'+
+                                                '<a class="btn btn-large btn-block btn-warning" id="btn_bayar" role="button">BAYAR</a>'+
+                                            '</td>';
+                                }
+                                else
+                                {
+                                    html+=  '<td class="status_bayar">'+
+                                                '<a class="btn btn-large btn-block btn-success" id="btn_cetak" role="button">CETAK BUKTI BAYAR</a>'+
+                                            '</td>';
+                                }
+                        html+='</tr>';
+                    }
+                    $('#show_data').html(html);
+                    $('#tbl_bayar_infaq').DataTable({
+                           'paging': true,
+                           'lengthChange': true,
+                           'searching': true,
+                           'ordering': false,
+                           'info': true,
+                           'autoWidth': true,
+                           'destroy': true,
+                           'retrieve': true,
+                  });
+                 },
+                 error: function (xhr, textStatus, error) {
+                    console.log(xhr.responseText);
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                },
+             });
+         }
 
          $("#data_infaq").change(function (e) { 
              e.preventDefault();
@@ -291,20 +358,33 @@ $('body').on('click', '#btn_bayar', function () {
 		            for(i=0; i<data.length; i++){
                         html+='<tr>'+
                                 '<td>'+(i+1)+'</td>'+
-                                '<td>'+data[i]['id_santri']+'</td>'+
-                                '<td>'+data[i]['n_santri']+'</td>'+
-                                '<td>detail santri</td>';
+                                '<td class="id_santri">'+data[i]['id_santri']+'</td>'+
+                                '<td class="n_santri">'+data[i]['n_santri']+'</td>'+
+                                '<td><a href="<?php echo base_url();?>/index.php/modul_pendaftaran/pendaftaran/cetak/'+data[i]['id_santri']+'" type="button" class="btn btn-large btn-block btn-default"><i class="fas fa-list-alt"></i></a></td>';
                                 if(data[i]['status_bayar_infaq']!=1)
                                 {
-                                    html+='<td><button id="btn_bayar">bayar</button></td>';
+                                    html+=  '<td class="status_bayar">'+
+                                                '<a class="btn btn-large btn-block btn-warning" id="btn_bayar" role="button">BAYAR</a>'+
+                                            '</td>';
                                 }
                                 else
                                 {
-                                    html+='<td><button id="btn_cetak">cetak bukti bayar</button></td>';
+                                    html+=  '<td class="status_bayar">'+
+                                                '<a class="btn btn-large btn-block btn-success" id="btn_cetak" role="button">CETAK BUKTI BAYAR</a>'+
+                                            '</td>';
                                 }
                         html+='</tr>';
                     }
                     $('#show_data').html(html);
+                    $('#tbl_bayar_infaq').DataTable({
+                           'paging': true,
+                           'lengthChange': true,
+                           'searching': true,
+                           'ordering': false,
+                           'info': true,
+                           'autoWidth': true,
+                           'retrieve': true,
+                  });
                  },
                  error: function (xhr, textStatus, error) {
                     console.log(xhr.responseText);

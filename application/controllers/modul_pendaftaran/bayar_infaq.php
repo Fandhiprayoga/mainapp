@@ -36,6 +36,40 @@ class Bayar_infaq extends CI_Controller{
         }
     }
 
+    public function laporan()
+    {
+        if($this->session->id_user=="")
+        {
+            redirect(base_url('index.php/auth'), 'refresh');
+        }
+        else
+        {
+            $data['data_bayar_infaq']=$this->bayar_infaq_model->tampil_bayar_infaq_list();
+            $data['page']='modul_pendaftaran/bayar_infaq/laporan_bayar_infaq_modul_pendaftaran_view';
+            $this->load->view('modul_pendaftaran/dasbor_modul_pendaftaran_view', $data);
+        }
+    }
+
+    public function cetak_laporan_blm_byr()
+    {
+        $this->load->library('pdf');
+        $data['infaq']=$this->uri->segment('4');
+        $data['santri']=$this->uri->segment('5');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan_blm_byr.pdf";
+        $this->pdf->load_view('modul_pendaftaran/bayar_infaq/cetak_lap_blm_bayar_infaq_modul_pendaftaran_view',$data);
+    }
+
+    public function cetak_laporan_sdh_byr()
+    {
+        $this->load->library('pdf');
+        $data['infaq']=$this->uri->segment('4');
+        $data['santri']=$this->uri->segment('5');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan_sdh_byr.pdf";
+        $this->pdf->load_view('modul_pendaftaran/bayar_infaq/cetak_lap_sdh_bayar_infaq_modul_pendaftaran_view',$data);
+    }
+
     public function cetak()
     {
         $this->load->library('pdf');
@@ -163,50 +197,6 @@ class Bayar_infaq extends CI_Controller{
         $id_pendaftaran    = $this->input->post('id_pendaftaran');
         $id_infaq          = $this->input->post('id_infaq');
         $data              = $this->bayar_infaq_model->tambah_bayar_infaq_santri_lama();
-
-        if($data)
-        {
-            $chk=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->num_rows();
-            if($chk>0)
-            {
-                //edit
-                $data   = array(
-                    'infaq_daftar_ulang'=>$id_pendaftaran.".pdf",
-                );
-                    $this->db->where('id_pendaftaran',$id_pendaftaran);
-                    $this->db->update('daftar_ulang',$data);
-                    if($this->db->affected_rows()>0)    
-                    {
-                        $data= TRUE;
-                        $this->cetak2($id_pendaftaran, $id_infaq);
-                    }
-                    else {
-                        $data= FALSE;
-                    }
-            }
-            else
-            {
-                //tambah
-                $data=array(
-                    'id_pendaftaran'=>$id_pendaftaran,
-                    'infaq_daftar_ulang'=>$id_pendaftaran.".pdf",
-                );
-        
-                    $this->db->insert('daftar_ulang',$data);
-                    if($this->db->affected_rows()>0)    
-                    {
-                        $data= TRUE;
-                        $this->cetak2($id_pendaftaran, $id_infaq);
-                    }
-                    else {
-                        $data= FALSE;
-                    }
-            }
-        }
-        else
-        {
-            //ga ngapa2
-        }
         
 		echo json_encode($data);
     }

@@ -214,10 +214,9 @@
                         },
                         success: function (data) {
                             console.log(data);
-                            if (data == true) {
+                            if (data) {
                                 $.alert('Data Tersimpan');
-                                window.location.href =
-                                    "<?php echo base_url();?>index.php/modul_pendaftaran/pendaftaran";
+                                history.back();
                             } else {
                                 $.alert('Data Gagal Tersimpan');
                             }

@@ -182,7 +182,7 @@ class Pendaftaran extends CI_Controller{
         $data['data_esp']=$this->pendaftaran_model->edit_pendaftaran();
         if($data)
         {
-            $a=$this->query('select * from mst_santri where id_santri="'.$id_pendaftaran.'"')->num_rows();
+            $a=$this->db->query('select * from mst_santri where id_santri="'.$id_pendaftaran.'"')->num_rows();
             if($a>0)
             {
                    //edit mst_santri

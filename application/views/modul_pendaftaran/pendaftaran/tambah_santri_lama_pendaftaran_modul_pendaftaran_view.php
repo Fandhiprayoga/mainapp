@@ -197,7 +197,7 @@
                                             <td>
                                                     <div class="btn-toolbar" style="width:100%;">
                                                         <div role="group" class="btn-group">
-                                                            <a id="btn_detail" href="pendaftaran/detail/'.$a['id_pendaftaran'].'" class="btn btn-default" type="button"><i class="fa fa-list"></i></a>
+                                                            <a id="btn_detail" href="'.base_url().'index.php/modul_pendaftaran/pendaftaran/detail/'.$a['id_pendaftaran'].'" class="btn btn-default" type="button"><i class="fa fa-list"></i></a>
                                                             <a id="btn_cetak" href="'.base_url().'index.php/modul_pendaftaran/pendaftaran/cetak/'.$a['id_pendaftaran'].'" class="btn btn-warning" type="button"><i class="fas fa-print    "></i></a>
                                                             <button id="btn_hapus" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button>
                                                         </div>

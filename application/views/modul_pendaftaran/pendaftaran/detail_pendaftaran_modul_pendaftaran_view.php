@@ -228,10 +228,10 @@ $("#btn_simpan").click(function (e) {
                         },
                         success: function(data){
                             console.log(data);
-                            if(data['data_esp']==true)
+                            if(data)
                             {
                                 $.alert('Data Tersimpan');
-                                location.reload();
+                                history.back();
                             }
                             else
                             {

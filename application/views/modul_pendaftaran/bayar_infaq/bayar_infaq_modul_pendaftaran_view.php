@@ -43,12 +43,63 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#">INFAQ CALON SANTRI</a></li>
-                            <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/santri_lama">INFAQ SANTRI</a></li>
+                            <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/santri_lama#">INFAQ SANTRI</a></li>
+                            <li ><a href="<?php echo base_url();?>index.php/modul_pendaftaran/bayar_infaq/laporan#">CETAK LAPORAN</a></li>
                         </ul>
                     </div>
 
                 </div>
                 <br>
+                    <!-- <div class=" pull-right">
+                        <button style="display:none;" type="button" id="btn_filter" class="btn btn-default"><i class="fa fa-print"></i> Cetak</button>
+                    </div> -->
+                     
+                <br>
+                <hr>  
+                
+                
+                <!-- <div id="filter_row">
+                    <div class="box box-default box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Cetak Data bayar infaq calon santri</h3>
+
+                            <div class="box-tools pull-right">
+                                <!-- <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button> -->
+                            <!-- </div>
+                            <!-- /.box-tools -->
+                        <!-- </div>
+                        <!-- /.box-header -->
+                        <!-- <div class="box-body">
+
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="">Pilih periode infaq</label>
+
+                                    <select name="" id="kelas_cetak" class="form-control js-example-basic-single">
+                                        <option value="SEMUA">Pilih SEMUA</option>
+                                        <?php
+                                            $a=$this->db->query('select * from mst_infaq')->result_array();
+                                            if(count($a))
+                                            {
+                                                foreach($a as $a)
+                                                {
+                                                    echo '<option value="'.$a['id_infaq'].'">'.$a['nama_infaq'].' | Rp.'.$a['nominal_infaq'].'</option>';
+                                                }
+                                            }
+                                        ?>
+                                    </select>
+
+                                </div>
+
+                                <a id="btn_cetak_2" type="button" class="btn btn-primary">Mulai cetak</a>
+                            </form>
+
+                        </div>
+                        <!-- /.box-body -->
+                    <!-- </div>
+                    <!-- /.box -->
+                <!-- </div> --> 
                 <div class="table-responsive">
                     <table class="table" id="tbl_bayar_infaq" class="table table-bordered table-hover">
                         <thead>
@@ -193,7 +244,13 @@
             'info': true,
             'autoWidth': true,
         });
+        $("#filter_row").hide();
     });
+
+    $("#btn_filter").click(function (e) { 
+        e.preventDefault();
+        $("#filter_row").toggle(1000);
+    }); 
 
     var setDefaultActive = function () {
         var url = String(window.location);
