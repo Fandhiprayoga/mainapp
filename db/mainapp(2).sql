@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2018 at 06:46 PM
+-- Generation Time: Nov 18, 2018 at 04:42 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -42,8 +42,8 @@ CREATE TABLE `bayar_infaq` (
 --
 
 INSERT INTO `bayar_infaq` (`id_bayar_infaq`, `id_pendaftaran`, `id_infaq`, `status_bayar_infaq`, `tgl_bayar_infaq`, `dump_bayar_infaq`) VALUES
-(31, 'SA199507061', 8, 1, '2018-11-15', '2018-11-14 18:34:45'),
-(32, 'SA200211061', 8, 1, '2018-11-15', '2018-11-14 18:41:58');
+(33, 'SA201811181', 8, 1, '2018-11-18', '2018-11-18 06:22:43'),
+(34, 'SA201811091', 8, 1, '2018-11-18', '2018-11-18 13:34:07');
 
 -- --------------------------------------------------------
 
@@ -67,8 +67,8 @@ CREATE TABLE `daftar_ulang` (
 --
 
 INSERT INTO `daftar_ulang` (`id_daftar_ulang`, `id_pendaftaran`, `ijazah_daftar_ulang`, `kk_daftar_ulang`, `yatim_daftar_ulang`, `infaq_daftar_ulang`, `status_daftar_ulang`, `dump_daftar_ulang`) VALUES
-(30, 'SA199507061', '4dde6c20e14811d94687290ea0748261.pdf', 'e585643bb9a715a801d7f72b78f962a6.pdf', NULL, 'santri_lama', 1, '2018-11-14 17:07:23'),
-(32, 'SA200211061', NULL, NULL, NULL, 'santri_lama', 1, '2018-11-14 18:41:13');
+(33, 'SA201811091', 'cf7c68513b70e3d4d2a05fe8f5600f9d.pdf', '7dad80598ca220438da8c4fbc01f3806.pdf', NULL, 'santri_lama', 1, '2018-11-18 06:21:14'),
+(34, 'SA201811181', 'b6cbcded44df24fcdfb4f9f278cf212e.pdf', 'fb36d979ffc59520665a355ca1ddc813.pdf', '56fbf24acc633c61c104d508123ebebe.pdf', 'SA201811181.pdf', 1, '2018-11-18 06:22:15');
 
 -- --------------------------------------------------------
 
@@ -172,8 +172,8 @@ CREATE TABLE `kelas_asrama` (
 --
 
 INSERT INTO `kelas_asrama` (`id_kelas_asrama`, `id_santri`, `id_asrama`, `id_kelas`, `dump_kelas_santri`) VALUES
-(10, 'SA199507061', 0, 0, '2018-11-14 17:07:23'),
-(12, 'SA200211061', 0, 0, '2018-11-14 18:41:13');
+(13, 'SA201811091', 0, 0, '2018-11-18 06:21:14'),
+(14, 'SA201811181', 0, 0, '2018-11-18 06:23:04');
 
 -- --------------------------------------------------------
 
@@ -300,6 +300,26 @@ INSERT INTO `mst_kelas` (`id_kelas`, `nama_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mst_mainapp`
+--
+
+CREATE TABLE `mst_mainapp` (
+  `id` int(11) NOT NULL,
+  `nama_mainapp` varchar(50) DEFAULT NULL,
+  `instansi_mainapp` varchar(50) DEFAULT NULL,
+  `tahun_mainapp` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mst_mainapp`
+--
+
+INSERT INTO `mst_mainapp` (`id`, `nama_mainapp`, `instansi_mainapp`, `tahun_mainapp`) VALUES
+(1, 'E-PONPES', 'MAHARDIKA APLICATION PRODUCT', '2018');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mst_organisasi`
 --
 
@@ -387,8 +407,8 @@ CREATE TABLE `mst_santri` (
 --
 
 INSERT INTO `mst_santri` (`id_santri`, `n_santri`, `nl_santri`, `t_santri`, `tl_santri`, `telp_santri`, `email_santri`, `instansi_santri`, `alamat_santri`, `status_santri`, `dump_santri`) VALUES
-('SA199507061', 'bbbbbbbb', 'bbbbbbbb', 'bbbbbbbb', '2018-11-20', '22222222222', 'bbbbbbbb', 'bbbbbbbb', '<p>bbbbbbbb</p>\n', 'AKTIF', '2018-11-14 17:07:23'),
-('SA200211061', 'ccccccccc', 'ccccccccc', 'ccccccccc', '2018-11-20', '333333333333', 'ccccccccc', 'ccccccccc', '<p>ccccccccc</p>\n', 'AKTIF', '2018-11-14 18:41:13');
+('SA201811091', 'bbbbbbbbbbbb', 'bbbbbbbbbbbb', 'bbbbbbbbbbbb', '2018-11-23', '2222222', 'bbbbbbbbbbbb', 'bbbbbbbbbbbb', '<p>bbbbbbbbbbbb</p>\n', 'AKTIF', '2018-11-18 06:21:14'),
+('SA201811181', 'aaaaaaaaaaaa', 'aaaaaaaaaaaa', 'aaaaaaaaaaaa', '2018-11-20', '33333333', 'aaaaaaaaaaaa', 'aaaaaaaaaaaa', '<p>aaaaaaaaaaaa</p>\n', 'AKTIF', '2018-11-18 06:23:04');
 
 -- --------------------------------------------------------
 
@@ -440,8 +460,10 @@ CREATE TABLE `pendaftaran` (
 --
 
 INSERT INTO `pendaftaran` (`id_pendaftaran`, `n_pendaftaran`, `nl_pendaftaran`, `t_pendaftaran`, `tl_pendaftaran`, `instansi_pendaftaran`, `alamat_pendaftaran`, `telp_pendaftaran`, `email_pendaftaran`, `org_pendaftaran`, `prestasi_pendaftaran`, `alasan_pendaftaran`, `tgl_pendaftaran`, `foto_pendaftaran`, `dump_pendaftaran`) VALUES
-('SA199507061', 'bbbbbbbb', 'bbbbbbbb', 'bbbbbbbb', '2018-11-20', 'bbbbbbbb', '<p>bbbbbbbb</p>\n', '22222222222', 'bbbbbbbb', '<p>bbbbbbbb</p>\n', '<p>bbbbbbbb</p>\n', '<p>bbbbbbbb</p>\n', '1995-07-06', 'b5f20c20fd4af21dd7ab8d7cce64e541.jpg', '2018-11-14 19:11:54'),
-('SA200211061', 'ccccccccc', 'ccccccccc', 'ccccccccc', '2018-11-20', 'ccccccccc', '<p>ccccccccc</p>\n', '333333333333', 'ccccccccc', '<p>ccccccccc</p>\n', '<p>ccccccccc</p>\n', '<p>ccccccccc</p>\n', '2002-11-06', NULL, '2018-11-14 18:41:13');
+('SA201811091', 'bbbbbbbbbbbb', 'bbbbbbbbbbbb', 'bbbbbbbbbbbb', '2018-11-23', 'bbbbbbbbbbbb', '<p>bbbbbbbbbbbb</p>\n', '2222222', 'bbbbbbbbbbbb', '<p>bbbbbbbbbbbb</p>\n', '<p>bbbbbbbbbbbb</p>\n', '<p>bbbbbbbbbbbb</p>\n', '2018-11-09', '66028343d03e74e168b75444cb6a62e3.jpg', '2018-11-18 06:21:24'),
+('SA201811181', 'aaaaaaaaaaaa', 'aaaaaaaaaaaa', 'aaaaaaaaaaaa', '2018-11-20', 'aaaaaaaaaaaa', '<p>aaaaaaaaaaaa</p>\n', '33333333', 'aaaaaaaaaaaa', '<p>aaaaaaaaaaaa</p>\n', '<p>aaaaaaaaaaaa</p>\n', '<p>aaaaaaaaaaaa</p>\n', '2018-11-18', '899ee9081c954726eb667cdf32b6e248.jpg', '2018-11-18 06:20:36'),
+('SA201811182', 'dddddddd', 'dddddddd', 'dddddddd', '2018-11-28', 'dddddddd', '<p>dddddddd</p>\n', '2222233', 'dddddddd', '<p>dddddddd</p>\n', '<p>dddddddd</p>\n', '<p>dddddddd</p>\n', '2018-11-18', NULL, '2018-11-18 15:16:19'),
+('SA201811183', 'vvvvvvvvvv', 'vvvvvvvvvv', 'vvvvvvvvvv', '2018-10-31', 'vvvvvvvvvv', '<p>vvvvvvvvvv</p>\n', '33333333', 'vvvvvvvvvv', '<p>vvvvvvvvvv</p>\n', '<p>vvvvvvvvvv</p>\n', '<p>vvvvvvvvvv</p>\n', '2018-11-18', NULL, '2018-11-18 15:29:05');
 
 -- --------------------------------------------------------
 
@@ -582,6 +604,12 @@ ALTER TABLE `mst_kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
+-- Indexes for table `mst_mainapp`
+--
+ALTER TABLE `mst_mainapp`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mst_organisasi`
 --
 ALTER TABLE `mst_organisasi`
@@ -629,13 +657,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bayar_infaq`
 --
 ALTER TABLE `bayar_infaq`
-  MODIFY `id_bayar_infaq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_bayar_infaq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `daftar_ulang`
 --
 ALTER TABLE `daftar_ulang`
-  MODIFY `id_daftar_ulang` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id daftar ulang', AUTO_INCREMENT=33;
+  MODIFY `id_daftar_ulang` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id daftar ulang', AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `group_priv`
@@ -659,7 +687,7 @@ ALTER TABLE `instansi`
 -- AUTO_INCREMENT for table `kelas_asrama`
 --
 ALTER TABLE `kelas_asrama`
-  MODIFY `id_kelas_asrama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kelas_asrama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -690,6 +718,12 @@ ALTER TABLE `mst_infaq`
 --
 ALTER TABLE `mst_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `mst_mainapp`
+--
+ALTER TABLE `mst_mainapp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `submenu`
