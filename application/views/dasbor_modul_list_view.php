@@ -76,7 +76,7 @@ desired effect
             <a class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
+                $a=$this->db->query("select * from mst_organisasi where id_organisasi='".$this->session->id_organisasi."'")->result_array();
                 
                 if($a[0]['foto_organisasi']=="")
                 {
@@ -88,7 +88,7 @@ desired effect
                 }
               ?>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</span>
+              <span class="hidden-xs"><?php echo $this->session->id_user;?>&nbsp;(<?php $a=$this->db->query("select nama_group_user from group_user where id_group_user='".$this->session->group_user."'")->result_array(); echo $a[0]['nama_group_user'];?>)</span>
             </a>
           </li>
 

@@ -41,7 +41,7 @@
                     <table class="table table-hover">
                         <tbody>
                             <?php 
-                            $a=$this->db->query('select * from pendaftaran where substring(id_pendaftaran,3,8)="'.date('Y').''.date('m').''.date('d').'"')->num_rows();
+                            $a=$this->db->query("select * from pendaftaran where substring(id_pendaftaran,3,8)='".date('Y')."".date('m')."".date('d')."'")->num_rows();
                             $b=$a+1;
                         ?>
                             <tr>

@@ -56,8 +56,8 @@
                             {
                                 foreach($data_submenu as $list)
                                 {
-                                    $data_modul=$this->db->query('select nama_modul from modul where id="'.$list['id_modul'].'"')->result_array();
-                                    $data_menu=$this->db->query('select nama_menu from menu where id="'.$list['id_menu'].'"')->result_array();
+                                    $data_modul=$this->db->query("select nama_modul from modul where id='".$list['id_modul']."'")->result_array();
+                                    $data_menu=$this->db->query("select nama_menu from menu where id='".$list['id_menu']."'")->result_array();
                                     echo '<tr>';
                                     echo '<td class="id">'.$list['id'].'</td>';
                                     echo '<td id="menu" id_menu="'.$list['id_menu'].'">';

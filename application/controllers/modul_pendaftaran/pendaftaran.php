@@ -128,7 +128,7 @@ class Pendaftaran extends CI_Controller{
              }
 
              //insert mst_santri
-             $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+             $a=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();
              $n_santri         = $a[0]['n_pendaftaran']; //nama lengkap santri
              $nl_santri        = $a[0]['nl_pendaftaran']; // nama panggilan santri
              $t_santri         = $a[0]['t_pendaftaran']; //tempat lahir santri
@@ -182,11 +182,11 @@ class Pendaftaran extends CI_Controller{
         $data['data_esp']=$this->pendaftaran_model->edit_pendaftaran();
         if($data)
         {
-            $a=$this->db->query('select * from mst_santri where id_santri="'.$id_pendaftaran.'"')->num_rows();
+            $a=$this->db->query("select * from mst_santri where id_santri='".$id_pendaftaran."'")->num_rows();
             if($a>0)
             {
                    //edit mst_santri
-                    $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+                    $a=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();
                     $n_santri         = $a[0]['n_pendaftaran']; //nama lengkap santri
                     $nl_santri        = $a[0]['nl_pendaftaran']; // nama panggilan santri
                     $t_santri         = $a[0]['t_pendaftaran']; //tempat lahir santri
@@ -223,8 +223,8 @@ class Pendaftaran extends CI_Controller{
     public function aksi_hapus_pendaftaran()
     {
         $id_pendaftaran=$this->input->post('id_pendaftaran');
-        $du=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
-        $p=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+        $du=$this->db->query("select * from daftar_ulang where id_pendaftaran='".$id_pendaftaran."'")->result_array();
+        $p=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();
         if(count($du))
         {
             

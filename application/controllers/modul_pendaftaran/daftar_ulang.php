@@ -91,7 +91,7 @@ class Daftar_ulang extends CI_Controller{
     {
         $kolom            = $this->input->post('kolom');
         $id_pendaftaran   = $this->input->post('id_pendaftaran');
-        $check            = $this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->num_rows();
+        $check            = $this->db->query("select * from daftar_ulang where id_pendaftaran='".$id_pendaftaran."'")->num_rows();
         
             $config['allowed_types'] = 'pdf';
             $config['encrypt_name']   = TRUE; //enkripsi file name upload
@@ -196,7 +196,7 @@ class Daftar_ulang extends CI_Controller{
         // integrasi daftar_ulang ke mst_santri
         if($data)
         {
-            $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+            $a=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();
             $n_santri         = $a[0]['n_pendaftaran']; //nama lengkap santri
             $nl_santri        = $a[0]['nl_pendaftaran']; // nama panggilan santri
             $t_santri         = $a[0]['t_pendaftaran']; //tempat lahir santri

@@ -34,7 +34,7 @@
   <div class="col-md-12 col-sm-6 col-xs-12">
     <div class="info-box">
       <span class="info-box-icon bg-red"><i class="fas fa-user-plus"></i></span>
-      <?php $b=$this->db->query('select count(id_pendaftaran) as jml_santri_baru from pendaftaran where SUBSTRING(id_pendaftaran,3,4)="'.date('Y').'" ')->result_array();?>
+      <?php $b=$this->db->query("select count(id_pendaftaran) as jml_santri_baru from pendaftaran where SUBSTRING(id_pendaftaran,3,4)='".date('Y')."' ")->result_array();?>
       <div class="info-box-content">
         <span class="info-box-text">Jml Pendaftaran santri baru tahun ini (<?php echo date('Y');?>)</span>
         <span class="info-box-number">

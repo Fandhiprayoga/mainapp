@@ -23,10 +23,10 @@
                     echo '<div class="illustration"><img style="margin-top:-30px;" width="115px" height="115px;" src="'.base_url().'assets/upload/'.$a[0]['logo_instansi'].'"></div><p style="margin-top:-30px;" class="text-center"><b>'.$a[0]['nama_instansi'].'</b><br><br>'.$a[0]['alamat_instansi'].'</p>';
                 }
             ?>
-            
+             <?PHP $b=$this->db->query('select * from mst_mainapp')->result_array();?>
             <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username" required></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#dd4b39;">Log In</button></div><a href="#" class="forgot">mainapp&nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;2018</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#dd4b39;">Log In</button></div><a href="#" class="forgot"><?php echo $b[0]['nama_mainapp'];?>&nbsp;<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;2018</a></form>
     </div>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url();?>/assets/bower_components/jquery/dist/jquery.min.js"></script>

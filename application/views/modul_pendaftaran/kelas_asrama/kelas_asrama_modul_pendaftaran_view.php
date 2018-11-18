@@ -124,9 +124,9 @@
                                     foreach($data_kelas_asrama as $a)
                                     {
                                         
-                                             $b=$this->db->query('select * from mst_santri where id_santri ="'.$a['id_santri'].'"')->result_array();
-                                             $c=$this->db->query('select * from mst_kelas where id_kelas ="'.$a['id_kelas'].'"')->result_array();
-                                             $d=$this->db->query('select * from mst_asrama where id_asrama ="'.$a['id_asrama'].'"')->result_array();        
+                                             $b=$this->db->query("select * from mst_santri where id_santri ='".$a['id_santri']."'")->result_array();
+                                             $c=$this->db->query("select * from mst_kelas where id_kelas ='".$a['id_kelas']."'")->result_array();
+                                             $d=$this->db->query("select * from mst_asrama where id_asrama ='".$a['id_asrama']."'")->result_array();        
                                         echo '<tr>
                                                 <td class="id_kelas_asrama" id_kelas_asrama="'.$a['id_kelas_asrama'].'">'.$i.'</td>
                                                 <td>'.$a['id_santri'].'</td>

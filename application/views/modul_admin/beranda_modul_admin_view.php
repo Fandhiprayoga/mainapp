@@ -23,8 +23,8 @@
 
             <div class="info-box-content">
             <?php
-              $m_aktif=count($this->db->query('select * from modul where status_aktif="Aktif"')->result_array());
-              $m_tidak=count($this->db->query('select * from modul where status_aktif="Tidak"')->result_array());
+              $m_aktif=count($this->db->query("select * from modul where status_aktif='Aktif'")->result_array());
+              $m_tidak=count($this->db->query("select * from modul where status_aktif='Tidak'")->result_array());
             ?>
               <span class="info-box-text">Modul Aktif</span>
               <span class="info-box-number"><?php echo $m_aktif;?></span>
@@ -43,8 +43,8 @@
 
             <div class="info-box-content">
             <?php
-              $u_aktif=count($this->db->query('select * from user where status_user="Aktif"')->result_array());
-              $u_tidak=count($this->db->query('select * from user where status_user="Tidak"')->result_array());
+              $u_aktif=count($this->db->query("select * from pengguna where status_user='Aktif'")->result_array());
+              $u_tidak=count($this->db->query("select * from pengguna where status_user='Tidak'")->result_array());
             ?>
               <span class="info-box-text">User Aktif</span>
               <span class="info-box-number"><?php echo $u_aktif;?></span>

@@ -62,12 +62,12 @@
             <?php
                         if($santri=="0")
                         {
-                                    $query='SELECT p.*, bi.status_bayar_infaq FROM pendaftaran p LEFT JOIN bayar_infaq bi ON p.id_pendaftaran=bi.id_pendaftaran AND bi.id_infaq="'.$infaq.'" and bi.status_bayar_infaq!=1 where SUBSTRING(p.id_pendaftaran,3,4)="'.date('Y').'" ORDER BY p.id_pendaftaran DESC';
+                                    $query="SELECT p.*, bi.status_bayar_infaq FROM pendaftaran p LEFT JOIN bayar_infaq bi ON p.id_pendaftaran=bi.id_pendaftaran AND bi.id_infaq='".$infaq."' and bi.status_bayar_infaq!=1 where SUBSTRING(p.id_pendaftaran,3,4)='".date('Y')."' ORDER BY p.id_pendaftaran DESC";
                                     $a=$this->db->query($query)->result_array();
                                     //print_r($a);
                                     if(count($a))
                                     {
-                                                $infq=$this->db->query('select nama_infaq from mst_infaq where id_infaq="'.$infaq.'"')->result_array();
+                                                $infq=$this->db->query("select nama_infaq from mst_infaq where id_infaq='".$infaq."'")->result_array();
                                                 echo '<div class="tabel_plate">
                                                                         <hr>
                                                 
@@ -108,11 +108,11 @@
                         }
                         else
                         {
-                                    $query='SELECT p.*, bi.* FROM mst_santri p LEFT JOIN bayar_infaq bi ON p.id_santri=bi.id_pendaftaran AND bi.id_infaq="'.$infaq.'" and bi.status_bayar_infaq!=1 ORDER BY p.id_santri DESC';
+                                    $query="SELECT p.*, bi.* FROM mst_santri p LEFT JOIN bayar_infaq bi ON p.id_santri=bi.id_pendaftaran AND bi.id_infaq='".$infaq."' and bi.status_bayar_infaq!=1 ORDER BY p.id_santri DESC";
                                     $a=$this->db->query($query)->result_array();
                                     if(count($a))
                                     {
-                                                $infq=$this->db->query('select nama_infaq from mst_infaq where id_infaq="'.$infaq.'"')->result_array();
+                                                $infq=$this->db->query("select nama_infaq from mst_infaq where id_infaq='".$infaq."'")->result_array();
                                                 echo '<div class="tabel_plate">
                                                                         <hr>
                                                 
@@ -134,8 +134,8 @@
                                                 $jml_data=count($a);
                                                 foreach($a as $a)
                                                 {
-                                                            $id_kelas=$this->db->query('select id_kelas from kelas_asrama where id_santri="'.$a['id_santri'].'"')->result_array();
-                                                            $n_kelas=$this->db->query('select nama_kelas from mst_kelas where id_kelas="'.$id_kelas[0]['id_kelas'].'"')->result_array();
+                                                            $id_kelas=$this->db->query("select id_kelas from kelas_asrama where id_santri='".$a['id_santri']."'")->result_array();
+                                                            $n_kelas=$this->db->query("select nama_kelas from mst_kelas where id_kelas='".$id_kelas[0]['id_kelas']."'")->result_array();
                                                             
                                                             echo        '<tr>
                                                                                     <td>'.$i.'</td>

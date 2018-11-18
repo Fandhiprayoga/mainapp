@@ -25,10 +25,12 @@ class mst_organisasi extends CI_Controller{
     public function export()
     {
         $file_name = 'mst_organisasi_'.date("Y-m-d h-i-s").'.csv';
-        $query = $this->db->query('select id_organisasi, nama_organisasi, jk_organisasi, t_organisasi, tl_organisasi, jabatan_organisasi, alamat_organisasi from mst_organisasi where id_organisasi!="OR999999999"');
-
+        $query = $this->db->query("select id_organisasi, nama_organisasi, jk_organisasi, t_organisasi, tl_organisasi, jabatan_organisasi, alamat_organisasi from mst_organisasi where id_organisasi!='OR999999999'");
+        $delimiter = ";";
+        $newline = "\n";
+        $enclosure = '"';
         $this->load->dbutil();
-        $data = $this->dbutil->csv_from_result($query);
+        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline, $enclosure);
         $this->load->helper('download');
         force_download($file_name, $data);  
         exit();
@@ -63,7 +65,7 @@ class mst_organisasi extends CI_Controller{
 
             foreach($csvData as $a)
             {
-                $ex=$this->db->query('select * from mst_organisasi where id_organisasi="'.$a['id_organisasi'].'"')->num_rows();
+                $ex=$this->db->query("select * from mst_organisasi where id_organisasi='".$a['id_organisasi']."'")->num_rows();
                 if($ex>0)
                 {
                     //engga ngapa-ngapain mhank
@@ -183,9 +185,9 @@ class mst_organisasi extends CI_Controller{
             $alamat     = $this->input->post('alamat');
            
             // hapus data foto eksis
-            $z            = $this->db->query('select foto_organisasi from mst_organisasi where id_organisasi="'.$id.'"')->result_array();
+            $z            = $this->db->query("select foto_organisasi from mst_organisasi where id_organisasi='".$id."'")->result_array();
             
-                unlink('.assets/upload/'.$z[0]['foto_organisasi']);
+                unlink('./assets/upload/'.$z[0]['foto_organisasi']);
            
             
 
@@ -214,7 +216,7 @@ class mst_organisasi extends CI_Controller{
     {
         $id_organisasi=$this->input->post('id_mst_organisasi');
         // hapus data foto eksis
-        $x= $this->db->query('select foto_organisasi from mst_organisasi where id_organisasi="'.$id_organisasi.'"')->result_array();
+        $x= $this->db->query("select foto_organisasi from mst_organisasi where id_organisasi='".$id_organisasi."'")->result_array();
         
 
         $data=$this->mst_organisasi_model->hapus_mst_organisasi($id_organisasi);

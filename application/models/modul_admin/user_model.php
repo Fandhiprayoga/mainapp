@@ -6,14 +6,14 @@ class User_model extends CI_Model{
 
     public function tampil_user_list()
     {
-        $query = $this->db->query("select u.*, (select nama_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as nama_user, (select jabatan_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as bagian_user from user u");
+        $query = $this->db->query("select u.*, (select nama_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as nama_user, (select jabatan_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as bagian_user from pengguna u");
         return $query->result_array();
     }
 
     public function get_user_exist()
     {
         $id_user=$this->input->post('id_user');
-        $query = $this->db->query("select * from user where id_user ='".$id_user."'");
+        $query = $this->db->query("select * from pengguna where id_user ='".$id_user."'");
         return $query->result_array();
     }
 
@@ -28,7 +28,7 @@ class User_model extends CI_Model{
             'status_user'=>$this->input->post('status_user'),
             
         );
-        $this->db->insert('user',$data);
+        $this->db->insert('pengguna',$data);
     }
 
     public function edit_user()
@@ -42,14 +42,14 @@ class User_model extends CI_Model{
             'status_user'=>$this->input->post('status_user'),
         );
         $this->db->where('id_user',$id_user);
-        $this->db->update('user',$data);
+        $this->db->update('pengguna',$data);
     }
 
     public function hapus_user()
     {
         $id_user=$this->input->post('id_user');
         $this->db->where('id_user',$id_user);
-        $this->db->delete('user');
+        $this->db->delete('pengguna');
     }
     
 

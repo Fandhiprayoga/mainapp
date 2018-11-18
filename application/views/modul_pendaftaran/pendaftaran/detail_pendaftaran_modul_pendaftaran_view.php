@@ -46,7 +46,7 @@
                 <table class="table table-hover">
                     <tbody>
                         <?php 
-                            $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();
+                            $a=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();
                         ?>
                         <tr>
                             <td>ID PENDAFTARAN</td>

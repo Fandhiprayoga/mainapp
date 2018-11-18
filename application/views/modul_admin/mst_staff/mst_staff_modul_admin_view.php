@@ -73,7 +73,7 @@
                                 
                                 foreach($data_mst_staff as $list)
                                 {
-                                    $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$list['id_organisasi'].'"')->result_array(); 
+                                    $a=$this->db->query("select * from mst_organisasi where id_organisasi='".$list['id_organisasi']."'")->result_array(); 
                                     echo '<tr>';
                                     echo '<td class="id_staff">'.$list['id_staff'].'</td>';
                                     echo '<td class="id_organisasi">'.$list['id_organisasi'].'</td>';

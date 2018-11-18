@@ -57,7 +57,7 @@
                             {
                                 foreach($data_menu as $list)
                                 {
-                                    $modul=$this->db->query('select max(nama_modul) as nama_modul from modul where id="'.$list['id_modul'].'"')->result_array();
+                                    $modul=$this->db->query("select max(nama_modul) as nama_modul from modul where id='".$list['id_modul']."'")->result_array();
                                     echo '<tr>';
                                     echo '<td class="id">'.$list['id'].'</td>';
                                     echo '<td id="modul" id_modul="'.$list['id_modul'].'" >';

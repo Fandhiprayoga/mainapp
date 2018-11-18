@@ -37,7 +37,7 @@
             <div class="box-body">
         <form id="submit_tambah">
             <div class="form-group" >
-            <?php $a=$this->db->query('select * from mst_organisasi where substring(id_organisasi,2,8)="'.date('Y').''.date('m').''.date('d').'"')->num_rows();
+            <?php $a=$this->db->query("select * from mst_organisasi where substring(id_organisasi,2,8)='".date('Y')."".date('m')."".date('d')."'")->num_rows();
                     $b=$a+1;
             ?>
         <p class="help-block">ID ANGGOTA</p><input name="id" type="text" readonly class="form-control" id="id_edit" value="<?php echo date('Y').''.date('m').''.date('d').''.$b;?>" /></div>

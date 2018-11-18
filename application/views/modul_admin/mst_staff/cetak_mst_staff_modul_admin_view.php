@@ -78,7 +78,7 @@
                             $i=1;
                             foreach($b as $bl)
                             {
-                                $c=$this->db->query('select * from mst_organisasi where id_organisasi="'.$bl['id_organisasi'].'"')->result_array();
+                                $c=$this->db->query("select * from mst_organisasi where id_organisasi='".$bl['id_organisasi']."'")->result_array();
                                 echo '<tr>
                                             <td>'.$i.'</td>
                                             <td>'.$bl['id_staff'].'</td>

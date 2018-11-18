@@ -63,7 +63,7 @@ class mst_staff extends CI_Controller{
 
             foreach($csvData as $a)
             {
-                $ex=$this->db->query('select * from mst_staff where id_staff="'.$a['id_staff'].'"')->num_rows();
+                $ex=$this->db->query("select * from mst_staff where id_staff='".$a['id_staff']."'")->num_rows();
                 if($ex>0)
                 {
                     //engga ngapa-ngapain mhank

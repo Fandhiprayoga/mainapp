@@ -87,7 +87,7 @@ desired effect
               <a class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
                 <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
+                $a=$this->db->query("select * from mst_organisasi where id_organisasi='".$this->session->id_organisasi."'")->result_array();
                 
                 if($a[0]['foto_organisasi']=="")
                 {
@@ -102,7 +102,7 @@ desired effect
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">
                   <?php echo $this->session->id_user;?>&nbsp;(
-                  <?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</span>
+                  <?php $a=$this->db->query("select nama_group_user from group_user where id_group_user='".$this->session->group_user."'")->result_array(); echo $a[0]['nama_group_user'];?>)</span>
               </a>
             </li>
 
@@ -125,7 +125,7 @@ desired effect
         <div class="user-panel" style="height:80px;">
           <div class="pull-left image">
             <?php
-                $a=$this->db->query('select * from mst_organisasi where id_organisasi="'.$this->session->id_organisasi.'"')->result_array();
+                $a=$this->db->query("select * from mst_organisasi where id_organisasi='".$this->session->id_organisasi."'")->result_array();
                 
                 if($a[0]['foto_organisasi']=="")
                 {
@@ -142,7 +142,7 @@ desired effect
             <p>
               <?php echo $this->session->id_user;?>&nbsp;</p>
             <p>(
-              <?php $a=$this->db->query('select nama_group_user from group_user where id_group_user="'.$this->session->group_user.'"')->result_array(); echo $a[0]['nama_group_user'];?>)</p>
+              <?php $a=$this->db->query("select nama_group_user from group_user where id_group_user='".$this->session->group_user."'")->result_array(); echo $a[0]['nama_group_user'];?>)</p>
             <!-- Status -->
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
@@ -159,7 +159,7 @@ desired effect
 
           <?php
             $dummy_gu=$this->session->group_user;
-            $data_group_priv=$this->db->query('SELECT gp.*, (SELECT nama_submenu FROM submenu WHERE id=gp.id_submenu) AS nama_submenu, (SELECT link_submenu FROM submenu WHERE id=gp.id_submenu) AS link_submenu, (SELECT id_menu FROM submenu WHERE id=gp.id_submenu) AS id_menu, (SELECT order_submenu FROM submenu WHERE id=gp.id_submenu) AS order_submenu FROM group_priv gp WHERE id_group_user="'.$dummy_gu.'" AND is_priv="1" ORDER BY order_submenu ASC')->result_array();
+            $data_group_priv=$this->db->query("SELECT gp.*, (SELECT nama_submenu FROM submenu WHERE id=gp.id_submenu) AS nama_submenu, (SELECT link_submenu FROM submenu WHERE id=gp.id_submenu) AS link_submenu, (SELECT id_menu FROM submenu WHERE id=gp.id_submenu) AS id_menu, (SELECT order_submenu FROM submenu WHERE id=gp.id_submenu) AS order_submenu FROM group_priv gp WHERE id_group_user='".$dummy_gu."' AND is_priv='1' ORDER BY order_submenu ASC")->result_array();
             $data_menu=$this->db->query("select * from menu where id_modul='6' order by order_menu asc" )->result_array();
             // $data_submenu=$this->db->query("select * from submenu " )->result_array();
             if(count($data_menu))

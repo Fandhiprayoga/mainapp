@@ -83,9 +83,9 @@
                                     BUKTI PENERIMAAN UANG INFAQ </p>
                            <br>
                            <table>
-                            <?php $p=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();?>
-                            <?php $i=$this->db->query('select * from mst_infaq where id_infaq="'.$id_infaq.'"')->result_array();?>
-                            <?php $bi=$this->db->query('select * from bayar_infaq where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();?>
+                            <?php $p=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();?>
+                            <?php $i=$this->db->query("select * from mst_infaq where id_infaq='".$id_infaq."'")->result_array();?>
+                            <?php $bi=$this->db->query("select * from bayar_infaq where id_pendaftaran='".$id_pendaftaran."'")->result_array();?>
                                     <tbody>
                                     <tr>
                                              <td>Sudah diterima dari </td>

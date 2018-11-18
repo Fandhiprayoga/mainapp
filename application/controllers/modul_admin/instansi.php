@@ -63,7 +63,7 @@ class Instansi extends CI_Controller{
         $link='assets/upload/'.$link;
         if(unlink($link))
         {
-           $data= $this->db->query('update instansi set logo_instansi="" where id="1"');
+           $data= $this->db->query("update instansi set logo_instansi='' where id='1'");
         }
         else
         {

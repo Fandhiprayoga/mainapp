@@ -86,7 +86,7 @@
             <br>
             <br>
             <table>
-                <?php $a=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$id_pendaftaran.'"')->result_array();?>
+                <?php $a=$this->db->query("select * from pendaftaran where id_pendaftaran='".$id_pendaftaran."'")->result_array();?>
                 <tbody>
                     <tr>
                         <td style="width:45%;">NAMA LENGKAP </td>

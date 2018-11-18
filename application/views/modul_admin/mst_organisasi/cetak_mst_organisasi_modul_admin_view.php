@@ -71,7 +71,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        $b=$this->db->query('select * from mst_organisasi  where id_organisasi!="OR999999999"')->result_array();
+                        $b=$this->db->query("select * from mst_organisasi  where id_organisasi!='OR999999999'")->result_array();
                         if(count($b))
                         {
                             $i=1;

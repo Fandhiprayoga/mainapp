@@ -135,7 +135,7 @@ class Bayar_infaq extends CI_Controller{
 
     public function tampil_bayar_infaq()
     {
-        $a=$this->db->query('select p.*, bi.id_infaq, bi.id_infaq, bi.status_bayar_infaq from mst_santri p left join bayar_infaq bi on p.id_santri=bi.id_pendaftaran and bi.id_infaq="'.$this->input->post('id_infaq').'" order by p.id_santri desc')->result_array();
+        $a=$this->db->query("select p.*, bi.id_infaq, bi.id_infaq, bi.status_bayar_infaq from mst_santri p left join bayar_infaq bi on p.id_santri=bi.id_pendaftaran and bi.id_infaq='".$this->input->post('id_infaq')."' order by p.id_santri desc")->result_array();
         echo json_encode($a);
     }
 
@@ -147,7 +147,7 @@ class Bayar_infaq extends CI_Controller{
 
         if($data)
         {
-            $chk=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$id_pendaftaran.'"')->num_rows();
+            $chk=$this->db->query("select * from daftar_ulang where id_pendaftaran='".$id_pendaftaran."'")->num_rows();
             if($chk>0)
             {
                 //edit

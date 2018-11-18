@@ -45,7 +45,7 @@
                   foreach($id_pendaftaran as $a)
                   {
                            $i=$this->db->query('select * from instansi')->result_array();
-                           $n=$this->db->query('select * from pendaftaran where id_pendaftaran="'.$a.'"')->result_array();
+                           $n=$this->db->query("select * from pendaftaran where id_pendaftaran='".$a."'")->result_array();
                            echo '<img width="642.51968504px" height="204.09448819px" src="./assets/upload/idcard.png" alt="" style="margin-bottom:5px;margin-top:5px;" ><br>';   
                            //instansi header front
                            echo     '<div id="header">

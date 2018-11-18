@@ -47,7 +47,7 @@ class Group_priv_model extends CI_Model{
     {
         $id_group_user=$this->input->post('id_group_user');
         $id_submenu=$this->input->post('id_submenu');
-        return $this->db->query('select * from group_priv where id_group_user="'.$id_group_user.'" and id_submenu="'.$id_submenu.'"')->result_array();
+        return $this->db->query("select * from group_priv where id_group_user='".$id_group_user."' and id_submenu='".$id_submenu."'")->result_array();
     }
 }
 

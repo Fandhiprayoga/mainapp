@@ -17,7 +17,7 @@ class Auth extends CI_Controller{
     {
         $username=$this->input->post('username');
         $password=$this->input->post('password');
-        $d_login=$this->db->query('select u.*, (select nama_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as nama_user, (select jabatan_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as bagian_user from user u where u.id_user="'.$username.'" and u.pass_user="'.$password.'"')->result();
+        $d_login=$this->db->query("select u.*, (select nama_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as nama_user, (select jabatan_organisasi from mst_organisasi where id_organisasi=u.id_organisasi) as bagian_user from pengguna u where u.id_user='".$username."' and u.pass_user='".$password."'")->result();
         if(count($d_login)>0)
         {
             if($d_login[0]->status_user=="Aktif")

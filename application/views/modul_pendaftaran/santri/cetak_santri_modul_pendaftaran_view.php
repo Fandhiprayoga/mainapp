@@ -144,7 +144,7 @@
                                                                $i=1;
                                                                foreach($a as $a)
                                                                {
-                                                                        $yatim=$this->db->query('select * from daftar_ulang where id_pendaftaran="'.$a['id_santri'].'"')->result_array();
+                                                                        $yatim=$this->db->query("select * from daftar_ulang where id_pendaftaran='".$a['id_santri']."'")->result_array();
                                                                         echo     '<tr>
                                                                                           <td>'.$i.'</td>
                                                                                           <td>'.$a['id_santri'].'</td>
