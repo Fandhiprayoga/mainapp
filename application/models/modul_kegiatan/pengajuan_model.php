@@ -82,6 +82,41 @@ class Pengajuan_model extends CI_Model{
             return $this->db->affected_rows();
     }
     
+    public function tampil_laporan()
+    {
+        $kegiatan=$this->input->post('kegiatan');
+        $tgl_awal=$this->input->post('tgl_awal');
+        $tgl_akhir=$this->input->post('tgl_akhir');
+        if($kegiatan==0)
+        {
+            $query="select p.id_pengajuan,
+            (select top 1 pj_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as pj_kegiatan,
+            (select top 1 rincian_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as rincian_kegiatan,
+            (select top 1 tempat_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as tempat_kegiatan, 
+            (select top 1 nama_pengajuan from pengajuan where id_pengajuan=p.id_pengajuan) as nama_pengajuan, 
+            (select top 1 kategori_pengajuan from pengajuan where id_pengajuan=p.id_pengajuan) as kategori_pengajuan, 
+            (select top 1 tgl_pengajuan from pengajuan where id_pengajuan=p.id_pengajuan) as tgl_pengajuan,
+            (select top 1 lpj_kegiatan from pengajuan where id_pengajuan = p.id_pengajuan) as lpj_pengajuan, 
+            (select top 1 waktu_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as waktu_kegiatan
+             from pengajuan p 
+             where p.id_pengajuan not in (select id_pengajuan from pengajuan where lpj_kegiatan is not null) and p.tgl_pengajuan between '".$tgl_awal."' and '".$tgl_akhir."' group by p.id_pengajuan";
+        }
+        else
+        {
+            $query="select ra.id_pengajuan,
+            (select top 1 pj_kegiatan from pengajuan where id_pengajuan=ra.id_pengajuan) as pj_kegiatan,
+            (select top 1 rincian_kegiatan from pengajuan where id_pengajuan=ra.id_pengajuan) as rincian_kegiatan,
+            (select top 1 tempat_kegiatan from pengajuan where id_pengajuan=ra.id_pengajuan) as tempat_kegiatan, 
+            (select top 1 nama_pengajuan from pengajuan where id_pengajuan=ra.id_pengajuan) as nama_pengajuan, 
+            (select top 1 kategori_pengajuan from pengajuan where id_pengajuan=ra.id_pengajuan) as kategori_pengajuan, 
+            (select top 1 tgl_pengajuan from pengajuan where id_pengajuan=ra.id_pengajuan) as tgl_pengajuan,
+            (select top 1 lpj_kegiatan from pengajuan where id_pengajuan = ra.id_pengajuan) as lpj_pengajuan, 
+            (select top 1 waktu_kegiatan from pengajuan where id_pengajuan=ra.id_pengajuan) as waktu_kegiatan
+             from rencana_anggaran ra, pengajuan p 
+             where ra.id_pengajuan=p.id_pengajuan and p.lpj_kegiatan is not null and p.tgl_pengajuan between '".$tgl_awal."' and '".$tgl_akhir."' group by ra.id_pengajuan";
+        }
+        return $this->db->query($query)->result_array();
+    }
 }
 
 ?>

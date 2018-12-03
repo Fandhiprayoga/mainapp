@@ -97,6 +97,19 @@ class Pengajuan extends CI_Controller{
         $this->pdf->load_view('modul_admin/pengajuan/cetak_pengajuan_modul_admin_view');
         //$this->load->view('modul_admin/pengajuan/cetak_pengajuan_modul_admin_view');
     }
+    
+    public function cetak_laporan()
+    {
+        $data['kegiatan']=$this->uri->segment('4');
+        $data['tgl_awal']=$this->uri->segment('5');
+        $data['tgl_akhir']=$this->uri->segment('6');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "data_laporan.pdf";
+        $this->pdf->load_view('modul_kegiatan/pengajuan/cetak_laporan_modul_kegiatan_view',$data);
+        //$this->load->view('modul_admin/pengajuan/cetak_pengajuan_modul_admin_view');
+    }
+
 
     public function tambah()
     {
@@ -150,6 +163,20 @@ class Pengajuan extends CI_Controller{
         {
             $data['data_galeri']=$this->pengajuan_model->tampil_lpj_list();
             $data['page']='modul_kegiatan/pengajuan/galeri_modul_kegiatan_view';
+            $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
+        }
+    }
+
+    public function laporan()
+    {
+        if($this->session->id_user=="")
+        {
+            redirect(base_url('index.php/auth'), 'refresh');
+        }
+        else
+        {
+            $data['data_galeri']=$this->pengajuan_model->tampil_lpj_list();
+            $data['page']='modul_kegiatan/pengajuan/laporan_modul_kegiatan_view';
             $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
         }
     }
@@ -361,6 +388,12 @@ class Pengajuan extends CI_Controller{
             $data=$this->pengajuan_model->hapus_pengajuan();
         
             echo json_encode($data);
+    }
+
+    public function tampil_laporan()
+    {
+        $data=$this->pengajuan_model->tampil_laporan();
+        echo json_encode($data);
     }
 } 
 
