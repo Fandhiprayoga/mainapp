@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mst_donatur extends CI_Controller{
+class Mst_org_yayasan extends CI_Controller{
 
     function __construct() {
         parent::__construct();
-        $this->load->model('modul_keuangan_yayasan/mst_donatur_model');
+        $this->load->model('modul_keuangan_yayasan/mst_org_yayasan_model');
     }
 
     public function index()
@@ -16,33 +16,33 @@ class Mst_donatur extends CI_Controller{
         }
         else
         {
-            $data['data_mst_donatur']=$this->mst_donatur_model->tampil_mst_donatur_list();
-            $data['page']='modul_keuangan_yayasan/mst_donatur/mst_donatur_modul_keuangan_yayasan_view';
+            $data['data_mst_org_yayasan']=$this->mst_org_yayasan_model->tampil_mst_org_yayasan_list();
+            $data['page']='modul_keuangan_yayasan/mst_org_yayasan/mst_org_yayasan_modul_keuangan_yayasan_view';
             $this->load->view('modul_keuangan_yayasan/dasbor_modul_keuangan_yayasan_view', $data);
         }
     }
 
-    public function aksi_tambah_mst_donatur()
+    public function aksi_tambah_mst_org_yayasan()
     {
-        $data=$this->mst_donatur_model->tambah_mst_donatur();
+        $data=$this->mst_org_yayasan_model->tambah_mst_org_yayasan();
         echo json_encode($data);
     } 
 
-    public function aksi_edit_mst_donatur()
+    public function aksi_edit_mst_org_yayasan()
     {
-      $data=$this->mst_donatur_model->edit_mst_donatur();
+      $data=$this->mst_org_yayasan_model->edit_mst_org_yayasan();
       echo json_encode($data);
     }
-    public function aksi_hapus_mst_donatur()
+    public function aksi_hapus_mst_org_yayasan()
     {
-      $data=$this->mst_donatur_model->hapus_mst_donatur();
+      $data=$this->mst_org_yayasan_model->hapus_mst_org_yayasan();
       echo json_encode($data);
     }
 
     // public function export()
     // {
-    //     $file_name = 'mst_donatur_'.date("Y-m-d h-i-s").'.csv';
-    //     $query = $this->db->query("select id_donatur, nama_donatur, jk_donatur, t_donatur, tl_donatur, jabatan_donatur, alamat_donatur from mst_donatur where id_donatur!='OR999999999'");
+    //     $file_name = 'mst_org_yayasan_'.date("Y-m-d h-i-s").'.csv';
+    //     $query = $this->db->query("select id_donatur, nama_donatur, jk_donatur, t_donatur, tl_donatur, jabatan_donatur, alamat_donatur from mst_org_yayasan where id_donatur!='OR999999999'");
     //     $delimiter = ";";
     //     $newline = "\n";
     //     $enclosure = '"';
@@ -82,7 +82,7 @@ class Mst_donatur extends CI_Controller{
 
     //         foreach($csvData as $a)
     //         {
-    //             $ex=$this->db->query("select * from mst_donatur where id_donatur='".$a['id_donatur']."'")->num_rows();
+    //             $ex=$this->db->query("select * from mst_org_yayasan where id_donatur='".$a['id_donatur']."'")->num_rows();
     //             if($ex>0)
     //             {
     //                 //engga ngapa-ngapain mhank
@@ -98,13 +98,13 @@ class Mst_donatur extends CI_Controller{
     //                     'jabatan_donatur'=>$a['jabatan_donatur'],
     //                     'alamat_donatur'=>$a['alamat_donatur'],
     //                 );
-    //                 $c=$this->db->insert('mst_donatur',$db);
+    //                 $c=$this->db->insert('mst_org_yayasan',$db);
     //                 // $cx=$this->db->affected_rows();
     //                 // echo json_encode($cx);
     //             }
     //         }
     //         unlink($upload_data['full_path']);
-    //         header("Location:".base_url()."index.php/modul_admin/mst_donatur");
+    //         header("Location:".base_url()."index.php/modul_admin/mst_org_yayasan");
     //     }
     // }
 
@@ -117,9 +117,9 @@ class Mst_donatur extends CI_Controller{
     
     //     $this->pdf->setPaper('A4', 'potrait');
     //     $this->pdf->filename = "data_donatur.pdf";
-    //     $this->pdf->load_view('modul_admin/mst_donatur/cetak_mst_donatur_modul_admin_view');
+    //     $this->pdf->load_view('modul_admin/mst_org_yayasan/cetak_mst_org_yayasan_modul_admin_view');
 
-    //     //$this->load->view('modul_admin/mst_donatur/cetak_mst_donatur_modul_admin_view');
+    //     //$this->load->view('modul_admin/mst_org_yayasan/cetak_mst_org_yayasan_modul_admin_view');
     // }
 
 //     public function tambah()
@@ -130,13 +130,13 @@ class Mst_donatur extends CI_Controller{
 //         }
 //         else
 //         {
-//             $data['data_mst_donatur']=$this->mst_donatur_model->tampil_mst_donatur_list();
-//             $data['page']='modul_keuangan_yayasan/mst_donatur/tambah_mst_donatur_keuangan_yayasan_view';
+//             $data['data_mst_org_yayasan']=$this->mst_org_yayasan_model->tampil_mst_org_yayasan_list();
+//             $data['page']='modul_keuangan_yayasan/mst_org_yayasan/tambah_mst_org_yayasan_keuangan_yayasan_view';
 //             $this->load->view('keuangan_yayasan/dasbor_keuangan_yayasan_view', $data);
 //         }
 //     }
 
-//     public function aksi_tambah_mst_donatur()
+//     public function aksi_tambah_mst_org_yayasan()
 //     {
 
 //         $config['upload_path']    = "./assets/upload"; //path folder file upload
@@ -160,7 +160,7 @@ class Mst_donatur extends CI_Controller{
 //             $id2         = $jabatan2.''.$id;
 //             $id=$id2;
 //             $nama_file  = $data['upload_data']['file_name']; //set file name ke variable image
-//             $data       = $this->mst_donatur_model->tambah_mst_donatur($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
+//             $data       = $this->mst_org_yayasan_model->tambah_mst_org_yayasan($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
 //             echo json_encode($data);
 //     }
 //     else
@@ -177,12 +177,12 @@ class Mst_donatur extends CI_Controller{
 //             $id2         = $jabatan2.''.$id;
 //             $id=$id2;
 //             $nama_file  = $data['upload_data']['file_name']; //set file name ke variable image
-//             $data       = $this->mst_donatur_model->tambah_mst_donatur($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
+//             $data       = $this->mst_org_yayasan_model->tambah_mst_org_yayasan($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
 //             echo json_encode($data);
 //     }
 // }
 
-    // public function aksi_edit_mst_donatur()
+    // public function aksi_edit_mst_org_yayasan()
     // {
     //     $config['upload_path']    = "./assets/upload"; //path folder file upload
     //     $config['allowed_types']  = 'gif|jpg|png'; //type file yang boleh di upload
@@ -202,16 +202,16 @@ class Mst_donatur extends CI_Controller{
     //         $alamat     = $this->input->post('alamat');
            
     //         // hapus data foto eksis
-    //         $z            = $this->db->query("select foto_donatur from mst_donatur where id_donatur='".$id."'")->result_array();
+    //         $z            = $this->db->query("select foto_donatur from mst_org_yayasan where id_donatur='".$id."'")->result_array();
             
     //             unlink('./assets/upload/'.$z[0]['foto_donatur']);
            
             
 
     //         $nama_file    = $data['upload_data']['file_name']; //set file name ke variable image
-    //         $data         = $this->mst_donatur_model->edit_mst_donatur($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
+    //         $data         = $this->mst_org_yayasan_model->edit_mst_org_yayasan($id,$nama,$jk,$t,$tl,$jabatan,$nama_file, $alamat);
     //         echo json_encode($data);
-    //     // $data=$this->mst_donatur_model->edit_mst_donatur();
+    //     // $data=$this->mst_org_yayasan_model->edit_mst_org_yayasan();
 		// // echo json_encode($data);
     // }
     // else
@@ -224,19 +224,19 @@ class Mst_donatur extends CI_Controller{
     //         $jabatan    = $this->input->post('jabatan');
     //         $alamat    = $this->input->post('alamat');
 
-    //     $data=$this->mst_donatur_model->edit_mst_donatur_tanpa_foto($id,$nama,$jk,$t,$tl,$jabatan,$alamat);
+    //     $data=$this->mst_org_yayasan_model->edit_mst_org_yayasan_tanpa_foto($id,$nama,$jk,$t,$tl,$jabatan,$alamat);
     //     echo json_encode($data);
     // }
 //}
 
-    // public function aksi_hapus_mst_donatur()
+    // public function aksi_hapus_mst_org_yayasan()
     // {
-    //     $id_donatur=$this->input->post('id_mst_donatur');
+    //     $id_donatur=$this->input->post('id_mst_org_yayasan');
     //     // hapus data foto eksis
-    //     $x= $this->db->query("select foto_donatur from mst_donatur where id_donatur='".$id_donatur."'")->result_array();
+    //     $x= $this->db->query("select foto_donatur from mst_org_yayasan where id_donatur='".$id_donatur."'")->result_array();
         
 
-    //     $data=$this->mst_donatur_model->hapus_mst_donatur($id_donatur);
+    //     $data=$this->mst_org_yayasan_model->hapus_mst_org_yayasan($id_donatur);
     //     if($data>0)
     //     {
     //         if($x[0]['foto_donatur']!=null)
