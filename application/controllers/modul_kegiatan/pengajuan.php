@@ -153,6 +153,12 @@ class Pengajuan extends CI_Controller{
         }
     }
 
+    public function get_history_lpj()
+    {
+        $data             = $this->pengajuan_model->get_history_lpj();
+        echo json_encode($data);
+    }   
+
     public function galeri()
     {
         if($this->session->id_user=="")
@@ -220,7 +226,7 @@ class Pengajuan extends CI_Controller{
     public function aksi_upload_lpj()
     {
         $id_pengajuan= $this->input->post('id_pengajuan');
-        
+        $date_history =  date("Y-m-d H:i:s");
         $config['upload_path']    = "./assets/upload/lpj"; //path folder file upload
         $config['allowed_types']  = 'pdf'; //type file yang boleh di upload
         $config['encrypt_name']   = TRUE; //enkripsi file name upload
@@ -239,7 +245,20 @@ class Pengajuan extends CI_Controller{
             $this->db->update('pengajuan', $data_ins);
             if($this->db->affected_rows()>0)    
              {
-                header('Location:'.base_url().'index.php/modul_kegiatan/pengajuan/lpj');
+                 $dataHistory=array(
+                     'id_pengajuan'=>$id_pengajuan,
+                     'nama_file'=>$nama_file,
+                     'date_history'=>$date_history,
+                 );
+                 $this->db->insert('history_lpj', $dataHistory);
+                 if($this->db->affected_rows()>0)
+                 {
+                    header('Location:'.base_url().'index.php/modul_kegiatan/pengajuan/lpj');
+                 }
+                 else
+                 {
+                    echo 'Data gagal tersimpan !';
+                 }
              }
              else 
              {
@@ -327,14 +346,15 @@ class Pengajuan extends CI_Controller{
         $this->db->update('pengajuan',$data);
         if($this->db->affected_rows()>0)    
         {
-            if(unlink('./assets/upload/lpj/'.$lpj_kegiatan))
-            {
-                header('Location:'.base_url().'index.php/modul_kegiatan/pengajuan/lpj');
-            }
-            else
-            {
-                echo 'Gagal hapus proposal';
-            }
+            header('Location:'.base_url().'index.php/modul_kegiatan/pengajuan/lpj');
+            // if(unlink('./assets/upload/lpj/'.$lpj_kegiatan))
+            // {
+            //     header('Location:'.base_url().'index.php/modul_kegiatan/pengajuan/lpj');
+            // }
+            // else
+            // {
+            //     echo 'Gagal hapus proposal';
+            // }
             
         }
         else 

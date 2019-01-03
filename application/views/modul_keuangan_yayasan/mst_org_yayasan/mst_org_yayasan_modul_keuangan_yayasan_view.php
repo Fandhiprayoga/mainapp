@@ -133,9 +133,9 @@
                                         <td>'.$d['id_org_yayasan'].'</td>
                                         <td class="nama">'.$d['nama'].'</td>
                                         <td class="jk">'.$d['jk'].'</td>
-                                        <td c>'.$d['tempat_lahir'].', '.$d['tanggal_lahir'].'</td>
-                                        <td>'.$d['jabatan'].'</td>
-                                        <td>'.$d['alamat'].'</td>
+                                        <td class="ttl" t="'.$d['tempat_lahir'].'" tl="'.$d['tanggal_lahir'].'">'.$d['tempat_lahir'].', '.$d['tanggal_lahir'].'</td>
+                                        <td class="jabatan" jabatan="'.$d['jabatan'].'">'.$d['jabatan'].'</td>
+                                        <td class="alamat" alamat="'.$d['alamat'].'">'.$d['alamat'].'</td>
                                         <td><a class="btn btn-danger" id="btn_hapus">hapus</a><a id="btn_edit" class="btn btn-default" data-toggle="modal" href="#modal-id">edit</a></td>
                                       </tr>';  
                                 $i++;
@@ -162,18 +162,33 @@ modal</a> -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Edit Donatur</h4>
+                <h4 class="modal-title">Edit data org yayasan</h4>
             </div>
             <div class="modal-body">
             <div class="form-group">
-                    <p class="help-block"></p><input name="nama" type="hidden" class="form-control" id="id_edit"/></div>
+                    <p class="help-block">ID</p><input name="ID" type="text" class="form-control" id="id_edit" value="" readonly/></div>
                 <div class="form-group">
-                    <p class="help-block">NAMA LENGKAP DONATUR</p><input name="nama" type="text" class="form-control" id="nama_edit"/></div>
+                    <p class="help-block">NAMA LENGKAP</p><input name="nama" type="text" class="form-control" id="nama_edit"/></div>
                 <div class="form-group">
-                    <p class="help-block">NOMOR TELEPON</p><input name="nama" type="text" class="form-control" id="telp_edit"/></div>
+                    <p class="help-block">JENIS KELAMIN</p>
+                    
+                    <select name="" id="jk_edit" class="form-control">
+                      <option value="">-- Select One --</option>
+                      <option value="Laki-laki">LAKI-LAKI</option>
+                      <option value="Perempuan">PEREMPUAN</option>
+                    </select>
+                    
+                </div>
 
                 <div class="form-group">
-                    <p class="help-block">ALAMAT</p>
+                    <p class="help-block">TEMPAT TANGGAL LAHIR</p><input name="nama" type="text" class="form-control" id="t"/></div>
+                    <input class="form-control" type="date" id="tl_edit"/>
+                <div class="form-group">
+                
+                <div class="form-group">
+                    <p class="help-block">JABATAN</p><input name="nama" type="text" class="form-control" id="jabatan_edit"/></div>
+                
+                <p class="help-block">ALAMAT</p>
                     <textarea name="alamat" id="alamat_edit" class="form-control"></textarea>
                 </div>
             </div>
@@ -311,18 +326,22 @@ setDefaultActive();
 
     $("body").on("click","#btn_edit", function () {
       var row = $(this).closest("tr"); // Find the row
-        var id_donatur = row
-            .find(".id_donatur")
-            .attr('id_donatur'); // Find the text
-        var nama_donatur=row.find(".nama_donatur").text();
-        var telp_donatur=row.find(".telp_donatur").text();
-        var alamat_donatur=row.find(".alamat_donatur").text();
+        var id_org_yayasan= row .find(".id_org_yayasan").attr('id_org_yayasan'); // Find the text
+        var nama=row.find(".nama").text();
+        var jk=row.find(".jk").text();
+        var tempat_lahir=row.find(".t").text();
+        var tanggal_lahir=row.find(".tl").text();
+        var jabatan=row.find(".jabatan").text();
+        var alamat=row.find(".alamat").text();
 
         // alert(id_donatur+nama_donatur+telp_donatur+alamat_donatur);
-        $("#id_edit").val(id_donatur);
-        $("#nama_edit").val(nama_donatur);
-        $("#telp_edit").val(telp_donatur);
-        $("#alamat_edit").val(alamat_donatur);
+        $("#id_edit").val(id_org_yayasan);
+        $("#nama_edit").val(nama);
+        $("#jk_edit").val(jk);
+        $("#tempat_edit").val(tempat_edit);
+        $("#tanggal_lahir").val(tanggal_lahir);
+        $("#jabatan").val(jabatan);
+        $("#alamat").val(alamat);
 
     });
 

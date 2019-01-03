@@ -26,6 +26,13 @@ class Pengajuan_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function get_history_lpj()
+    {
+        $id_pengajuan= $this->input->post('id_pengajuan');
+        $query = $this->db->query("select * from history_lpj where id_pengajuan=".$id_pengajuan." order by date_history desc");
+        return $query->result_array();
+    }
+
     public function tambah_pengajuan()
     {
         $data=array

@@ -47,6 +47,7 @@
                             <th>KATEGORI</th>
                             <th>TGL_PENGAJUAN</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +59,7 @@
                                 {   
                                             $b=$this->db->query("select * from pengajuan where id_pengajuan='".$a['id_pengajuan']."'")->result_array();
                                     echo        "<tr data-waktu_kegiatan='".$b[0]['waktu_kegiatan']."' data-tempat_kegiatan='".$b[0]['tempat_kegiatan']."' data-rincian_kegiatan='".$b[0]['rincian_kegiatan']."' data-pj_kegiatan='".$b[0]['pj_kegiatan']."'>
-                                                            <td id_pengajuan='".$b[0]['id_pengajuan']."' id='id_pengajuan'>".$i."</td>
+                                                            <td id_pengajuan='".$b[0]['id_pengajuan']."' class='id_pengajuan' id='id_pengajuan'>".$i."</td>
                                                             <td><a class='btn btn-default' class='btn' id='btn_detail'><i class='fas fa-plus-square'></i></a></td>
                                                             <td>".$b[0]['nama_pengajuan']."</td>
                                                             <td>".$b[0]['kategori_pengajuan']."</td>
@@ -80,10 +81,8 @@
                                                                                                 <a href="aksi_hapus_lpj/'.$b[0]['id_pengajuan'].'/'.$b[0]['lpj_kegiatan'].'" class="btn btn-default">Hapus LPJ</a>
                                                                                                 </td>';     
                                                                         }
-                                                                        
-                                                            
-
-                                    
+                                                                       
+                                    echo                  '<td><a id="btn_history_modal" data-toggle="modal" href="#modal_history" class="btn btn-default">history</a></td>';
                                     echo        "</tr>";
                                     $i++;
                                 }
@@ -109,6 +108,43 @@
 
     </section>
     <!-- /.content -->
+    
+
+    <div class="modal fade" id="modal_history">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">History upload LPJ</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>FILE NAME</th>
+                                <th>LAST DATE MODIFY</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="show_history">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a class='btn btn-default'>show</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- REQUIRED JS SCRIPTS -->
 
@@ -197,5 +233,41 @@ $("tbody").on("click","#btn_detail", function () {
 	        row.child(format(tr.data('waktu_kegiatan'),tr.data('tempat_kegiatan'),tr.data('rincian_kegiatan'),tr.data('pj_kegiatan'))).show();
 	        tr.addClass('shown');
 	    }
+});
+
+$("body").on("click", "#btn_history_modal", function () {
+    var row = $(this).closest("tr"); // Find the row
+    var id_pengajuan = row
+        .find(".id_pengajuan")
+        .attr('id_pengajuan');
+
+    $.ajax({
+        type: "post",
+        url: "<?php echo base_url();?>index.php/modul_kegiatan/pengajuan/get_history_lpj",
+        data: {
+            id_pengajuan: id_pengajuan
+        },
+        dataType: "json",
+        success: function (data) {
+                // alert(JSON.stringify(data))
+                var html = '';
+		            var i;
+		            for(i=0; i<data.length; i++){
+		                html += '<tr>'+
+                                '<td>'+(i+1)+'</td>'+
+                                '<td>'+data[i]['nama_file']+'</td>'+
+                                '<td>'+data[i]['date_history']+'</td>'+
+                                '<td><a href="<?php echo base_url();?>assets/upload/lpj/'+data[i]['nama_file']+'" class="btn btn-default">show</a></td>'+
+                            '</tr>';
+		            }
+		            $('#show_history').html(html);
+        },
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        }
+    });
 });
 </script>
