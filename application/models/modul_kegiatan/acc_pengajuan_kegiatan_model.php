@@ -6,13 +6,13 @@ class acc_pengajuan_kegiatan_model extends CI_Model{
 
     public function tampil_acc_pengajuan_kegiatan_yayasan_list()
     {
-        $query = $this->db->query("select * from pengajuan where kategori_pengajuan='yayasan' order by tgl_pengajuan, id_pengajuan desc");
+        $query = $this->db->query("select * from pengajuan where kategori_pengajuan='yayasan' order by id_pengajuan desc");
         return $query->result_array();
     }
 
     public function tampil_acc_pengajuan_kegiatan_yatim_list()
     {
-        $query = $this->db->query("select * from pengajuan where kategori_pengajuan='yatim' order by tgl_pengajuan, id_pengajuan desc");
+        $query = $this->db->query("select * from pengajuan where kategori_pengajuan='yatim' order by id_pengajuan desc");
         return $query->result_array();
     }
 

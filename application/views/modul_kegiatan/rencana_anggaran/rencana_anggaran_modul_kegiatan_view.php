@@ -40,7 +40,7 @@
                 <select style="width:90%;" name="" id="pilih_id_pengajuan" class="form-control js-example-basic-single">
                     <option value="">-- PILIH KEGIATAN --</option>
                     <?php
-                                                    $a=$this->db->query("select * from pengajuan where status_proposal='1'")->result_array();
+                                                    $a=$this->db->query("select * from pengajuan where status_proposal='1' order by id_pengajuan desc")->result_array();
                                                     if(count($a))
                                                     {
                                                         foreach($a as $a)

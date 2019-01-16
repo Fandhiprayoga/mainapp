@@ -12,7 +12,7 @@ class Pengajuan_model extends CI_Model{
 
     public function tampil_proposal_list()
     {
-        $query = $this->db->query("select * from pengajuan where status_pengajuan=1 order by tgl_pengajuan, id_pengajuan desc");
+        $query = $this->db->query("select * from pengajuan where status_verifikasi_kegiatan=1 order by  id_pengajuan desc");
         return $query->result_array();
     }
 
@@ -22,7 +22,17 @@ class Pengajuan_model extends CI_Model{
         (select id_pengajuan
         from rencana_anggaran 
         where status_rencana_anggaran=0 
-        group by id_pengajuan) group by id_pengajuan order by id_pengajuan");
+        group by id_pengajuan) group by id_pengajuan order by id_pengajuan desc");
+        return $query->result_array();
+    }
+
+    public function tampil_lpj_list_galery()
+    {
+        $query = $this->db->query(" select id_pengajuan from rencana_anggaran where id_pengajuan not in 
+        (select id_pengajuan
+        from rencana_anggaran 
+        where status_rencana_anggaran=0 
+        group by id_pengajuan) group by id_pengajuan order by id_pengajuan desc");
         return $query->result_array();
     }
 

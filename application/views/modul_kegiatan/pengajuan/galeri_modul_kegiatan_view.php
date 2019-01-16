@@ -56,7 +56,7 @@
                                         $i=1;
                                 foreach($data_galeri as $a)
                                 {   
-                                            $b=$this->db->query("select * from pengajuan where id_pengajuan='".$a['id_pengajuan']."'")->result_array();
+                                            $b=$this->db->query("select * from pengajuan where id_pengajuan='".$a['id_pengajuan']."' and status_lpj='1'")->result_array();
                                     echo        "<tr data-waktu_kegiatan='".$b[0]['waktu_kegiatan']."' data-tempat_kegiatan='".$b[0]['tempat_kegiatan']."' data-rincian_kegiatan='".$b[0]['rincian_kegiatan']."' data-pj_kegiatan='".$b[0]['pj_kegiatan']."'>
                                                             <td id_pengajuan='".$b[0]['id_pengajuan']."' id='id_pengajuan'>".$i."</td>
                                                             <td><a class='btn btn-default' class='btn' id='btn_detail'><i class='fas fa-plus-square'></i></a></td>

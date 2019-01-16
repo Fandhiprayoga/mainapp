@@ -77,9 +77,19 @@
                                                                         }
                                                                         else
                                                                         {
-                                                                                    echo '    <td>   <a href="'.base_url().'assets/upload/lpj/'.$b[0]['lpj_kegiatan'].'" class="btn btn-default">Lihat LPJ</a>
+                                                                            if($b[0]['status_lpj']==1)
+                                                                            {
+                                                                                echo '    <td>   <a href="'.base_url().'assets/upload/lpj/'.$b[0]['lpj_kegiatan'].'" class="btn btn-default">Lihat LPJ</a>
+                                                                                                
+                                                                                                </td>';   
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                echo '    <td>   <a href="'.base_url().'assets/upload/lpj/'.$b[0]['lpj_kegiatan'].'" class="btn btn-default">Lihat LPJ</a>
                                                                                                 <a href="aksi_hapus_lpj/'.$b[0]['id_pengajuan'].'/'.$b[0]['lpj_kegiatan'].'" class="btn btn-default">Hapus LPJ</a>
                                                                                                 </td>';     
+                                                                            }
+                                                                                    
                                                                         }
                                                                        
                                     echo                  '<td><a id="btn_history_modal" data-toggle="modal" href="#modal_history" class="btn btn-default">history</a></td>';

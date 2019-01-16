@@ -167,7 +167,7 @@ class Pengajuan extends CI_Controller{
         }
         else
         {
-            $data['data_galeri']=$this->pengajuan_model->tampil_lpj_list();
+            $data['data_galeri']=$this->pengajuan_model->tampil_lpj_list_galery();
             $data['page']='modul_kegiatan/pengajuan/galeri_modul_kegiatan_view';
             $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
         }

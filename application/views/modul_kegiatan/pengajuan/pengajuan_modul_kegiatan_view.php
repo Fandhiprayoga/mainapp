@@ -46,8 +46,10 @@
                             <th>NAMA KEGIATAN</th>
                             <th>KATEGORI</th>
                             <th>TGL_PENGAJUAN</th>
-                            <th>STATUS </th>
-                            <th>KETERANGAN</th>
+                            <th>STATUS ACC</th>
+                            <th>KETERANGAN ACC</th>
+                            <th>STATUS VERIFIKASI</th>
+                            <th>KETERANGAN VERIFIKASI</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -64,6 +66,7 @@
                                                             <td>".$a['nama_pengajuan']."</td>
                                                             <td>".$a['kategori_pengajuan']."</td>
                                                             <td>".$a['tgl_pengajuan']."</td>";
+                                                            // STATUS PENGAJUAN
                                                             if($a['tgl_review_pengajuan_kegiatan']!="")
                                                             {
                                                                         if($a['status_pengajuan']==1)
@@ -89,6 +92,32 @@
                                                                         echo "<td>BLM DIREVIEW</td>";
                                                             }
                                                             
+                                                            // STATUS REVIEW KEGIATAN
+                                                            if($a['tgl_verifikasi_kegiatan']!="")
+                                                            {
+                                                                        if($a['status_verifikasi_kegiatan']==1)
+                                                                        {
+                                                                                    echo "<td class='success'>DITERIMA</td>";
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                                    echo "<td class='danger'>DITOLAK</td>";
+                                                                        }
+                                                            }
+                                                            else
+                                                            {
+                                                                        echo "<td>BLM DIREVIEW</td>";
+                                                            }
+                                                            
+                                                            if($a['tgl_verifikasi_kegiatan']!="")
+                                                            {
+                                                                       echo "<td>".$a['ket_verifikasi_kegiatan']." (direview tgl : ".$a['tgl_verifikasi_kegiatan'].")</td>";
+                                                            }
+                                                            else
+                                                            {
+                                                                        echo "<td>BLM DIREVIEW</td>";
+                                                            }
+
                                                             if($a['tgl_review_pengajuan_kegiatan']!="")
                                                             {
                                                                         echo   "<td><button class='btn btn-block btn-danger' id='' disabled>HAPUS</button></td>";
