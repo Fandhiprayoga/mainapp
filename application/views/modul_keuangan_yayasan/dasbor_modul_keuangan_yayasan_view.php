@@ -149,7 +149,7 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
       <li><a href="<?php echo base_url();?>index.php/modul_list"><i class="fas fa-arrow-alt-circle-left"></i> <span> Kembali ke Menu Modul</span></a></li>
-      <li class=""><a href="<?php echo base_url();?>index.php/modul_admin/beranda"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+      <li class=""><a href="<?php echo base_url();?>index.php/modul_keuangan_yayasan/beranda"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li class="header">LIST MENU</li>
         <!-- Optionally, you can add icons to the links -->
         

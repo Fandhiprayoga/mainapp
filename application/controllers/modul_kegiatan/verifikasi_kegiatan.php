@@ -23,7 +23,7 @@ class Verifikasi_kegiatan extends CI_Controller
                         {
                                     $data['data_kegiatan_yatim']=$this->verifikasi_kegiatan_model->tampil_verifikasi_pengajuan_kegiatan_yatim_list();
                                     $data['page']='modul_kegiatan/verifikasi_pengajuan_kegiatan/verifikasi_pengajuan_kegiatan_yatim_modul_kegiatan_view';
-                                    $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
+                                    $this->load->view('modul_keuangan_yatim/dasbor_modul_keuangan_yatim_view', $data);
                         }
                                 
             }

@@ -57,35 +57,39 @@
                                 foreach($data_galeri as $a)
                                 {   
                                             $b=$this->db->query("select * from pengajuan where id_pengajuan='".$a['id_pengajuan']."' and status_lpj='1'")->result_array();
-                                    echo        "<tr data-waktu_kegiatan='".$b[0]['waktu_kegiatan']."' data-tempat_kegiatan='".$b[0]['tempat_kegiatan']."' data-rincian_kegiatan='".$b[0]['rincian_kegiatan']."' data-pj_kegiatan='".$b[0]['pj_kegiatan']."'>
-                                                            <td id_pengajuan='".$b[0]['id_pengajuan']."' id='id_pengajuan'>".$i."</td>
-                                                            <td><a class='btn btn-default' class='btn' id='btn_detail'><i class='fas fa-plus-square'></i></a></td>
-                                                            <td>".$b[0]['nama_pengajuan']."</td>
-                                                            <td>".$b[0]['kategori_pengajuan']."</td>
-                                                            <td>".$b[0]['tgl_pengajuan']."</td>";
-                                                            
-                                                           
-                                                                        if($b[0]['galeri_kegiatan']=="")
-                                                                        {
-                                                                                    echo        '<td> <form method="post" id="form_galeri" action="aksi_upload_galeri" enctype="multipart/form-data">
-                                                                                                <input type="hidden" name="id_pengajuan" value="'.$b[0]['id_pengajuan'].'">
-                                                                                                <label class="btn btn-default btn-file">
-                                                                                                            Upload ... <input accept=".zip, .rar" name="galeri" id="galeri" type="file" style="display: none;">
-                                                                                                </label>
-                                                                                    </form></td>';
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                                    echo '    <td>   <a href="'.base_url().'assets/upload/galeri/'.$b[0]['galeri_kegiatan'].'" class="btn btn-default">Download galeri</a>
-                                                                                                <a href="aksi_hapus_galeri/'.$b[0]['id_pengajuan'].'/'.$b[0]['galeri_kegiatan'].'" class="btn btn-default">Hapus galeri</a>
-                                                                                                </td>';     
-                                                                        }
-                                                                        
-                                                            
+                                                if(count($b))
+                                                {
+                                                    echo        "<tr data-waktu_kegiatan='".$b[0]['waktu_kegiatan']."' data-tempat_kegiatan='".$b[0]['tempat_kegiatan']."' data-rincian_kegiatan='".$b[0]['rincian_kegiatan']."' data-pj_kegiatan='".$b[0]['pj_kegiatan']."'>
+                                                                    <td id_pengajuan='".$b[0]['id_pengajuan']."' id='id_pengajuan'>".$i."</td>
+                                                                    <td><a class='btn btn-default' class='btn' id='btn_detail'><i class='fas fa-plus-square'></i></a></td>
+                                                                    <td>".$b[0]['nama_pengajuan']."</td>
+                                                                    <td>".$b[0]['kategori_pengajuan']."</td>
+                                                                    <td>".$b[0]['tgl_pengajuan']."</td>";
+                                                    
+                                                   
+                                                                if($b[0]['galeri_kegiatan']=="")
+                                                                {
+                                                                            echo        '<td> <form method="post" id="form_galeri" action="aksi_upload_galeri" enctype="multipart/form-data">
+                                                                                        <input type="hidden" name="id_pengajuan" value="'.$b[0]['id_pengajuan'].'">
+                                                                                        <label class="btn btn-default btn-file">
+                                                                                                    Upload ... <input accept=".zip, .rar" name="galeri" id="galeri" type="file" style="display: none;">
+                                                                                        </label>
+                                                                            </form></td>';
+                                                                }
+                                                                else
+                                                                {
+                                                                            echo '    <td>   <a href="'.base_url().'assets/upload/galeri/'.$b[0]['galeri_kegiatan'].'" class="btn btn-default">Download galeri</a>
+                                                                                        <a href="aksi_hapus_galeri/'.$b[0]['id_pengajuan'].'/'.$b[0]['galeri_kegiatan'].'" class="btn btn-default">Hapus galeri</a>
+                                                                                        </td>';     
+                                                                }
+                                                                
+                                                    
 
-                                    
-                                    echo        "</tr>";
-                                    $i++;
+                            
+                            echo        "</tr>";
+                            $i++;
+                                                }
+
                                 }
                             }
                             else

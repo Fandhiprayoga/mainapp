@@ -23,7 +23,7 @@ class History_rab extends CI_Controller
                         {
                                     //$data['data_kegiatan_yatim']=$this->acc_rencana_anggaran_model->tampil_acc_rencana_anggaran_yatim_list();
                                     $data['page']='modul_kegiatan/history_rab/history_rencana_anggaran_yatim_modul_kegiatan_view';
-                                    $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
+                                    $this->load->view('modul_keuangan_yatim/dasbor_modul_keuangan_yatim_view', $data);
                         }
                                 
             }

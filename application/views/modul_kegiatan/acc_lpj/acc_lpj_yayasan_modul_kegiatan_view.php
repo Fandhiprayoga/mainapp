@@ -77,7 +77,7 @@
                                                                                                             echo "<option  value='1'>DITERIMA</option>";     
                                                                                                 }
                                                                                                 
-                                                                                                if($a['status_pengajuan']==0 and $a['tgl_review_lpj_kegiatan']!="")
+                                                                                                if($a['status_lpj']==0 and $a['tgl_review_lpj_kegiatan']!="")
                                                                                                 {
                                                                                                             echo   "<option selected value='0'>DITOLAK</option>";
                                                                                                 }

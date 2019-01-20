@@ -23,7 +23,7 @@ class Acc_lpj extends CI_Controller
                         {
                                     $data['data_kegiatan_yatim']=$this->acc_lpj_model->tampil_acc_lpj_kegiatan_yatim_list();
                                     $data['page']='modul_kegiatan/acc_lpj/acc_lpj_yatim_modul_kegiatan_view';
-                                    $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data);
+                                    $this->load->view('modul_keuangan_yatim/dasbor_modul_keuangan_yatim_view', $data);
                         }
                                 
             }

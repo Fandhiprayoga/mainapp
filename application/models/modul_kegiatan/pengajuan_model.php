@@ -6,7 +6,7 @@ class Pengajuan_model extends CI_Model{
 
     public function tampil_pengajuan_list()
     {
-        $query = $this->db->query("select * from pengajuan order by tgl_pengajuan, id_pengajuan desc");
+        $query = $this->db->query("select * from pengajuan order by id_pengajuan desc");
         return $query->result_array();
     }
 

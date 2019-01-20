@@ -70,7 +70,7 @@
                       (select top 1 galeri_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as galeri_kegiatan,
                       (select top 1 waktu_kegiatan from pengajuan where id_pengajuan=p.id_pengajuan) as waktu_kegiatan
                        from pengajuan p 
-                       where p.id_pengajuan  in (select id_pengajuan from pengajuan where lpj_kegiatan is not null) group by p.id_pengajuan order by p.id_pengajuan";
+                       where p.id_pengajuan  in (select id_pengajuan from pengajuan where lpj_kegiatan is not null) group by p.id_pengajuan order by p.id_pengajuan desc";
                     
                       $a=$this->db->query($q)->result_array();
                       if(count($a))

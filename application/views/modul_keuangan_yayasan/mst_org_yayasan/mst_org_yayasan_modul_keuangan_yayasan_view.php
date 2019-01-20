@@ -181,7 +181,7 @@ modal</a> -->
                 </div>
 
                 <div class="form-group">
-                    <p class="help-block">TEMPAT TANGGAL LAHIR</p><input name="nama" type="text" class="form-control" id="t"/></div>
+                    <p class="help-block">TEMPAT TANGGAL LAHIR</p><input name="nama" type="text" class="form-control" id="t_edit"/></div>
                     <input class="form-control" type="date" id="tl_edit"/>
                 <div class="form-group">
                 
@@ -325,12 +325,12 @@ setDefaultActive();
     });
 
     $("body").on("click","#btn_edit", function () {
-      var row = $(this).closest("tr"); // Find the row
+        var row = $(this).closest("tr"); // Find the row
         var id_org_yayasan= row .find(".id_org_yayasan").attr('id_org_yayasan'); // Find the text
         var nama=row.find(".nama").text();
         var jk=row.find(".jk").text();
-        var tempat_lahir=row.find(".t").text();
-        var tanggal_lahir=row.find(".tl").text();
+        var tempat_lahir=row.find(".ttl").attr('t');
+        var tanggal_lahir=row.find(".ttl").attr('tl');
         var jabatan=row.find(".jabatan").text();
         var alamat=row.find(".alamat").text();
 
@@ -338,24 +338,27 @@ setDefaultActive();
         $("#id_edit").val(id_org_yayasan);
         $("#nama_edit").val(nama);
         $("#jk_edit").val(jk);
-        $("#tempat_edit").val(tempat_edit);
-        $("#tanggal_lahir").val(tanggal_lahir);
-        $("#jabatan").val(jabatan);
-        $("#alamat").val(alamat);
+        $("#t_edit").val(tempat_lahir);
+        $("#tl_edit").val(tanggal_lahir);
+        $("#jabatan_edit").val(jabatan);
+        $("#alamat_edit").val(alamat);
 
     });
 
     $("body").on("click","#btn_simpan_edit", function () {
-        var id_donatur= $("#id_edit").val();
-        var nama_donatur = $('#nama_edit').val();
-        var telp_donatur = $('#telp_edit').val();
-        var alamat_donatur = $('#alamat_edit').val();
+        var id_org_yayasan= $("#id_edit").val();
+        var nama = $('#nama_edit').val();
+        var jk = $('#jk_edit').val();
+        var alamat = $('#alamat_edit').val();
+        var tempat_lahir=$('#t_edit').val();
+        var tanggal_lahir=$('#tl_edit').val();
+        var jabatan=$("#jabatan_edit").val();
         // alert(nama_donatur+telp_donatur+alamat_donatur+id);
         
         $.ajax({
           type: "post",
-          url: "<?php echo base_url();?>index.php/modul_keuangan_yayasan/mst_donatur/aksi_edit_mst_donatur",
-          data: {id_donatur:id_donatur,nama_donatur:nama_donatur,telp_donatur:telp_donatur,alamat_donatur:alamat_donatur,},
+          url: "<?php echo base_url();?>index.php/modul_keuangan_yayasan/mst_org_yayasan/aksi_edit_mst_org_yayasan",
+          data: {id_org_yayasan:id_org_yayasan,nama:nama,jk:jk,alamat:alamat,tempat_lahir:tempat_lahir,tanggal_lahir:tanggal_lahir,jabatan:jabatan},
           dataType: "json",
           success: function (response) {
                 $.alert('edit berhasil');
