@@ -43,6 +43,21 @@ class Acc_lpj extends CI_Controller
                           
             }
 
+            public function pembangunan()
+            {
+                        if($this->session->id_user=="")
+                        {
+                                    redirect(base_url('index.php/auth'), 'refresh');
+                        }
+                        else
+                        {
+                                    $data['data_kegiatan_pembangunan']=$this->acc_lpj_model->tampil_acc_lpj_kegiatan_pembangunan_list();
+                                    $data['page']='modul_kegiatan/acc_lpj/acc_lpj_pembangunan_modul_kegiatan_view';
+                                    $this->load->view('modul_pembangunan/dasbor_modul_pembangunan_view', $data); 
+                        }
+                          
+            }
+
             public function aksi_edit_acc_lpj_kegiatan()
             {
                         $data  = $this->acc_lpj_model->edit_acc_lpj_kegiatan();

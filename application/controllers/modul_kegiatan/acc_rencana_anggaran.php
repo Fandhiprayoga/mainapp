@@ -43,6 +43,21 @@ class Acc_rencana_anggaran extends CI_Controller
                           
             }
 
+            public function pembangunan()
+            {
+                        if($this->session->id_user=="")
+                        {
+                                    redirect(base_url('index.php/auth'), 'refresh');
+                        }
+                        else
+                        {
+                                    //$data['data_kegiatan_yayasan']=$this->acc_rencana_anggaran_model->tampil_acc_rencana_anggaran_yayasan_list();
+                                    $data['page']='modul_kegiatan/acc_rencana_anggaran/acc_rencana_anggaran_pembangunan_modul_kegiatan_view';
+                                    $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data); 
+                        }
+                          
+            }
+
             public function aksi_edit_acc_rencana_anggaran()
             {
                         $data  = $this->acc_rencana_anggaran_model->edit_acc_rencana_anggaran();

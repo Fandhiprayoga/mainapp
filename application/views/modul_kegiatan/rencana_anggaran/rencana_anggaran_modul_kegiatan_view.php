@@ -323,6 +323,7 @@ function cek_status_rencana_anggaran(id_pengajuan)
             {
                 //$("#btn_cetak_rab").show(1000);
                 $("#btn_show_tambah").hide(1000);
+                $("#div_tambah_item").hide(1000);
                 
             }
             else

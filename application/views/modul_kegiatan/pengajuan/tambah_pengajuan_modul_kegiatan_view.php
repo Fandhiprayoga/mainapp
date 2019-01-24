@@ -57,6 +57,7 @@
                                                 <option value="">-- pilih kategori kegiatan --</option>
                                                 <option value="yayasan">KEGIATAN YAYASAN</option>
                                                 <option value="yatim">KEGIATAN YATIM</option>
+                                                <option value="pembangunan">KEGIATAN PEMBANGUNAN</option>
                                     </select>
                                     
                                 </td>

@@ -10,12 +10,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
       <h1>
-        acc lpj kegiatan yatim
+        acc lpj kegiatan pembangunan
         <small>Halaman kelola acc_lpj_kegiatan</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-        <li><a href="#">list acc lpj kegiatan yatim</a></li>
+        <li><a href="#">list acc lpj kegiatan pembangunan</a></li>
         
       </ol>
     </section>
@@ -26,7 +26,7 @@
     <div class="container-fluid">
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">List acc lpj kegiatan yatim</h3>
+              <h3 class="box-title">List acc lpj kegiatan pembangunan</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -53,10 +53,10 @@
                     </thead>
                     <tbody>
                         <?php
-                            if(count($data_kegiatan_yatim))
+                            if(count($data_kegiatan_pembangunan))
                             {
                                         $i=1;
-                                foreach($data_kegiatan_yatim as $a)
+                                foreach($data_kegiatan_pembangunan as $a)
                                 {   
                                     echo        "<tr data-waktu_kegiatan='".$a['waktu_kegiatan']."' data-tempat_kegiatan='".$a['tempat_kegiatan']."' data-rincian_kegiatan='".$a['rincian_kegiatan']."' data-pj_kegiatan='".$a['pj_kegiatan']."'>
                                                             <td id_pengajuan='".$a['id_pengajuan']."' id='id_pengajuan'>".$i."</td>
@@ -68,23 +68,23 @@
                                                                         <select name='' id='status_pengajuan' class='form-control'>
                                                                                     <option value=''>-- Select One --</option>";
                                                                                     
-                                                                                    if($a['status_lpj']==1 and $a['tgl_review_lpj_kegiatan']!="")
-                                                                                    {
-                                                                                                echo "<option selected value='1'>DITERIMA</option>";
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                                echo "<option  value='1'>DITERIMA</option>";     
-                                                                                    }
-                                                                                    
-                                                                                    if($a['status_lpj']==0 and $a['tgl_review_lpj_kegiatan']!="")
-                                                                                    {
-                                                                                                echo   "<option selected value='0'>DITOLAK</option>";
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                                echo   "<option value='0'>DITOLAK</option>";
-                                                                                    }
+                                                                                                if($a['status_lpj']==1 and $a['tgl_review_lpj_kegiatan']!="")
+                                                                                                {
+                                                                                                            echo "<option selected value='1'>DITERIMA</option>";
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                            echo "<option  value='1'>DITERIMA</option>";     
+                                                                                                }
+                                                                                                
+                                                                                                if($a['status_lpj']==0 and $a['tgl_review_lpj_kegiatan']!="")
+                                                                                                {
+                                                                                                            echo   "<option selected value='0'>DITOLAK</option>";
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                            echo   "<option value='0'>DITOLAK</option>";
+                                                                                                }
 
                                                                                     
                                                                                     
@@ -93,7 +93,10 @@
                                                             
                                     echo                    "<td><textarea  class='form-control' id='ket_review_pengajuan' cols='20' rows='3'>".$a['ket_review_lpj_kegiatan']."</textarea></td>";
                                                             
-                                    echo                    "<td><button class='btn btn-block btn-success' id='btn_simpan'>SIMPAN</button><a href='".base_url()."assets/upload/lpj/".$a['lpj_kegiatan']."' class='btn btn-block btn-default'>Lihat LPJ</a></td>";
+                                    echo                    "<td>
+                                                                <button class='btn btn-block btn-success' id='btn_simpan'>SIMPAN</button>
+                                                                <a href='".base_url()."assets/upload/lpj/".$a['lpj_kegiatan']."' class='btn btn-block btn-default'>Lihat LPJ</a>
+                                                            </td>";
 
                                     
                                     echo        "</tr>";

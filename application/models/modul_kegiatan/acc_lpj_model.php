@@ -16,6 +16,12 @@ class acc_lpj_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function tampil_acc_lpj_kegiatan_pembangunan_list()
+    {
+        $query = $this->db->query("select * from pengajuan where kategori_pengajuan='pembangunan' and lpj_kegiatan is not null order by id_pengajuan desc");
+        return $query->result_array();
+    }
+
     public function edit_acc_lpj_kegiatan()
     {
         $id_pengajuan=$this->input->post('id_pengajuan');

@@ -43,6 +43,21 @@ class Verifikasi_kegiatan extends CI_Controller
                           
             }
 
+            public function pembangunan()
+            {
+                        if($this->session->id_user=="")
+                        {
+                                    redirect(base_url('index.php/auth'), 'refresh');
+                        }
+                        else
+                        {
+                                    $data['data_kegiatan_pembangunan']=$this->verifikasi_kegiatan_model->tampil_verifikasi_pengajuan_kegiatan_pembangunan_list();
+                                    $data['page']='modul_kegiatan/verifikasi_pengajuan_kegiatan/verifikasi_pengajuan_kegiatan_pembangunan_modul_kegiatan_view';
+                                    $this->load->view('modul_pembangunan/dasbor_modul_pembangunan_view', $data);
+                        }
+                          
+            }
+
             public function aksi_edit_verifikasi_pengajuan_kegiatan()
             {
                         $data  = $this->verifikasi_kegiatan_model->edit_verifikasi_pengajuan_kegiatan();

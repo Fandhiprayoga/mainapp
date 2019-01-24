@@ -93,7 +93,7 @@
                                                             
                                     echo                    "<td><textarea  class='form-control' id='ket_review_pengajuan' cols='20' rows='3'>".$a['ket_review_lpj_kegiatan']."</textarea></td>";
                                                             
-                                    echo                    "<td><button class='btn btn-block btn-success' id='btn_simpan'>SIMPAN</button></td>";
+                                    echo                    "<td><button class='btn btn-block btn-success' id='btn_simpan'>SIMPAN</button><a href='".base_url()."assets/upload/lpj/".$a['lpj_kegiatan']."' class='btn btn-block btn-default'>Lihat LPJ</a></td>";
 
                                     
                                     echo        "</tr>";

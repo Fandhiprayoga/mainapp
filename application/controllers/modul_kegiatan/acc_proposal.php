@@ -43,6 +43,21 @@ class Acc_proposal extends CI_Controller
                           
             }
 
+            public function pembangunan()
+            {
+                        if($this->session->id_user=="")
+                        {
+                                    redirect(base_url('index.php/auth'), 'refresh');
+                        }
+                        else
+                        {
+                                    $data['data_kegiatan_pembangunan']=$this->acc_proposal_model->tampil_acc_proposal_pembangunan_list();
+                                    $data['page']='modul_kegiatan/acc_proposal/acc_proposal_pembangunan_modul_kegiatan_view';
+                                    $this->load->view('modul_kegiatan/dasbor_modul_kegiatan_view', $data); 
+                        }
+                          
+            }
+
             public function aksi_edit_acc_proposal()
             {
                         $data  = $this->acc_proposal_model->edit_acc_proposal();
