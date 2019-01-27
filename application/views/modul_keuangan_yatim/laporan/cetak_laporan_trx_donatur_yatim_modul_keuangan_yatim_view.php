@@ -75,9 +75,9 @@
                 <?php 
                             $a= $this->db->query("select *, 
                             (sum(nominal_trx_donatur_yatim) over()) as total,
-                            (select nama_donatur from mst_donatur where id_donatur=trx_donatur_yatim.id_donatur) as nama_donatur,
-                            (select telp_donatur from mst_donatur where id_donatur=trx_donatur_yatim.id_donatur) as telp_donatur,
-                            (select alamat_donatur from mst_donatur where id_donatur=trx_donatur_yatim.id_donatur) as alamat_donatur 
+                            (select nama_donatur from mst_donatur_yatim where id_donatur=trx_donatur_yatim.id_donatur) as nama_donatur,
+                            (select telp_donatur from mst_donatur_yatim where id_donatur=trx_donatur_yatim.id_donatur) as telp_donatur,
+                            (select alamat_donatur from mst_donatur_yatim where id_donatur=trx_donatur_yatim.id_donatur) as alamat_donatur 
                             from trx_donatur_yatim 
                             where tgl_trx_donatur_yatim between '".$tgl_awal."' and '".$tgl_akhir."'")->result_array();
 

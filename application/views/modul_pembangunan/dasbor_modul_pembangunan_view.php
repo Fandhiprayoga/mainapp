@@ -116,7 +116,9 @@ desired effect
       </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
+    <aside class="main-sidebar" style="overflow-y: scroll;
+    top: 0;
+    bottom: 0;">
 
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">

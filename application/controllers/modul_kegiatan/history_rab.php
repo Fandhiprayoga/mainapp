@@ -53,7 +53,7 @@ class History_rab extends CI_Controller
                         {
                                     //$data['data_kegiatan_yayasan']=$this->acc_rencana_anggaran_model->tampil_acc_rencana_anggaran_yayasan_list();
                                     $data['page']='modul_kegiatan/history_rab/history_rencana_anggaran_pembangunan_modul_kegiatan_view';
-                                    $this->load->view('modul_keuangan_yayasan/dasbor_modul_keuangan_yayasan_view', $data);
+                                    $this->load->view('modul_pembangunan/dasbor_modul_pembangunan_view', $data);
                         }
                           
             }
