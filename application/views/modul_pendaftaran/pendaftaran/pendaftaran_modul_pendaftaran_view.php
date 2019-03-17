@@ -45,6 +45,7 @@
                             <th>ID DAFTAR</th>
                             <th>NAMA LENGKAP</th>
                             <th>TTL</th>
+                            <th>STATUS SANTRI</th>
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>FOTO</th>
@@ -60,7 +61,8 @@
                                     echo '<tr>
                                             <td class="id_pendaftaran">'.$a['id_pendaftaran'].'</td>
                                             <td>'.$a['n_pendaftaran'].'</td> 
-                                            <td>'.$a['t_pendaftaran'].', '.$a['tl_pendaftaran'].'</td> 
+                                            <td>'.$a['t_pendaftaran'].', '.$a['tl_pendaftaran'].'</td>
+                                            <td>'.$a['nama_status'].'</td> 
                                             <td>'.$a['alamat_pendaftaran'].'</td> 
                                             <td>'.$a['tgl_pendaftaran'].'</td>
                                             <td style="align:center;">';

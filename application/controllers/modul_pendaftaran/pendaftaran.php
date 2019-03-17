@@ -137,6 +137,7 @@ class Pendaftaran extends CI_Controller{
              $telp_santri      = $a[0]['telp_pendaftaran']; //no telp santri
              $email_santri     = $a[0]['email_pendaftaran']; //email atau fb santri
              $instansi_santri  = $a[0]['instansi_pendaftaran']; //instansi/sekolah asal santri
+             $id_status  = $a[0]['id_status']; //instansi/sekolah asal santri
             
              $obj=array(
                  'id_santri'=>$id_pendaftaran,
@@ -148,7 +149,9 @@ class Pendaftaran extends CI_Controller{
                  'telp_santri'=>$telp_santri,
                  'email_santri'=>$email_santri,
                  'instansi_santri'=>$instansi_santri,
+                 'id_status'=>$id_status,
              );
+
              $this->db->insert('mst_santri', $obj);
              if($this->db->affected_rows()>0)    
               {
@@ -195,6 +198,7 @@ class Pendaftaran extends CI_Controller{
                     $telp_santri      = $a[0]['telp_pendaftaran']; //no telp santri
                     $email_santri     = $a[0]['email_pendaftaran']; //email atau fb santri
                     $instansi_santri  = $a[0]['instansi_pendaftaran']; //instansi/sekolah asal santri
+                    $id_status = $a[0]['id_status'];
                     
                     $obj=array(
                         'n_santri'=>$n_santri,
@@ -205,6 +209,7 @@ class Pendaftaran extends CI_Controller{
                         'telp_santri'=>$telp_santri,
                         'email_santri'=>$email_santri,
                         'instansi_santri'=>$instansi_santri,
+                        'id_status'=>$id_status,
                     );
                     $this->db->where('id_santri',$id_pendaftaran);
                     $this->db->update('mst_santri', $obj);

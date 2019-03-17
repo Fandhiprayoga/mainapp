@@ -6,13 +6,13 @@ class Pendaftaran_model extends CI_Model{
 
     public function tampil_pendaftaran_list()
     {
-        $query = $this->db->query("select * from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri) order by id_pendaftaran desc");
+        $query = $this->db->query("select *, (select nama_status from mst_status where id_status=pendaftaran.id_status) as nama_status from pendaftaran where id_pendaftaran not in (select id_santri from mst_santri) order by id_pendaftaran desc");
         return $query->result_array();
     }
 
     public function tampil_pendaftaran_list_lama()
     {
-        $query = $this->db->query("select * from pendaftaran   where id_pendaftaran in (select id_pendaftaran from daftar_ulang where status_daftar_ulang='1') order by id_pendaftaran asc");
+        $query = $this->db->query("select *,(select nama_status from mst_status where id_status=pendaftaran.id_status) as nama_status from pendaftaran   where id_pendaftaran in (select id_pendaftaran from daftar_ulang where status_daftar_ulang='1') order by id_pendaftaran asc");
         return $query->result_array();
     }
 
@@ -49,6 +49,7 @@ class Pendaftaran_model extends CI_Model{
             'prestasi_pendaftaran'=>$this->input->post('prestasi_pendaftaran'),
             'alasan_pendaftaran'=>$this->input->post('alasan_pendaftaran'),
             'tgl_pendaftaran'=>$date,
+            'id_status'=>$this->input->post('id_status'),
         );
         $this->db->insert('pendaftaran',$data);
         if($this->db->affected_rows()>0)    
@@ -79,6 +80,7 @@ class Pendaftaran_model extends CI_Model{
             'prestasi_pendaftaran'=>$this->input->post('prestasi_pendaftaran'),
             'alasan_pendaftaran'=>$this->input->post('alasan_pendaftaran'),
             'tgl_pendaftaran'=>$this->input->post('tgl_pendaftaran'),
+            'id_status'=>$this->input->post('id_status'),
         );
         $this->db->insert('pendaftaran',$data);
         if($this->db->affected_rows()>0)    
@@ -107,6 +109,7 @@ class Pendaftaran_model extends CI_Model{
             'org_pendaftaran'=>$this->input->post('org_pendaftaran'),
             'prestasi_pendaftaran'=>$this->input->post('prestasi_pendaftaran'),
             'alasan_pendaftaran'=>$this->input->post('alasan_pendaftaran'),
+            'id_status'=>$this->input->post('id_status'),
         );
         $this->db->where('id_pendaftaran',$id_pendaftaran);
         $this->db->update('pendaftaran',$data);

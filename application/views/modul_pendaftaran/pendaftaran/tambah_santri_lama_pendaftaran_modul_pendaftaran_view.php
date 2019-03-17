@@ -77,6 +77,26 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>STATUS SANTIR</td>
+                                <td>
+                                    
+                                    <select name="id_status" id="id_status" class="form-control" required="required">
+                                        <option value="">--PILIH SALAH SATU--</option>
+                                        <?php
+                                            $res=$this->db->query("select * from mst_status")->result_array();
+                                            if(count($res))
+                                            {
+                                                foreach($res as $r)
+                                                {
+                                                    echo '<option value="'.$r['id_status'].'">'.$r['nama_status'].'</option>';    
+                                                }
+                                            }
+                                        ?>
+                                    </select>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>INSTANSI/FAK/JUR</td>
                                 <td>
                                     <input type="text" name="instansi_pendaftaran" id="instansi_pendaftaran" class="form-control"
@@ -156,6 +176,7 @@
                             <th>ID DAFTAR</th>
                             <th>NAMA LENGKAP</th>
                             <th>TTL</th>
+                            <th>STATUS SANTRI</th>
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>FOTO</th>
@@ -172,7 +193,8 @@
                                             <td class="id_pendaftaran">'.$a['id_pendaftaran'].'</td>
                                             <td>'.$a['n_pendaftaran'].'</td> 
                                             <td>'.$a['t_pendaftaran'].', '.$a['tl_pendaftaran'].'</td> 
-                                            <td>'.$a['alamat_pendaftaran'].'</td> 
+                                            <td>'.$a['nama_status'].'</td>
+                                            <td>'.$a['alamat_pendaftaran'].'</td>  
                                             <td>'.$a['tgl_pendaftaran'].'</td>
                                             <td style="align:center;">';
 
@@ -304,6 +326,7 @@
                             prestasi_pendaftaran    : CKEDITOR.instances['prestasi_pendaftaran'].getData(),
                             alasan_pendaftaran      : CKEDITOR.instances['alasan_pendaftaran'].getData(),
                             tgl_pendaftaran          : $("#tgl_masuk").val(),
+                            id_status:$('#id_status').val(),
                         },
                         success: function (data) {
                             console.log(data);

@@ -205,7 +205,7 @@ class Daftar_ulang extends CI_Controller{
             $telp_santri      = $a[0]['telp_pendaftaran']; //no telp santri
             $email_santri     = $a[0]['email_pendaftaran']; //email atau fb santri
             $instansi_santri  = $a[0]['instansi_pendaftaran']; //instansi/sekolah asal santri
-           
+            $id_status=$a[0]['id_status'];
             $obj=array(
                 'id_santri'=>$id_pendaftaran,
                 'n_santri'=>$n_santri,
@@ -216,6 +216,7 @@ class Daftar_ulang extends CI_Controller{
                 'telp_santri'=>$telp_santri,
                 'email_santri'=>$email_santri,
                 'instansi_santri'=>$instansi_santri,
+                'id_status'=>$id_status,
             );
             $this->db->insert('mst_santri', $obj);
             if($this->db->affected_rows()>0)    

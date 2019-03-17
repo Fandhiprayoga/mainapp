@@ -35,61 +35,40 @@
                   {
                            if($status_santri=="SEMUA")
                            {
-                                    $sy="select * from mst_santri";
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status from mst_santri";
                            }
                            else if($status_santri=="AKTIF")
                            {
-                                    $sy="select * from mst_santri WHERE status_santri='AKTIF'";
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='AKTIF'";
                            }
                            else if($status_santri=="LULUS")
                            {
-                                    $sy="select * from mst_santri WHERE status_santri='LULUS'";
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='LULUS'";
                            }
                            else
                            {
-                                    $sy="select * from mst_santri WHERE status_santri='KELUAR'"; 
-                           }
-                           
-                  }
-                  else if($status_yatim=="YA")
-                  {
-                           if($status_santri=="SEMUA")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is not null";
-                           }
-                           else if($status_santri=="AKTIF")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is not null and ms.status_santri='AKTIF'";
-                           }
-                           else if($status_santri=="LULUS")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is not null and ms.status_santri='LULUS'";
-                           }
-                           else
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is not null and ms.status_santri='KELUAR'";
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='KELUAR'"; 
                            }
                            
                   }
                   else
                   {
-                           if($status_santri=="SEMUA")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is null ";
-                           }
-                           else if($status_santri=="AKTIF")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is null ms.status_santri='AKTIF'";
-                           }
-                           else if($status_santri=="LULUS")
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is null ms.status_santri='LULUS'";
-                           }
-                           else
-                           {
-                                    $sy="select ms.* from mst_santri ms, daftar_ulang du where ms.id_santri=du.id_pendaftaran and du.yatim_daftar_ulang is null ms.status_santri='KELUAR'";    
-                           }
-                           
+                            if($status_santri=="SEMUA")
+                            {
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri where id_status='".$status_yatim."'";
+                            }
+                            else if($status_santri=="AKTIF")
+                            {
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='AKTIF' and id_status='".$status_yatim."'";
+                            }
+                            else if($status_santri=="LULUS")
+                            {
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='LULUS' and id_status='".$status_yatim."'";
+                            }
+                            else
+                            {
+                                    $sy="select *, (select nama_status from mst_status where id_status=mst_santri.id_status) AS nama_status  from mst_santri WHERE status_santri='KELUAR' and id_status='".$status_yatim."'"; 
+                            }       
                   }
          ?>
 
@@ -132,8 +111,9 @@
                         <th>ID SANTRI</th>
                         <th>NAMA SANTRI</th>
                         <th>TTL</th>
-                        <th>STATUS YATIM</th>
                         <th>STATUS SANTRI</th>
+                        <th>STATUS AKTIF</th>
+                        <th>ALAMAT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,22 +130,16 @@
                                                                                           <td>'.$a['id_santri'].'</td>
                                                                                           <td>'.$a['n_santri'].'</td>
                                                                                           <td>'.$a['t_santri'].', '.$a['tl_santri'].'</td>';
-                                                                                          if($yatim[0]['yatim_daftar_ulang']!="")
-                                                                                          {
-                                                                                              echo '<td>YATIM</td>';
-                                                                                          }
-                                                                                          else
-                                                                                          {
-                                                                                              echo '<td>TIDAK</td>';
-                                                                                          }
+                                                                        echo               '<td>'.$a['nama_status'].'</td>';    
                                                                           echo            '<td>'.$a['status_santri'].'</td>
+                                                                                          <td>'.$a['alamat_santri'].'</td>
                                                                                  </tr>';
                                                                                  $i++;
                                                                }
                                                       }
                                                       else
                                                       {
-                                                               echo '<td colspan="6" align="center">TIDAK ADA DATA</td>';
+                                                               echo '<td colspan="7" align="center">TIDAK ADA DATA</td>';
                                                                
                                                       }
                                              ?>

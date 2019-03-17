@@ -6,7 +6,7 @@ class Santri_model extends CI_Model{
 
     public function tampil_santri_list()
     {
-        $query = $this->db->query("select * from mst_santri order by id_santri desc");
+        $query = $this->db->query("select *, (select nama_status from mst_status where id_status=mst_santri.id_status) as nama_status from mst_santri order by id_santri desc");
         return $query->result_array();
     }
 

@@ -74,6 +74,34 @@
                             </td>
                         </tr>
                         <tr>
+                                <td>STATUS SANTRI</td>
+                                <td>
+                                    
+                                    <select name="id_status" id="id_status" class="form-control" required="required" disabled>
+                                        <option value="">--PILIH SALAH SATU--</option>
+                                        <?php
+                                            $res=$this->db->query("select * from mst_status")->result_array();
+                                            if(count($res))
+                                            {
+                                                foreach($res as $r)
+                                                {
+                                                    if($a[0]['id_status']==$r['id_status'])
+                                                    {
+                                                        echo '<option value="'.$r['id_status'].'" selected>'.$r['nama_status'].'</option>';  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="'.$r['id_status'].'">'.$r['nama_status'].'</option>';  
+                                                    }
+                                                      
+                                                }
+                                            }
+                                        ?>
+                                    </select>
+                                    
+                                </td>
+                            </tr>
+                        <tr>
                             <td>INSTANSI/FAK/JUR</td>
                             <td>
                                 <input type="text" name="instansi_pendaftaran" id="instansi_pendaftaran" class="form-control" value="<?php echo $a[0]['instansi_pendaftaran']?>" required="required"  disabled>
@@ -119,7 +147,7 @@
                 </table>
                 
                 <button class="btn btn-danger btn-block " type="button" id="btn_simpan" disabled>SIMPAN PERUBAHAN DATA</button>
-                <a href="<?php echo base_url();?>index.php/modul_pendaftaran/pendaftaran" class="btn btn-primary btn-block " type="button" id="btn_kembali" >KEMBALI</a>
+                <a href="<?php echo $previous = "javascript:history.go(-1)";?>" class="btn btn-primary btn-block " type="button" id="btn_kembali" >KEMBALI</a>
             </form>
             </div>
             <!-- /.box-body -->
@@ -192,6 +220,7 @@ function editable()
     $("#org_pendaftaran").removeAttr("disabled");
     $("#prestasi_pendaftaran").removeAttr("disabled");
     $("#alasan_pendaftaran").removeAttr("disabled");
+    $("#id_status").removeAttr("disabled");
 
     CKEDITOR.instances['alamat_pendaftaran'].setReadOnly(false);
     CKEDITOR.instances['org_pendaftaran'].setReadOnly(false);
@@ -225,6 +254,7 @@ $("#btn_simpan").click(function (e) {
                             org_pendaftaran:CKEDITOR.instances['org_pendaftaran'].getData(),
                             prestasi_pendaftaran:CKEDITOR.instances['prestasi_pendaftaran'].getData(),
                             alasan_pendaftaran:CKEDITOR.instances['alasan_pendaftaran'].getData(),
+                            id_status:$('#id_status').val(),
                         },
                         success: function(data){
                             console.log(data);

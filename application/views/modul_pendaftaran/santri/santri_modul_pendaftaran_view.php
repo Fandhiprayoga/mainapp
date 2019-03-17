@@ -56,18 +56,26 @@
                                 
                                 <form  role="form">
                                     <div class="form-group">
-                                        <label for="">Status Yatim</label>
+                                        <label for="">Status Santri</label>
                                         
                                         <select name="" id="status_yatim_cetak" class="form-control">
                                             <option value="SEMUA">Pilih Semua</option>
-                                            <option value="YA">Ya</option>
-                                            <option value="TIDAK">Tidak</option>
+                                            <?php
+                                                $res=$this->db->query("select * from mst_status")->result_array();
+                                                if(count($res))
+                                                {
+                                                    foreach($res as $r)
+                                                    {
+                                                        echo '<option value="'.$r['id_status'].'">'.$r['nama_status'].'</option>';    
+                                                    }
+                                                }
+                                            ?>
                                         </select>
                                         
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">Status Santri</label>
+                                        <label for="">Status Aktif Santri</label>
                                         <select name="" id="status_santri_cetak" class="form-control">
                                             <option value="SEMUA">Pilih Semua</option>
                                             <option value="AKTIF">Aktif</option>
@@ -93,7 +101,7 @@
                                 <th>NO</th>
                                 <th>NAMA SANTRI</th>
                                 <th>TTL</th>
-                                <th>STATUS YATIM</th>
+                                <th>STATUS SANTRI</th>
                                 <th>DETAIL SANTRI</th>
                                 <th>STATUS SANTRI</th>
                                 <th></th>
@@ -112,15 +120,8 @@
                                                 <td class="id_santri" id_santri="'.$a['id_santri'].'">'.$i.'</td>
                                                 <td class="nama_santri">'.$a['n_santri'].'</td>
                                                 <td class="ttl_santri">'.$a['t_santri'].', '.$a['tl_santri'].'</td>';
-                                                if($yatim[0]['yatim_daftar_ulang']!="")
-                                                {
-                                                    echo '<td>Ya</td>';
-                                                }
-                                                else
-                                                {
-                                                    echo '<td>Tidak</td>';
-                                                }
-                                        echo '<td> <a href="'.base_url().'index.php/modul_pendaftaran/pendaftaran/cetak/'.$a['id_santri'].'" type="button" class="btn btn-large btn-block btn-default"><i class="fas fa-list-alt"></i></a> </td>
+                                        echo    '<td>'.$a['nama_status'].'</td>';
+                                        echo '<td> <a href="'.base_url().'index.php/modul_pendaftaran/pendaftaran/detail/'.$a['id_santri'].'" type="button" class="btn btn-large btn-block btn-default"><i class="fas fa-list-alt"></i></a> </td>
                                                 <td>
                                                 <input type="hidden" name="txt_id_santri" id="txt_id_santri" value="'.$a['status_santri'].'">
                                                 <select style="width:100%;" name="" id="status_santri" class="form-control" disabled="disabled">';
